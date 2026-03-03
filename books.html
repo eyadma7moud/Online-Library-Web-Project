@@ -1,199 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="Online Library " content="Online library website helps the users to view and search for books to borrow">
-<title>All Books — Libraria</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Library</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
 
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#F5F0E8;
-  color:#2D2118;
-}
+    <nav>
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="books.html">Browse Books</a>
+        <a href="favourite.html">Favourite</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+      </div>
+    </nav>
 
-nav{
-  background:#1A1410;
-  padding:15px 40px;
-}
+    <main>
+      <div class="content">
+        <main>
+          <h1>Book Collection</h1>
 
-nav a{
-  color:white;
-  text-decoration:none;
-  margin-right:20px;
-  font-size:14px;
-}
+          <div class="filters">
+            <form action="search_results.html" method="GET">
+              <input
+                type="text"
+                name="keyword"
+                placeholder="Search by title or author..."
+                required
+              />
 
-nav a:hover{
-  color:#C8873A;
-}
+              <select name="category">
+                <option value="">All Categories</option>
+                <option>Fiction</option>
+                <option>Science</option>
+                <option>History</option>
+                <option>Technology</option>
+                <option>Philosophy</option>
+              </select>
 
-main{
-  padding:40px;
-}
+              <select name="status">
+                <option value="">All Status</option>
+                <option>Available</option>
+                <option>Borrowed</option>
+              </select>
 
-h1{
-  margin-bottom:20px;
-}
+              <input type="submit" value="Search" />
+            </form>
+          </div>
 
-.filters{
-  margin-bottom:30px;
-}
+          <div class="books-grid">
+            <div class="book-item">
+              <h3>Clean Code</h3>
+              <p>by Robert C. Martin</p>
+              <p class="category">Technology</p>
+              <p class="status-available">✓ Available</p>
+              <a href="book-details1.html" class="btn">View Details</a>
+            </div>
 
-.filters input,
-.filters select{
-  padding:8px;
-  margin-right:10px;
-  margin-bottom:10px;
-}
+            <div class="book-item">
+              <h3>Atomic Habits</h3>
+              <p>by James Clear</p>
+              <p class="category">Philosophy</p>
+              <p class="status-borrowed">✗ Borrowed</p>
+              <a href="book-details2.html" class="btn">View Details</a>
+            </div>
 
-.books-grid{
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-}
+            <div class="book-item">
+              <h3>A Brief History of Time</h3>
+              <p>by Stephen Hawking</p>
+              <p class="category">Science</p>
+              <p class="status-available">✓ Available</p>
+              <a href="book-details3.html" class="btn">View Details</a>
+            </div>
 
-.book-item{
-  background:white;
-  border:1px solid #ddd;
-  border-radius:8px;
-  width:220px;
-  padding:15px;
-}
+            <div class="book-item">
+              <h3>The Great Gatsby</h3>
+              <p>by F. Scott Fitzgerald</p>
+              <p class="category">Fiction</p>
+              <p class="status-available">✓ Available</p>
+              <a href="book-details4.html" class="btn">View Details</a>
+            </div>
 
-.book-item h3{
-  margin-top:0;
-}
+            <div class="book-item">
+              <h3>Sapiens</h3>
+              <p>by Yuval Noah Harari</p>
+              <p class="category">History</p>
+              <p class="status-borrowed">✗ Borrowed</p>
+              <a href="book-details5.html" class="btn">View Details</a>
+            </div>
+          </div>
+        </main>
+      </div>
+    </main>
 
-.category{
-  font-size:12px;
-  color:#6B4C35;
-}
-
-.status-available{
-  color:green;
-  font-weight:bold;
-}
-
-.status-borrowed{
-  color:red;
-  font-weight:bold;
-}
-
-.btn{
-  display:inline-block;
-  margin-top:10px;
-  padding:6px 12px;
-  background:#1A1410;
-  color:white;
-  text-decoration:none;
-  border-radius:4px;
-  font-size:12px;
-}
-
-.btn:hover{
-  background:#6B4C35;
-}
-
-footer{
-  background:#120E0A;
-  color:#ccc;
-  text-align:center;
-  padding:15px;
-  margin-top:40px;
-}
-</style>
-</head>
-
-<body>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="books.html">Browse Books</a>
-  <a href="categories.html">Categories</a>
-  <a href="login.html">Login</a>
-  <a href="signup.html">Sign Up</a>
-</nav>
-
-<main>
-
-<h1>Book Collection</h1>
-
-<div class="filters">
-  <form action="search_results.html" method="GET">
-    <input type="text" name="keyword" placeholder="Search by title or author..." required>
-    
-    <select name="category">
-      <option value="">All Categories</option>
-      <option>Fiction</option>
-      <option>Science</option>
-      <option>History</option>
-      <option>Technology</option>
-      <option>Philosophy</option>
-    </select>
-
-    <select name="status">
-      <option value="">All Status</option>
-      <option>Available</option>
-      <option>Borrowed</option>
-    </select>
-
-    <input type="submit" value="Search">
-  </form>
-</div>
-
-<div class="books-grid">
-
-  <div class="book-item">
-    <h3>Clean Code</h3>
-    <p>by Robert C. Martin</p>
-    <p class="category">Technology</p>
-    <p class="status-available">✓ Available</p>
-    <a href="book_details1.html" class="btn">View Details</a>
-  </div>
-
-  <div class="book-item">
-    <h3>Atomic Habits</h3>
-    <p>by James Clear</p>
-    <p class="category">Philosophy</p>
-    <p class="status-borrowed">✗ Borrowed</p>
-    <a href="book_details2.html" class="btn">View Details</a>
-  </div>
-
-  <div class="book-item">
-    <h3>A Brief History of Time</h3>
-    <p>by Stephen Hawking</p>
-    <p class="category">Science</p>
-    <p class="status-available">✓ Available</p>
-    <a href="book_details3.html" class="btn">View Details</a>
-  </div>
-
-  <div class="book-item">
-    <h3>The Great Gatsby</h3>
-    <p>by F. Scott Fitzgerald</p>
-    <p class="category">Fiction</p>
-    <p class="status-available">✓ Available</p>
-    <a href="book_details4.html" class="btn">View Details</a>
-  </div>
-
-  <div class="book-item">
-    <h3>Sapiens</h3>
-    <p>by Yuval Noah Harari</p>
-    <p class="category">History</p>
-    <p class="status-borrowed">✗ Borrowed</p>
-    <a href="book_details5.html" class="btn">View Details</a>
-  </div>
-
-</div>
-
-</main>
-
-<footer>
-© 2026 Libraria — IS231 Web Technology Project | Phase 1
-</footer>
-
-</body>
+    <footer>
+      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
+    </footer>
+  </body>
 </html>
-
-

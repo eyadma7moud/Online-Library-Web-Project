@@ -1,92 +1,176 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Online Library</title>
-    <link rel="stylesheet" href="style.css">
+<head>
+<meta charset="UTF-8">
+<meta name="Online Library " content="Online library website helps the users to view and search for books to borrow">
+<title>Libraria — Online Library</title>
 
-  </head>
-  <body>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-    <!-- ========== HEADER ========== -->
-    <header>
-      <div class="header-main">
-        <div class="logo">
-          <div class="logo-icon">📖</div>
-          <div>
-            <h1>Library Management System</h1>
-            <p style="font-size: 0.8em; opacity: 0.9">
-              Your Gateway to Knowledge
-            </p>
-          </div>
-        </div>
-        <div class="header-info">
-          <p>📞 Contact: +20 123 456 7890</p>
-          <p>✉️ Email: info@library.edu</p>
-        </div>
-      </div>
-    </header>
+<style>
+:root {
+  --cream:#F5F0E8;
+  --dark:#1A1410;
+  --brown:#6B4C35;
+  --amber:#C8873A;
+  --text:#2D2118;
+  --muted:#7A6A5A;
+}
 
-    <!-- ========== NAV Bar ========== -->
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="view-books.html">View All Books</a></li>
-        <li><a href="categories.html">Categories</a></li>
-        <li><a href="borrow-book.html">Borrow Book</a></li>
-        <li><a href="return-book.html">Return Book</a></li>
-        <li><a href="favourite.html">Favourite</a></li>
-        <li><a href="about.html">About Us</a></li>
-      </ul>
-      <ul>
-        <li><a href="register.html">Register</a></li>
-        <li><a href="login.html">Login</a></li>
-        <button class="dark-mode">🔆</button>
-      </ul>
-    </nav>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-    <!-- ========== Page CONTENT ========== -->
-    <div class="container">
-      <div class="content">
-        <h2>[Home Page]</h2>
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--text);
+}
 
-      </div>
-    </div>
+nav{
+  background:var(--dark);
+  padding:15px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    <!-- ========== FOOTER ========== -->
-    <footer>
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>About Us</h3>
-          <p>
-            Our library has been serving the community since 1950, providing
-            access to thousands of books and resources for learning and
-            research.
-          </p>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul>
-            <li>📚 Browse Catalog</li>
-            <li>📖 New Arrivals</li>
-            <li>⭐ Popular Books</li>
-            <li>❓ FAQ</li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact Info</h3>
-          <ul>
-            <li>📍 123 Library Street, Cairo, Egypt</li>
-            <li>📞 +20 123 456 7890</li>
-            <li>✉️ info@library.edu</li>
-            <li>🕒 Mon-Sat: 8:00 AM - 8:00 PM</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Library Management System. All rights reserved.</p>
-      </div>
-    </footer>
-  </body>
-</html>
+nav .logo{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  color:white;
+  text-decoration:none;
+}
+
+nav .links a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+  font-size:14px;
+}
+
+nav .links a:hover{
+  color:var(--amber);
+}
+
+
+.hero{
+  padding:120px 40px 80px;
+  text-align:center;
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:48px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:18px;
+  margin-bottom:40px;
+}
+
+
+.search-box{
+  margin-bottom:30px;
+}
+
+.search-box form{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.search-box select,
+.search-box input[type="text"]{
+  padding:10px;
+  font-size:14px;
+  border:1px solid var(--brown);
+  border-radius:5px;
+}
+
+.search-box input[type="submit"]{
+  padding:10px 20px;
+  background:var(--dark);
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.search-box input[type="submit"]:hover{
+  background:var(--brown);
+}
+
+
+.btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 25px;
+  background:var(--amber);
+  color:white;
+  text-decoration:none;
+  border-radius:5px;
+}
+
+.btn:hover{
+  background:#b87830;
+}
+
+footer{
+  background:#120E0A;
+  color:#ccc;
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="home.html" class="logo">Libraria</a>
+  <div class="links">
+    <a href="books.html">Browse Books</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+  </div>
+</nav>
+
+<section class="hero">
+
+  <h1>Discover & Borrow Great Books</h1>
+  <p>Your online gateway to thousands of books. Search, explore and borrow easily.</p>
+
+  <div class="search-box">
+    <form action="search_results.html" method="GET">
+
+      <select name="search_type" required>
+        <option value="">Search By</option>
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+        <option value="category">Category</option>
+      </select>
+
+      <input type="text" 
+             name="keyword" 
+             placeholder="Search for any book..." 
+             minlength="2"
+             required>
+
+      <input type="submit" value="Search">
+
+    </form>
+  </div>
+
+  <a href="books.html" class="btn">Browse Collection</a>
+
+</section>
+
+<footer>
+  © 2026 Libraria — IS231 Web Technology Project | Phase 1
+</footer>
+
+</body>
+  </html>

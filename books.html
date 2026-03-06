@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="Online Library " content="Online library website helps the users to view and search for books to borrow">
+    <title>Online Library</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <nav>
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="books.html">Browse Books</a>
+        <a href="favourite.html">Favourite</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="content">
+        <main>
+          <h1>Book Collection</h1>
+
+          <div class="filters">
+            <form action="search_results.html" method="GET">
+              <input
+                type="text"
+                name="keyword"
+                placeholder="Search by title or author..."
+                required
+              />
+
+              <select name="category">
+                <option value="">All Categories</option>
+                <option>Fiction</option>
+                <option>Science</option>
+                <option>History</option>
+                <option>Technology</option>
+                <option>Philosophy</option>
+              </select>
+
+              <select name="status">
+                <option value="">All Status</option>
+                <option>Available</option>
+                <option>Borrowed</option>
+              </select>
+
+              <input type="submit" value="Search" />
+            </form>
+          </div>
+
+          <div class="books-grid">
+            <div class="book-item">
+              <h3>Clean Code</h3>
+              <p>by Robert C. Martin</p>
+              <p class="category">Technology</p>
+              <p class="status-available">✓ Available</p>
+              <a href="book-details1.html" class="btn">View Details</a>
+            </div>
+
+            <div class="book-item">
+              <h3>Atomic Habits</h3>
+              <p>by James Clear</p>
+              <p class="category">Philosophy</p>
+              <p class="status-borrowed">✗ Borrowed</p>
+              <a href="book-details2.html" class="btn">View Details</a>
+            </div>
+
+            <div class="book-item">
+              <h3>A Brief History of Time</h3>
+              <p>by Stephen Hawking</p>
+              <p class="category">Science</p>
+              <p class="status-available">✓ Available</p>
+              <a href="book-details3.html" class="btn">View Details</a>
+            </div>
+
+            <div class="book-item">
+              <h3>The Great Gatsby</h3>
+              <p>by F. Scott Fitzgerald</p>
+              <p class="category">Fiction</p>
+              <p class="status-available">✓ Available</p>
+              <a href="book-details4.html" class="btn">View Details</a>
+            </div>
+
+            <div class="book-item">
+              <h3>Sapiens</h3>
+              <p>by Yuval Noah Harari</p>
+              <p class="category">History</p>
+              <p class="status-borrowed">✗ Borrowed</p>
+              <a href="book-details5.html" class="btn">View Details</a>
+            </div>
+          </div>
+        </main>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
+    </footer>
+  </body>
+</html>
+

@@ -1,0 +1,51 @@
+<!doctype>
+<html>
+    <head>
+         <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrow Book</title>
+    </head>
+    <body>
+        <header>
+            <h1>Online Library</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Libraria</a></li>
+                <li><a href="books.html">View Books</a></li>
+                <li><a href="borrow.html">Borrow</a></li>
+                <li><a href="return.html">Return</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h2>Borrow Book</h2>
+            <section>
+                <h3>Book Information</h3>
+                <p><strong>Title:</strong> Details about</p>
+                <p><strong>Author:</strong> Details about</p>
+            </section>
+            <section>
+                <h3>Borrow Form</h3>
+                <form action="borrow_success.html" method="get" target="_blank">
+                    <label for="1">Book ID</label>
+                    <input type="text" value="123" readonly id="1">
+                    <br><br>
+                    <label for="2">Borrow Date</label>
+                    <input type="date" required id="2" >
+                    <br><br>
+                    <label for="3">Return Date</label>
+                    <input type="date" required id="3" >
+                    <br><br>
+                    <input type="checkbox" id="4">
+                    <label for="4">Are you sure you want to borrow this book?</label>
+                    <br><br>
+                    <button type="submit">Borrow</button>
+                </form>
+            </section>
+            <footer> 
+                <p>&copy; 2026 Online Library.</p>
+            </footer>
+        </main>
+    </body>
+</html>

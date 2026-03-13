@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard - Online Library</title>
+    <meta
+      name="description"
+      content="Admin dashboard to manage books in the online library"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="books.html">Browse Books</a>
+        <a href="favourite.html">Favourite</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+        <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
+      </div>
+    </nav>
+
+    <hr />
+
+    <main style="padding-top: 40px;">
+      <h1>Add New Book</h1>
+
+      <form class="auth-form">
+        <label>Book Title</label>
+        <input type="text" placeholder="Enter book title" required />
+
+        <label>Author</label>
+        <input type="text" placeholder="Enter author name" required />
+
+        <label>Category</label>
+        <input
+          type="text"
+          placeholder="Technology, Science, Novel..."
+          required
+        />
+
+        <label>Publish Year</label> <input type="number" placeholder="Year" />
+
+        <label>Pages</label>
+        <input type="number" placeholder="Number of pages" />
+
+        <label>Book Description</label>
+
+        <textarea
+          rows="5"
+          placeholder="Write a short description about the book"
+        ></textarea>
+
+        <label>Status</label>
+        <select>
+          <option>Available</option>
+          <option>Borrowed</option>
+        </select>
+
+        <br /><br />
+
+        <button type="submit">Add Book</button>
+      </form>
+    </main>
+    <hr />
+
+    <footer>
+      <p>© 2026 Online Library — IS231 Web Technology Project | Phase 1</p>
+    </footer>
+  </body>
+</html>

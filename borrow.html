@@ -1,0 +1,51 @@
+<!doctype >
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Borrow Book</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="books.html">Browse Books</a>
+        <a href="favourite.html">Favourite</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+        <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
+      </div>
+    </nav>
+    <main style="padding-top: 40px">
+      <h2>Borrow Book</h2>
+      <section>
+        <h3>Book Information</h3>
+        <p><strong>Title:</strong> Details about</p>
+        <p><strong>Author:</strong> Details about</p>
+      </section>
+      <section>
+        <h3>Borrow Form</h3>
+        <form action="borrow_success.html" method="get" target="_blank">
+          <label for="1">Book ID</label>
+          <input type="text" value="123" readonly id="1" />
+          <br /><br />
+          <label for="2">Borrow Date</label>
+          <input type="date" required id="2" />
+          <br /><br />
+          <label for="3">Return Date</label>
+          <input type="date" required id="3" />
+          <br /><br />
+          <input type="checkbox" id="4" />
+          <label for="4">Are you sure you want to borrow this book?</label>
+          <br /><br />
+          <button class="btn" type="submit">Borrow</button>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
+    </footer>
+  </body>
+</html>

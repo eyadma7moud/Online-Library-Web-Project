@@ -1,0 +1,146 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard - Online Library</title>
+    <meta
+      name="description"
+      content="Admin dashboard to manage books in the online library"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="books.html">Browse Books</a>
+        <a href="favourite.html">Favourite</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+        <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
+      </div>
+    </nav>
+
+    <hr />
+    <main class="dashboard">
+      <h2 class="dashboard-title">Admin Dashboard</h2>
+
+      <div class="stats">
+        <div class="stat-box">
+          <h3>Total Books</h3>
+          <p>120</p>
+        </div>
+
+        <div class="stat-box">
+          <h3>Borrowed Books</h3>
+          <p>34</p>
+        </div>
+
+        <div class="stat-box">
+          <h3>Users</h3>
+          <p>50</p>
+        </div>
+      </div>
+
+      <div class="dashboard-actions">
+        <a href="add-book.html" class="btn">Add New Book</a>
+      </div>
+
+      <div class="dashboard-search">
+        <input type="text" placeholder="Search book..." />
+        <button>Search</button>
+      </div>
+
+      <table class="books-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Clean Code</td>
+            <td>Robert C. Martin</td>
+            <td class="status-available">Available</td>
+            <td>
+              <button class="action-btn edit-btn">Edit</button>
+              <button class="action-btn delete-btn">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Atomic Habits</td>
+            <td>James Clear</td>
+            <td class="status-borrowed">Borrowed</td>
+            <td>
+              <button class="action-btn edit-btn">Edit</button>
+              <button class="action-btn delete-btn">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Atomic Habits</td>
+            <td>James Clear</td>
+            <td class="status-borrowed">Borrowed</td>
+            <td>
+              <button class="action-btn edit-btn">Edit</button>
+              <button class="action-btn delete-btn">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Atomic Habits</td>
+            <td>James Clear</td>
+            <td class="status-borrowed">Borrowed</td>
+            <td>
+              <button class="action-btn edit-btn">Edit</button>
+              <button class="action-btn delete-btn">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Atomic Habits</td>
+            <td>James Clear</td>
+            <td class="status-borrowed">Borrowed</td>
+            <td>
+              <button class="action-btn edit-btn">Edit</button>
+              <button class="action-btn delete-btn">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Clean Code</td>
+            <td>Robert C. Martin</td>
+            <td class="status-available">Available</td>
+            <td>
+              <button class="action-btn edit-btn">Edit</button>
+              <button class="action-btn delete-btn">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Clean Code</td>
+            <td>Robert C. Martin</td>
+            <td class="status-available">Available</td>
+            <td>
+              <button class="action-btn edit-btn">Edit</button>
+              <button class="action-btn delete-btn">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <hr />
+
+    <footer>
+      <p>© 2026 Online Library — IS231 Web Technology Project | Phase 1</p>
+    </footer>
+  </body>
+</html>

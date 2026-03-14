@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Settings</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+        <nav>
+            <a href="index.html" class="logo">Libraria</a>
+            <div class="links">
+            <a href="profile.html">Back to Profile</a>
+            <a href="profile-info.html">Profile Information</a>
+            <a href="borrowed-books.html">Borrowed Books</a>
+            <a href="borrow-history.html">Borrow History</a>
+            <a href="account-settings.html">Account Settings</a>
+            </div>
+        </nav>
+    <h1>Account Settings</h1>
+    <h3>Change Username</h3>
+    <form>
+      <label for="Username">Username:</label>
+      <input type="text" id="Username" placeholder="Username" /><br />
+      <label>New Username</label>
+      <input type="text" required />
+      <br />
+      <button type="submit">Update Username</button>
+    </form>
+    <br />
+    <h3>Change Email and Password</h3>
+    <form action="">
+      <label for="Email">Email:</label>
+      <input type="email" id="Email" placeholder="****@email.com" />
+      <br />
+      <label for="newmail">New Email:</label>
+      <input type="email" id="newmail" placeholder="****@email.com" />
+      <br />
+      <label for="Password">Password:</label>
+      <input
+        type="password"
+        id="Password"
+        placeholder="*********"
+        minlength="6"
+        required
+      />
+      <br />
+      <label for="newpass">New Password:</label>
+      <input
+        type="password"
+        id="newpass"
+        placeholder="*********"
+        minlength="6"
+        required
+      />
+      <br />
+      <label for="confirmpass">Confirm New Password:</label>
+      <input
+        type="password"
+        id="confirmpass"
+        placeholder="*********"
+        minlength="6"
+        required
+      />
+      <br />
+      <button type="submit">Update Email and Password</button>
+      <br />
+      <button type="submit">Delete Account</button>
+      <br />
+      <button type="reset">Reset</button>
+      <br />
+      <button type="submit">Logout</button>
+      <br />
+    </form>
+  </body>
+</html>

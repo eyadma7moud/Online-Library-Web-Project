@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Borrowed Books</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="profile.html">Back to Profile</a>
+        <a href="profile-info.html">Profile Information</a>
+        <a href="borrowed-books.html">Borrowed Books</a>
+        <a href="borrow-history.html">Borrow History</a>
+        <a href="account-settings.html">Account Settings</a>
+      </div>
+    </nav>
+    <!-- | Book ID | Book Name | Author | Borrow Date | Return | -->
+    <br /><br />
+    <h1>Borrowed Books</h1>
+    <table caption="Borrowed Books" border="1">
+      <thead>
+        <tr>
+          <th>Book ID</th>
+          <th>Book Name</th>
+          <th>Author</th>
+          <th>Borrow Date</th>
+          <th>Return Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be populated dynamically -->
+        <tr>
+          <td>101</td>
+          <td>Clean Code</td>
+          <td>Robert C. Martin</td>
+          <td>2026-03-14</td>
+          <td>2026-03-21</td>
+          <td><button class="btn" style="padding: 0;"><a href="return.html" style="padding: 15px;">Return</a></button></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </body>
+</html>

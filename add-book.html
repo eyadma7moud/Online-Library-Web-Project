@@ -35,34 +35,43 @@
     <main style="padding-top: 40px">
       <h1>Add New Book</h1>
 
-      <form class="auth-form">
+      <form class="auth-form" id="add-book-form">
         <label>Book Title</label>
-        <input type="text" placeholder="Enter book title" required />
+        <input type="text" id="title" placeholder="Enter book title" required />
 
         <label>Author</label>
-        <input type="text" placeholder="Enter author name" required />
-
-        <label>Category</label>
         <input
           type="text"
-          placeholder="Technology, Science, Novel..."
+          id="author"
+          placeholder="Enter author name"
           required
         />
 
-        <label>Publish Year</label> <input type="number" placeholder="Year" />
+        <label>Category</label>
+        <select id="category">
+          <option>Fiction</option>
+          <option>Science</option>
+          <option>History</option>
+          <option>Technology</option>
+          <option>Philosophy</option>
+        </select>
+
+        <label>Publish Year</label>
+        <input type="number" id="year" placeholder="Year" />
 
         <label>Pages</label>
-        <input type="number" placeholder="Number of pages" />
+        <input type="number" id="pages" placeholder="Number of pages" />
 
         <label>Book Description</label>
 
         <textarea
+          id="description"
           rows="5"
           placeholder="Write a short description about the book"
         ></textarea>
 
         <label>Status</label>
-        <select>
+        <select id="status">
           <option>Available</option>
           <option>Borrowed</option>
         </select>
@@ -77,5 +86,6 @@
     <footer>
       <p>© 2026 Online Library — IS231 Web Technology Project | Phase 1</p>
     </footer>
+    <script src="js/add-book.js"></script>
   </body>
 </html>

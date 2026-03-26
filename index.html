@@ -1,82 +1,63 @@
 <!--HOME With semantic elements-->
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Online_library</title>
-    <meta
-      name="Online_library"
-      content="Online library has many types of book , you can see and borrow what you need"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Online_library</h1>
-      <img src="images/Logo.jpg" alt="NO logo" width="180" height="120" />
-      <p>
-        Discover & borrow your favorite books , you can discover and borrow what
-        you would like
-      </p>
-    </header>
-    <hr />
-    <nav>
-      <a href="index.html" class="logo">Libraria</a>
-      <div class="links">
-        <a href="books.html">Browse Books</a>
-        <a href="favourite.html">Favourite</a>
-        <a href="about.html">About Us</a>
-        <a href="login.html">Login</a>
-        <a href="register.html">Register</a>
-        <a href="profile.html">User Profile</a>
-        <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
-        <a href="#"><span class="material-symbols-outlined"> bedtime </span></a>
-      </div>
-    </nav>
-    <hr />
-    <section>
-      <p>
-        Hello, Our online library provides thousands of books , you can discover
-        and borrow the books you are interested in
-      </p>
-      <div class="search">
-        <form action="search_results.html" method="GET" target="_blank">
-          <label for="">Search</label>
-          <input
-            type="search"
-            name="search"
-            placeholder="Search for any book :"
-            required
-          />
-          <input type="submit" value="Search" />
-        </form>
-      </div>
-    </section>
-    <hr />
-    <aside>
-      <figure>
-        <img src="images/img1.jpg" alt="No image" width="400" height="200" />
-        <figcaption>Online_library</figcaption>
-      </figure>
-      <h3>Categories :</h3>
-      <ul>
-        <li>Programming</li>
-        <li>History</li>
-        <li>Novels</li>
-        <li>Short Stories</li>
-        <li>Science</li>
-      </ul>
-      <br />
-      <p>GO TO <a href="books.html">View All Books</a></p>
-    </aside>
-    <hr />
-    <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
-    </footer>
-    <hr />
-  </body>
+<!DOCTYPE html>
+<html lang ="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Online_library</title>
+        <meta name="describtion" content="Online library has many types of books , you can see and borrow what you need">
+    </head>
+    <body>
+        <header>
+            <h1>Online_library</h1>
+            <img src="images/logo.jpg" alt="Online_Library Logo" width="180" height="120">
+            <p>Discover & borrow your favorite books , you can discover and borrow what you would like</p>
+        </header>
+        <hr>
+        <nav>  
+            <a href="about.html">about</a>
+            <a href="books.html">books</a>
+            <a href="login.html">login</a>
+            <a href="register.html">register</a>
+            <a href="favourite.html">favourite</a>
+            <a href="profile.html">profile</a>
+            <a href="borrow-history.html">borrow-history</a>
+            <a href="contact.html">contact us</a>
+            <a href="account-settings.html">account-settings</a>
+        </nav>
+        <hr>
+        <section>
+            <p>Hello, our online library provides thousands of books , you can discover and borrow the books you are interested in </p>
+            <div class="search">
+                <form action="search_results.html" method="GET" target="_blank">
+
+                    <label for="search">Search</label>
+                    <input id="search" type="search" name="search" placeholder="Search for any book : " required>
+                    <input type="submit" value="Search">
+
+                </form>
+            </div>
+        </section>
+        <hr>
+        <aside>
+            <figure>
+                <img src="images/img1.jpg" alt="Online_Library Image" width="400" height="200">
+                <figcaption>Online_library</figcaption>
+            </figure>
+                <h3>Categories : </h3>
+                <ul>
+                    <li>Programming</li>
+                    <li>History</li>
+                    <li>Novels</li>
+                    <li>Short Stories</li>
+                    <li>Science</li>
+                </ul>
+                <br>
+                <p>GO TO <a href="books.html" >books</a></p>
+        </aside>
+        <hr>
+        <footer>
+            <p>© 2026 Online_Library — IS231 Web Technology Project | Phase 1</p>
+        </footer>
+        <hr>    
+    </body>
 </html>

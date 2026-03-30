@@ -4,17 +4,46 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile Information</title>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <nav>
+        <!-- SIDE MENU -->
+        <div class="menu-wrapper">
+            <details>
+                <summary aria-label="Open navigation menu">
+                    <div class="icon-bar">
+                        <span></span><span></span><span></span>
+                    </div>
+                </summary>
+                <nav class="menu">
+                    <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
+                    <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
+                    <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
+                    <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+                    <div class="menu-divider"></div>
+                    <a href="login.html"><span class="menu-icon">🔑</span> Login</a>
+                    <a href="register.html"><span class="menu-icon">📝</span> Register</a>
+                    <a href="profile.html"><span class="menu-icon">👤</span> User Profile</a>
+                    <div class="menu-divider"></div>
+                    <a href="admin-dashboard.html" class="dashboard-link"><span class="menu-icon">⚙️</span> Admin Dashboard</a>
+                </nav>
+            </details>
+        </div>
+        
+        <!-- TOP NAV -->
+        <nav class="topnav">
             <a href="index.html" class="logo">Libraria</a>
             <div class="links">
-            <a href="profile.html">Back to Profile</a>
-            <a href="profile-info.html">Profile Information</a>
-            <a href="borrowed-books.html">Borrowed Books</a>
-            <a href="borrow-history.html">Borrow History</a>
-            <a href="account-settings.html">Account Settings</a>
+                <a href="books.html">Browse Books</a>
+                <a href="favourite.html">Favourite</a>
+                <a href="about.html">About Us</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+                <a href="profile.html">User Profile</a>
+                <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
             </div>
         </nav>
         <br><br>
@@ -23,6 +52,6 @@
         <p>Email:</p>
         <p>Join Date:</p>
         <br>
-
+        <script src="theme.js"></script>
     </body>
 </html>

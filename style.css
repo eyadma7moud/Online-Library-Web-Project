@@ -1247,6 +1247,11 @@ main.dashboard {
 }
 
 .books-table td:last-child {
+  display: table-cell;
+  white-space: nowrap;
+}
+
+.action-buttons {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -1613,4 +1618,179 @@ body {
 ::selection {
   background: var(--accent-blue);
   color: #fff;
+}
+
+
+/* ==========================================
+   EDIT BOOK PAGE
+   ========================================== */
+
+.edit-book-header {
+  max-width: 760px;
+  margin: 0 auto 32px;
+  padding: 0 24px;
+}
+
+.edit-book-header h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 12px 0 6px;
+}
+
+.edit-subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-blue);
+  background: var(--accent-blue-light);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  transform: translateX(-3px);
+}
+
+/* Form layout: 2 columns */
+.edit-book-form {
+  max-width: 760px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Action buttons row */
+.edit-book-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.save-btn {
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-btn:hover {
+  background: var(--accent-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+}
+
+.cancel-btn {
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border-strong);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cancel-btn:hover {
+  background: var(--accent-red-bg);
+  color: var(--accent-red);
+  border-color: var(--accent-red);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .edit-book-actions {
+    flex-direction: column;
+  }
+  .save-btn, .cancel-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================
+   LOGOUT BUTTON in Navbar
+   ========================================== */
+.topnav .links .logout-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-red);
+  background: var(--accent-red-bg);
+  border: 1.5px solid var(--accent-red);
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all var(--transition);
+}
+
+.topnav .links .logout-btn:hover {
+  background: var(--accent-red);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   SUCCESS TOAST
+   ========================================== */
+.toast-success {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: var(--accent-green);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+
+.toast-success.toast-show {
+  opacity: 1;
+  transform: translateY(0);
 }

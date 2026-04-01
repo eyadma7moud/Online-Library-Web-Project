@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Admin Dashboard - Online Library</title>
+    <title>Admin Dashboard - Libraria</title>
     <meta
       name="description"
       content="Admin dashboard to manage books in the online library"
@@ -12,79 +12,86 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime"
     />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
-  
+
   <body>
-  <!-- SIDE MENU -->
-  <div class="menu-wrapper">
-    <details>
-      <summary aria-label="Open navigation menu">
-        <div class="icon-bar">
-          <span></span><span></span><span></span>
-        </div>
-      </summary>
-      <nav class="menu">
-        <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-        <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-        <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
-        <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
-        <div class="menu-divider"></div>
-        <a href="login.html"><span class="menu-icon">🔑</span> Login</a>
-        <a href="register.html"><span class="menu-icon">📝</span> Register</a>
-        <a href="profile.html"><span class="menu-icon">👤</span> User Profile</a>
-        <div class="menu-divider"></div>
-        <a href="admin-dashboard.html" class="dashboard-link"><span class="menu-icon">⚙️</span> Admin Dashboard</a>
-      </nav>
-    </details>
-  </div>
-  
-  <!-- TOP NAV -->
-  <nav class="topnav">
-    <a href="index.html" class="logo">Libraria</a>
-    <div class="links">
-      <a href="books.html">Browse Books</a>
-      <a href="favourite.html">Favourite</a>
-      <a href="about.html">About Us</a>
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
-      <a href="profile.html">User Profile</a>
-      <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    <!-- SIDE MENU -->
+    <div class="menu-wrapper">
+      <details>
+        <summary aria-label="Open navigation menu">
+          <div class="icon-bar"><span></span><span></span><span></span></div>
+        </summary>
+        <nav class="menu">
+          <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
+          <a href="books.html"
+            ><span class="menu-icon">📚</span> Browse Books</a
+          >
+          <a href="favourite.html"
+            ><span class="menu-icon">❤️</span> Favourite</a
+          >
+          <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+          <div class="menu-divider"></div>
+          <a href="admin-dashboard.html" class="dashboard-link"
+            ><span class="menu-icon">⚙️</span> Admin Dashboard</a
+          >
+        </nav>
+      </details>
     </div>
-  </nav>
+
+    <!-- TOP NAV -->
+    <nav class="topnav">
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="books.html">Browse Books</a>
+        <a href="favourite.html">Favourite</a>
+        <a href="about.html">About Us</a>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Toggle dark mode"
+        >
+          🌙
+        </button>
+      </div>
+    </nav>
+
     <hr />
     <main class="dashboard">
       <h2 class="dashboard-title">Admin Dashboard</h2>
-      
+
       <div class="stats">
         <div class="stat-box">
           <h3>Total Books</h3>
           <p id="total-books">0</p>
         </div>
-        
         <div class="stat-box">
           <h3>Borrowed Books</h3>
           <p id="borrowed">0</p>
         </div>
-        
         <div class="stat-box">
           <h3>Users</h3>
-          <p id="total-users">50</p>
+          <p id="total-users">0</p>
         </div>
       </div>
-      
+
       <div class="dashboard-actions">
         <a href="add-book.html" class="btn">Add New Book</a>
       </div>
-      
+
       <div class="dashboard-search">
-        <input type="text" placeholder="Search book..." />
-        <button>Search</button>
+        <input
+          type="text"
+          id="dashboard-search-input"
+          placeholder="Search by title, author, or category..."
+        />
+        <button id="dashboard-search-btn">Search</button>
       </div>
-      
+
       <table class="books-table">
         <thead>
           <tr>
@@ -94,28 +101,37 @@
             <th>Actions</th>
           </tr>
         </thead>
-        
         <tbody>
           <tr>
             <td>Clean Code</td>
             <td>Robert C. Martin</td>
             <td class="status-available">Available</td>
             <td>
-              <button class="action-btn edit-btn">Edit</button>
-              <button class="action-btn delete-btn">Delete</button>
+              <div class="action-buttons">
+                <button class="action-btn edit-btn" data-id="${book.id}">
+                  ✏️ Edit
+                </button>
+                <button class="action-btn delete-btn" data-id="${book.id}">
+                  🗑️ Delete
+                </button>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
     </main>
     <hr />
-    
+
     <footer>
-      <p>© 2026 Online Library — IS231 Web Technology Project | Phase 1</p>
+      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
     </footer>
 
+    <script src="theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      protectAdmin();
+    </script>
     <script src="js/books.js"></script>
     <script src="js/users.js"></script>
-    <script src="theme.js"></script>
   </body>
-  </html>
+</html>

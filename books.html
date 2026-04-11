@@ -2,17 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="Online Library "
-      content="Online library website helps the users to view and search for books to borrow"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime"
-    />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-
-    <title>Online Library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+    <title>Browse Books — Libraria</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -20,9 +13,7 @@
     <div class="menu-wrapper">
       <details>
         <summary aria-label="Open navigation menu">
-          <div class="icon-bar">
-            <span></span><span></span><span></span>
-          </div>
+          <div class="icon-bar"><span></span><span></span><span></span></div>
         </summary>
         <nav class="menu">
           <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
@@ -30,15 +21,10 @@
           <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
           <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
           <div class="menu-divider"></div>
-          <a href="login.html"><span class="menu-icon">🔑</span> Login</a>
-          <a href="register.html"><span class="menu-icon">📝</span> Register</a>
-          <a href="profile.html"><span class="menu-icon">👤</span> User Profile</a>
-          <div class="menu-divider"></div>
-          <a href="admin-dashboard.html" class="dashboard-link"><span class="menu-icon">⚙️</span> Admin Dashboard</a>
         </nav>
       </details>
     </div>
-    
+
     <!-- TOP NAV -->
     <nav class="topnav">
       <a href="index.html" class="logo">Libraria</a>
@@ -46,97 +32,49 @@
         <a href="books.html">Browse Books</a>
         <a href="favourite.html">Favourite</a>
         <a href="about.html">About Us</a>
-        <a href="login.html">Login</a>
-        <a href="register.html">Register</a>
-        <a href="profile.html">User Profile</a>
-        <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       </div>
     </nav>
 
     <main>
-      <div class="content">
-        <main>
-          <h1>Book Collection</h1>
+      <div class="content" style="max-width:1100px;">
+        <h1>Book Collection</h1>
 
-          <div class="filters">
-            <form action="search_results.html" method="GET">
-              <input
-                type="text"
-                name="keyword"
-                placeholder="Search by title or author..."
-                required
-              />
+        <div class="filters">
+          <form style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; background:transparent; border:none; padding:0; box-shadow:none; max-width:none;">
+            <input type="text"  id="search-input" placeholder="Search by title, author or category…" style="flex:1; min-width:180px;" />
 
-              <select name="category">
-                <option value="">All Categories</option>
-                <option>Fiction</option>
-                <option>Science</option>
-                <option>History</option>
-                <option>Technology</option>
-                <option>Philosophy</option>
-              </select>
+            <select id="cat-filter">
+              <option value="">All Categories</option>
+              <option value="Fiction">Fiction</option>
+              <option value="Science">Science</option>
+              <option value="History">History</option>
+              <option value="Technology">Technology</option>
+              <option value="Philosophy">Philosophy</option>
+              <option value="Self Development">Self Development</option>
+            </select>
 
-              <select name="status">
-                <option value="">All Status</option>
-                <option>Available</option>
-                <option>Borrowed</option>
-              </select>
+            <select id="status-filter">
+              <option value="">All Status</option>
+              <option value="available">Available</option>
+              <option value="borrowed">Borrowed</option>
+            </select>
 
-              <input type="submit" value="Search" />
-            </form>
-          </div>
+            <button type="button" id="search-btn" class="btn" style="width:auto; padding:12px 28px;">Search</button>
+          </form>
+        </div>
 
-          <div class="books-grid">
-            <div class="book-item">
-              <h3>Clean Code</h3>
-              <p>by Robert C. Martin</p>
-              <p class="category">Technology</p>
-              <p class="status-available">✓ Available</p>
-              <a href="book-details.html" class="btn">View Details</a>
-            </div>
-
-            <div class="book-item">
-              <h3>Atomic Habits</h3>
-              <p>by James Clear</p>
-              <p class="category">Philosophy</p>
-              <p class="status-borrowed">✗ Borrowed</p>
-              <a href="book-details.html" class="btn">View Details</a>
-            </div>
-
-            <div class="book-item">
-              <h3>A Brief History of Time</h3>
-              <p>by Stephen Hawking</p>
-              <p class="category">Science</p>
-              <p class="status-available">✓ Available</p>
-              <a href="book-details.html" class="btn">View Details</a>
-            </div>
-
-            <div class="book-item">
-              <h3>The Great Gatsby</h3>
-              <p>by F. Scott Fitzgerald</p>
-              <p class="category">Fiction</p>
-              <p class="status-available">✓ Available</p>
-              <a href="book-details.html" class="btn">View Details</a>
-            </div>
-
-            <div class="book-item">
-              <h3>Sapiens</h3>
-              <p>by Yuval Noah Harari</p>
-              <p class="category">History</p>
-              <p class="status-borrowed">✗ Borrowed</p>
-              <a href="book-details.html" class="btn">View Details</a>
-            </div>
-          </div>
-        </main>
+        <!-- Grid rendered by books-page.js -->
+        <div class="books-grid" id="books-grid"></div>
       </div>
     </main>
 
     <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
+      <p>© 2026 Libraria — IS231 Web Technology Project</p>
     </footer>
-    <script src="theme.js"></script>
-        <script src="js/auth.js"></script>
 
+    <script src="theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/books-page.js"></script>
   </body>
 </html>

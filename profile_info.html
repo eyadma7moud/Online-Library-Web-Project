@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-    <title>Borrowed Books — Libraria</title>
+    <title>Profile Information — Libraria</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -17,7 +17,7 @@
         <nav class="menu">
           <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
           <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="profile.html"><span class="menu-icon">👤</span> My Profile</a>
+          <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
           <div class="menu-divider"></div>
         </nav>
       </details>
@@ -28,35 +28,24 @@
       <a href="index.html" class="logo">Libraria</a>
       <div class="links">
         <a href="books.html">Browse Books</a>
-        <a href="profile.html">My Profile</a>
+        <a href="about.html">About Us</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       </div>
     </nav>
 
     <main>
-      <h1>My Borrowed Books</h1>
-
-      <p id="empty-borrowed" style="display:none; color:var(--text-muted); text-align:center; padding:40px 0;">
-        📚 You have no currently borrowed books.
-        <br/><br/>
-        <a href="books.html" class="btn" style="width:auto; display:inline-block;">Browse Books</a>
-      </p>
-
-      <table id="borrowed-table">
-        <thead>
-          <tr>
-            <th>Book ID</th>
-            <th>Book Name</th>
-            <th>Author</th>
-            <th>Borrow Date</th>
-            <th>Return By</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Populated by JS -->
-        </tbody>
-      </table>
+      <div class="content">
+        <h2>Profile Information</h2>
+        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; max-width:500px; box-shadow:var(--shadow-sm);">
+          <p><strong>Full Name:</strong> <span id="info-name">—</span></p>
+          <br/>
+          <p><strong>Email:</strong> <span id="info-email">—</span></p>
+          <br/>
+          <p><strong>Member Since:</strong> <span id="info-join">—</span></p>
+          <br/>
+          <a href="profile.html" class="btn" style="width:auto; display:inline-block; margin-top:8px;">← Back to Profile</a>
+        </div>
+      </div>
     </main>
 
     <footer>
@@ -65,6 +54,6 @@
 
     <script src="theme.js"></script>
     <script src="js/auth.js"></script>
-    <script src="js/borrowed_books.js"></script>
+    <script src="js/profile_info.js"></script>
   </body>
 </html>

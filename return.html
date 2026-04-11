@@ -1,90 +1,79 @@
-<!doctype >
-<html>
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime"
-    />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-
-    <title>Return Book</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+    <title>Return Book — Libraria</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- SIDE MENU -->
-    <div class="menu-wrapper">
-      <details>
-        <summary aria-label="Open navigation menu">
-          <div class="icon-bar">
-            <span></span><span></span><span></span>
-          </div>
-        </summary>
-        <nav class="menu">
-          <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-          <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
-          <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
-          <div class="menu-divider"></div>
-          <a href="login.html"><span class="menu-icon">🔑</span> Login</a>
-          <a href="register.html"><span class="menu-icon">📝</span> Register</a>
-          <a href="profile.html"><span class="menu-icon">👤</span> User Profile</a>
-          <div class="menu-divider"></div>
-          <a href="admin-dashboard.html" class="dashboard-link"><span class="menu-icon">⚙️</span> Admin Dashboard</a>
-        </nav>
-      </details>
-    </div>
-    
-    <!-- TOP NAV -->
-    <nav class="topnav">
-      <a href="index.html" class="logo">Libraria</a>
-      <div class="links">
-        <a href="books.html">Browse Books</a>
-        <a href="favourite.html">Favourite</a>
-        <a href="about.html">About Us</a>
-        <a href="login.html">Login</a>
-        <a href="register.html">Register</a>
-        <a href="profile.html">User Profile</a>
-        <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-      </div>
-    </nav>
+  <!-- SIDE MENU -->
+  <div class="menu-wrapper">
+    <details>
+      <summary aria-label="Open navigation menu">
+        <div class="icon-bar"><span></span><span></span><span></span></div>
+      </summary>
+      <nav class="menu">
+        <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
+        <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
+        <a href="borrowed-books.html"><span class="menu-icon">📖</span> My Books</a>
+        <div class="menu-divider"></div>
+      </nav>
+    </details>
+  </div>
 
-    <main style="padding-top: 40px;">
-      <h2>Return Book</h2>
-      <section>
-        <h3>Book Information</h3>
-        <p><strong>Title:</strong> Details about</p>
-        <p><strong>Author:</strong> Details about</p>
-      </section>
-      <section>
-        <h3>Return Form</h3>
-        <form action="return_success.html" method="get" target="_blank">
-          <label for="1">Book ID</label>
-          <input type="text" value="123" readonly id="1" />
-          <br /><br />
-          <label for="2">Borrow Date</label>
-          <input type="date" required id="2" />
-          <br /><br />
-          <label for="3">Return Date</label>
-          <input type="date" required id="3" />
-          <br /><br />
-          <label>Condition of Book:</label>
-          <select required>
-            <option value="">Select condition</option>
-            <option>Excellent</option>
-            <option>Good</option>
-            <option>Damaged</option>
-          </select>
-          <br /><br />
-          <button type="submit">Return</button>
-        </form>
-      </section>
-    </main>
-    <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
-    </footer>
-    <script src="theme.js"></script>
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a href="index.html" class="logo">Libraria</a>
+    <div class="links">
+      <a href="books.html">Browse Books</a>
+      <a href="borrowed-books.html">My Books</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </nav>
+
+  <main style="padding-top: 40px;">
+    <h2>Return Book</h2>
+
+    <section>
+      <h3>Book Information</h3>
+      <p><strong>Title:</strong> <span id="return-book-title">—</span></p>
+      <p><strong>Author:</strong> <span id="return-book-author">—</span></p>
+    </section>
+
+    <section>
+      <h3>Return Form</h3>
+      <form id="return-form">
+        <label for="return-book-id">Book ID</label>
+        <input type="text" id="return-book-id" readonly />
+
+        <label for="borrow-date">Borrow Date</label>
+        <input type="date" id="borrow-date" readonly />
+
+        <label for="return-date">Return Date</label>
+        <input type="date" id="return-date" required />
+
+        <label for="book-condition">Condition of Book</label>
+        <select id="book-condition" required>
+          <option value="">Select condition</option>
+          <option value="Excellent">Excellent</option>
+          <option value="Good">Good</option>
+          <option value="Damaged">Damaged</option>
+        </select>
+
+        <br /><br />
+        <button class="btn" type="submit">Return Book</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Libraria — IS231 Web Technology Project</p>
+  </footer>
+
+  <script src="theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/return.js"></script>
   </body>
 </html>

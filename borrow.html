@@ -1,15 +1,10 @@
-<!doctype >
-<html>
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime"
-    />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-
-    <title>Borrow Book</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+    <title>Borrow Book — Libraria</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -17,9 +12,7 @@
   <div class="menu-wrapper">
     <details>
       <summary aria-label="Open navigation menu">
-        <div class="icon-bar">
-          <span></span><span></span><span></span>
-        </div>
+        <div class="icon-bar"><span></span><span></span><span></span></div>
       </summary>
       <nav class="menu">
         <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
@@ -27,15 +20,10 @@
         <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
         <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
         <div class="menu-divider"></div>
-        <a href="login.html"><span class="menu-icon">🔑</span> Login</a>
-        <a href="register.html"><span class="menu-icon">📝</span> Register</a>
-        <a href="profile.html"><span class="menu-icon">👤</span> User Profile</a>
-        <div class="menu-divider"></div>
-        <a href="admin-dashboard.html" class="dashboard-link"><span class="menu-icon">⚙️</span> Admin Dashboard</a>
       </nav>
     </details>
   </div>
-  
+
   <!-- TOP NAV -->
   <nav class="topnav">
     <a href="index.html" class="logo">Libraria</a>
@@ -43,43 +31,49 @@
       <a href="books.html">Browse Books</a>
       <a href="favourite.html">Favourite</a>
       <a href="about.html">About Us</a>
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
-      <a href="profile.html">User Profile</a>
-      <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
     </div>
   </nav>
 
-    <main style="padding-top: 40px">
-      <h2>Borrow Book</h2>
-      <section>
-        <h3>Book Information</h3>
-        <p><strong>Title:</strong> Details about</p>
-        <p><strong>Author:</strong> Details about</p>
-      </section>
-      <section>
-        <h3>Borrow Form</h3>
-        <form action="borrow_success.html" method="get" target="_blank">
-          <label for="1">Book ID</label>
-          <input type="text" value="123" readonly id="1" />
-          <br /><br />
-          <label for="2">Borrow Date</label>
-          <input type="date" required id="2" />
-          <br /><br />
-          <label for="3">Return Date</label>
-          <input type="date" required id="3" />
-          <br /><br />
-          <input type="checkbox" id="4" />
-          <label for="4">Are you sure you want to borrow this book?</label>
-          <br /><br />
-          <button class="btn" type="submit">Borrow</button>
-        </form>
-      </section>
-    </main>
-    <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
-    </footer>
-    <script src="theme.js"></script>
+  <main style="padding-top: 40px;">
+    <h2>Borrow Book</h2>
+
+    <section>
+      <h3>Book Information</h3>
+      <p><strong>Title:</strong> <span id="borrow-book-title">—</span></p>
+      <p><strong>Author:</strong> <span id="borrow-book-author">—</span></p>
+    </section>
+
+    <section>
+      <h3>Borrow Form</h3>
+      <form id="borrow-form">
+        <label for="borrow-book-id">Book ID</label>
+        <input type="text" id="borrow-book-id" readonly />
+
+        <label for="borrow-date">Borrow Date</label>
+        <input type="date" id="borrow-date" required />
+
+        <label for="return-date">Return Date</label>
+        <input type="date" id="return-date" required />
+
+        <br /><br />
+        <input type="checkbox" id="confirm-borrow" />
+        <label for="confirm-borrow" style="display:inline; margin-top:0;">
+          I confirm I want to borrow this book.
+        </label>
+        <br /><br />
+
+        <button class="btn" type="submit">Borrow</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Libraria — IS231 Web Technology Project</p>
+  </footer>
+
+  <script src="theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/borrow.js"></script>
   </body>
 </html>

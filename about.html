@@ -3,99 +3,127 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime"
-    />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-    
     <title>Online Library</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
+
   </head>
   <body>
-  <!-- SIDE MENU -->
-  <div class="menu-wrapper">
-    <details>
-      <summary aria-label="Open navigation menu">
-        <div class="icon-bar">
-          <span></span><span></span><span></span>
+
+    <!-- ========== HEADER ========== -->
+    <header>
+      <div class="header-main">
+        <div class="logo">
+          <div class="logo-icon">📖</div>
+          <div>
+            <h1>Library Management System</h1>
+            <p style="font-size: 0.8em; opacity: 0.9">
+              Your Gateway to Knowledge
+            </p>
+          </div>
         </div>
-      </summary>
-      <nav class="menu">
-        <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-        <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-        <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
-        <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
-        <div class="menu-divider"></div>
-        <a href="login.html"><span class="menu-icon">🔑</span> Login</a>
-        <a href="register.html"><span class="menu-icon">📝</span> Register</a>
-        <a href="profile.html"><span class="menu-icon">👤</span> User Profile</a>
-        <div class="menu-divider"></div>
-        <a href="admin-dashboard.html" class="dashboard-link"><span class="menu-icon">⚙️</span> Admin Dashboard</a>
-      </nav>
-    </details>
-  </div>
-  
-  <!-- TOP NAV -->
-  <nav class="topnav">
-    <a href="index.html" class="logo">Libraria</a>
-    <div class="links">
-      <a href="books.html">Browse Books</a>
-      <a href="favourite.html">Favourite</a>
-      <a href="about.html">About Us</a>
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
-      <a href="profile.html">User Profile</a>
-      <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </div>
-  </nav>
-
-    <main>
-      <div class="content">
-        <h2>About Our Library</h2>
-        <p>
-          Our Online Library is a digital space created to make discovering and
-          borrowing books easier and more organized. We built this platform to
-          simplify the traditional library experience and bring it into a
-          smarter, more accessible environment.
-        </p>
-
-        <h3>What You Can Do Here</h3>
-
-        <ul>
-          <li>Search for books by title, author, or category.</li>
-          <li>Explore available books and view detailed information.</li>
-          <li>Check whether a book is available or currently borrowed.</li>
-          <li>Borrow books with a simple and clear process.</li>
-          <li>Keep track of the books you have borrowed.</li>
-        </ul>
-
-        <h3>Why We Built It</h3>
-
-        <p>
-          As students, we understand how important it is to access knowledge
-          quickly and efficiently. We wanted to create a system that keeps books
-          organized, easy to manage, and simple to explore.
-        </p>
-
-        <p>
-          This platform represents our vision of how technology can improve the
-          way libraries work — making them faster, clearer, and more
-          user-friendly.
-        </p>
-
-        <p>Because knowledge grows when it is shared.</p>
-
-        <p><strong>The Development Team</strong></p>
+        <div class="header-info">
+          <p>📞 Contact: +20 123 456 7890</p>
+          <p>✉️ Email: info@library.edu</p>
+        </div>
       </div>
-    </main>
+    </header>
 
+    <!-- ========== NAV Bar ========== -->
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="view-books.html">View All Books</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="borrow-book.html">Borrow Book</a></li>
+        <li><a href="return-book.html">Return Book</a></li>
+        <li><a href="favourite.html">Favourite</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+      <ul>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="login.html">Login</a></li>
+        <button class="dark-mode">🔆</button>
+      </ul>
+    </nav>
+
+    <!-- ========== Page CONTENT ========== -->
+    <div class="container">
+        <div class="content">
+            <h2>About Our Library </h2>
+            <p>
+                Our Online Library is a digital space created to make discovering
+                and borrowing books easier and more organized.
+                We built this platform to simplify the traditional library experience
+                and bring it into a smarter, more accessible environment.
+            </p>
+
+            <h3>What You Can Do Here</h3>
+
+            <ul>
+                <li>Search for books by title, author, or category.</li>
+                <li>Explore available books and view detailed information.</li>
+                <li>Check whether a book is available or currently borrowed.</li>
+                <li>Borrow books with a simple and clear process.</li>
+                <li>Keep track of the books you have borrowed.</li>
+            </ul>
+
+            <h3>Why We Built It</h3>
+
+            <p>
+                As students, we understand how important it is to access knowledge quickly
+                and efficiently. We wanted to create a system that keeps books organized,
+                easy to manage, and simple to explore.
+            </p>
+
+            <p>
+                This platform represents our vision of how technology can improve
+                the way libraries work — making them faster, clearer,
+                and more user-friendly.
+            </p>
+
+            <p>
+                Because knowledge grows when it is shared.
+            </p>
+
+            <p><strong>The Development Team</strong></p>
+
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
     <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <p>
+            Our library has been serving the community since 1950, providing
+            access to thousands of books and resources for learning and
+            research.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li>📚 Browse Catalog</li>
+            <li>📖 New Arrivals</li>
+            <li>⭐ Popular Books</li>
+            <li>❓ FAQ</li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <ul>
+            <li>📍 123 Library Street, Cairo, Egypt</li>
+            <li>📞 +20 123 456 7890</li>
+            <li>✉️ info@library.edu</li>
+            <li>🕒 Mon-Sat: 8:00 AM - 8:00 PM</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Library Management System. All rights reserved.</p>
+      </div>
     </footer>
-    <script src="theme.js"></script>
-        <script src="js/auth.js"></script>
-
+    <script src="js/about.js"></script>
   </body>
 </html>

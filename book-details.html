@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
     <title>Book Details — Libraria</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      #fav-btn {
+        margin-top: 8px;
+      }
+    </style>
   </head>
   <body>
     <!-- SIDE MENU -->
@@ -55,6 +60,9 @@
         <p id="book-status" class="status-available">✓ Available</p>
 
         <div class="buttons">
+          <!-- Favourite toggle button -->
+          <button id="fav-btn" class="btn" style="display:none;">❤️ Add to Favourites</button>
+
           <!-- Borrow button — shown only when available and user hasn't borrowed -->
           <a id="borrow-btn" href="#" class="btn">Borrow Book</a>
 

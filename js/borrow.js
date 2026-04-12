@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  const params  = new URLSearchParams(window.location.search);
-  const bookId  = parseInt(params.get("id"));
+  const params = new URLSearchParams(window.location.search);
+  const bookId = parseInt(params.get("id"));
 
   if (!bookId) {
     alert("No book selected.");
@@ -40,7 +40,31 @@ document.addEventListener("DOMContentLoaded", function () {
   if (authorEl) authorEl.textContent = book.author;
   if (bookIdEl) bookIdEl.value       = book.id;
 
-  // If book is already borrowed, disable form
+  // Check if user already borrowed this book
+  const currentUser = getCurrentUser();
+  const users       = JSON.parse(localStorage.getItem("users")) || [];
+  const fullUser    = users.find(u => u.id === currentUser.id);
+  const alreadyBorrowed = fullUser
+    ? (fullUser.borrowedBooks || []).some(b => b.bookId === bookId && !b.returned)
+    : false;
+
+  if (alreadyBorrowed) {
+    const form = document.getElementById("borrow-form");
+    if (form) {
+      form.innerHTML = `
+        <div style="text-align:center; padding: 24px;">
+          <p style="color: var(--accent-red); font-weight:600; font-size:1.1rem;">
+            ❌ You have already borrowed this book.
+          </p>
+          <a href="borrowed-books.html" class="btn" style="width:auto; display:inline-block; margin-top:16px;">
+            My Borrowed Books
+          </a>
+        </div>`;
+    }
+    return;
+  }
+
+  // If book is already borrowed by someone else, disable form
   if (book.status === "borrowed") {
     const form = document.getElementById("borrow-form");
     if (form) {
@@ -62,8 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const defaultReturn = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)
     .toISOString().split("T")[0];
 
-  const borrowDateEl  = document.getElementById("borrow-date");
-  const returnDateEl  = document.getElementById("return-date");
+  const borrowDateEl = document.getElementById("borrow-date");
+  const returnDateEl = document.getElementById("return-date");
 
   if (borrowDateEl) { borrowDateEl.value = today; borrowDateEl.min = today; }
   if (returnDateEl) { returnDateEl.value = defaultReturn; returnDateEl.min = today; }
@@ -80,8 +104,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const borrowDate  = borrowDateEl ? borrowDateEl.value : today;
-      const returnDate  = returnDateEl ? returnDateEl.value : defaultReturn;
+      const borrowDate = borrowDateEl ? borrowDateEl.value : today;
+      const returnDate = returnDateEl ? returnDateEl.value : defaultReturn;
 
       if (returnDate <= borrowDate) {
         alert("Return date must be after borrow date.");
@@ -89,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Get fresh data
-      const allBooks = JSON.parse(localStorage.getItem("books")) || [];
+      const allBooks  = JSON.parse(localStorage.getItem("books")) || [];
       const bookIndex = allBooks.findIndex(b => b.id === bookId);
 
       if (bookIndex === -1 || allBooks[bookIndex].status === "borrowed") {
@@ -98,32 +122,30 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const currentUser = getCurrentUser();
-      const users       = JSON.parse(localStorage.getItem("users")) || [];
-      const userIndex   = users.findIndex(u => u.id === currentUser.id);
+      const allUsers  = JSON.parse(localStorage.getItem("users")) || [];
+      const userIndex = allUsers.findIndex(u => u.id === currentUser.id);
 
-      // Mark book as borrowed
+      // ── Mark book as borrowed → unavailable ───────────────────
       allBooks[bookIndex].status     = "borrowed";
       allBooks[bookIndex].borrowedBy = currentUser.id;
       localStorage.setItem("books", JSON.stringify(allBooks));
 
-      // Add to user's borrowedBooks
+      // ── Add to user's borrowedBooks history ───────────────────
       if (userIndex !== -1) {
-        if (!users[userIndex].borrowedBooks) users[userIndex].borrowedBooks = [];
-        users[userIndex].borrowedBooks.push({
+        if (!allUsers[userIndex].borrowedBooks) allUsers[userIndex].borrowedBooks = [];
+        allUsers[userIndex].borrowedBooks.push({
           bookId:     bookId,
           borrowDate: borrowDate,
           returnDate: returnDate,
           returned:   false
         });
-        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem("users", JSON.stringify(allUsers));
 
-        // Update currentUser in session
-        const { password: _, ...safeUser } = users[userIndex];
+        const { password: _, ...safeUser } = allUsers[userIndex];
         localStorage.setItem("currentUser", JSON.stringify(safeUser));
       }
 
-      // Store success info for next page
+      // ── Store success info for next page ──────────────────────
       sessionStorage.setItem("borrowSuccess", JSON.stringify({
         title:      book.title,
         author:     book.author,

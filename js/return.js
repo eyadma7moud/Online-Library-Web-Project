@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  const params = new URLSearchParams(window.location.search);
-  const bookId = parseInt(params.get("id"));
+  const params  = new URLSearchParams(window.location.search);
+  const bookId  = parseInt(params.get("id"));
 
   if (!bookId) {
     alert("No book selected.");
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  const user       = users[userIndex];
+  const user        = users[userIndex];
   const borrowEntry = (user.borrowedBooks || []).find(
     b => b.bookId === bookId && !b.returned
   );
@@ -71,10 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
 
       const condition  = document.getElementById("book-condition");
-      const returnDate = returnDateEl ? returnDateEl.value
+      const returnDate = returnDateEl
+        ? returnDateEl.value
         : new Date().toISOString().split("T")[0];
 
-      // Update book status
+      // ── Update book status → available ────────────────────────
       const allBooks  = JSON.parse(localStorage.getItem("books")) || [];
       const bookIndex = allBooks.findIndex(b => b.id === bookId);
       if (bookIndex !== -1) {
@@ -83,17 +84,17 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("books", JSON.stringify(allBooks));
       }
 
-      // Update user's borrowedBooks entry
-      const allUsers  = JSON.parse(localStorage.getItem("users")) || [];
-      const uIdx      = allUsers.findIndex(u => u.id === currentUser.id);
+      // ── Update user's borrowedBooks entry → returned ──────────
+      const allUsers = JSON.parse(localStorage.getItem("users")) || [];
+      const uIdx     = allUsers.findIndex(u => u.id === currentUser.id);
       if (uIdx !== -1) {
         const entryIdx = allUsers[uIdx].borrowedBooks.findIndex(
           b => b.bookId === bookId && !b.returned
         );
         if (entryIdx !== -1) {
-          allUsers[uIdx].borrowedBooks[entryIdx].returned   = true;
+          allUsers[uIdx].borrowedBooks[entryIdx].returned     = true;
           allUsers[uIdx].borrowedBooks[entryIdx].actualReturn = returnDate;
-          allUsers[uIdx].borrowedBooks[entryIdx].condition  =
+          allUsers[uIdx].borrowedBooks[entryIdx].condition    =
             condition ? condition.value : "Good";
         }
         localStorage.setItem("users", JSON.stringify(allUsers));
@@ -101,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("currentUser", JSON.stringify(safeUser));
       }
 
-      // Store success info
+      // ── Store success info ────────────────────────────────────
       sessionStorage.setItem("returnSuccess", JSON.stringify({
         title:      book.title,
         author:     book.author,

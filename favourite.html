@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Online Library</title>
+    <title>My Favourites — Libraria</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
     <link rel="stylesheet" href="style.css">
     <style>
         .books-grid {
@@ -14,28 +15,22 @@
         }
         .book-card {
             width: 260px !important;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition);
         }
-
-        .book-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
+        .book-card:hover {
+            box-shadow: var(--shadow-md);
         }
-
-        .books-grid .book-card img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border-radius: var(--radius-md);
-            margin-bottom: 16px;
-            transition: transform var(--transition);
+        .book-card h3 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            margin-bottom: 6px;
         }
-
-        .books-grid .book-card:hover img { 
-            transform: scale(1.03); 
-        }
-
-        .books-grid .book-card button {
+        .books-grid .book-card button.remove-fav-btn {
             width: 100%;
             padding: 10px;
             background: var(--accent-red-bg);
@@ -49,137 +44,84 @@
             transition: all var(--transition);
             margin-top: 8px;
         }
-
-        .books-grid .book-card button:hover {
+        .books-grid .book-card button.remove-fav-btn:hover {
             background: var(--accent-red);
             color: #fff;
         }
-
-
-
         .empty-fav {
             text-align: center;
             margin-top: 60px;
             color: var(--text-muted);
         }
-
         .empty-fav h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
             font-family: var(--font-display);
-            }
-
-        .empty-fav p {
-            font-size: 14px;
         }
+        .empty-fav p { font-size: 14px; }
     </style>
-    
 </head>
 <body>
+    <!-- SIDE MENU -->
+    <div class="menu-wrapper">
+        <details>
+            <summary aria-label="Open navigation menu">
+                <div class="icon-bar"><span></span><span></span><span></span></div>
+            </summary>
+            <nav class="menu">
+                <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
+                <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
+                <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
+                <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+                <div class="menu-divider"></div>
+            </nav>
+        </details>
+    </div>
 
-    <!-- ========== HEADER ========== -->
-    <header>
-        <div class="header-main">
-            <div class="logo">
-                <div class="logo-icon">📖</div>
-                <div>
-                    <h1>Library Management System</h1>
-                    <p style="font-size: 0.8em; opacity: 0.9">
-                        Your Gateway to Knowledge
-                    </p>
-                </div>
-            </div>
-            <div class="header-info">
-                <p>📞 Contact: +20 123 456 7890</p>
-                <p>✉️ Email: info@library.edu</p>
-            </div>
+    <!-- TOP NAV -->
+    <nav class="topnav">
+        <a href="index.html" class="logo">Libraria</a>
+        <div class="links">
+            <a href="books.html">Browse Books</a>
+            <a href="favourite.html">Favourite</a>
+            <a href="about.html">About Us</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
         </div>
-    </header>
-
-    <!-- ========== NAV Bar ========== -->
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="view-books.html">View All Books</a></li>
-            <li><a href="categories.html">Categories</a></li>
-            <li><a href="borrow-book.html">Borrow Book</a></li>
-            <li><a href="return-book.html">Return Book</a></li>
-            <li><a href="favourite.html">Favourite</a></li>
-            <li><a href="about.html">About Us</a></li>
-        </ul>
-        <ul>
-            <li><a href="register.html">Register</a></li>
-            <li><a href="login.html">Login</a></li>
-            <button class="dark-mode">🔆</button>
-        </ul>
     </nav>
 
-    <!-- ========== Page CONTENT ========== -->
     <div class="container">
         <div class="content">
             <h2>My Favourite Books</h2>
-
-            <div class="books-grid">
-
-                <div class="book-card">
-                    <img src="images/book1.jpg" alt="Book 1" width="150">
-                    <h3>Clean Code</h3>
-                    <p>Robert C. Martin</p>
-                    <button> Remove</button>
-                </div>
-
-                <div class="book-card">
-                    <img src="images/book2.jpg" alt="Book 2" width="150">
-                    <h3>Atomic Habits</h3>
-                    <p>James Clear</p>
-                    <button> Remove</button>
-                </div>
-
-                <div class="book-card">
-                    <img src="images/book3.jpg" alt="Book 3" width="150">
-                    <h3>The Alchemist</h3>
-                    <p>Paulo Coelho</p>
-                    <button> Remove</button>
-                </div>
-
-                <div class="book-card">
-                    <img src="images/book4.jpg" alt="Book 4" width="150">
-                    <h3>Introduction to Algorithms</h3>
-                    <p>Thomas H. Cormen</p>
-                    <button> Remove</button>
-                </div>
-
-            </div>
-
+            <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">
+                Books you've hearted ❤️ — click any book to view details or borrow.
+            </p>
+            <!-- Dynamically rendered by favourite.js -->
+            <div class="books-grid"></div>
         </div>
     </div>
 
-    <!-- ========== FOOTER ========== -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>About Us</h3>
-                <p>
-                    Our library has been serving the community since 1950, providing
-                    access to thousands of books and resources for learning and
-                    research.
-                </p>
+                <p>Our library has been serving the community since 1950, providing access to thousands of books and resources.</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li>📚 Browse Catalog</li>
-                    <li>📖 New Arrivals</li>
-                    <li>⭐ Popular Books</li>
-                    <li>❓ FAQ</li>
+                    <li><a href="books.html" style="color:inherit;">📚 Browse Catalog</a></li>
+                    <li><a href="books.html" style="color:inherit;">📖 New Arrivals</a></li>
+                    <li><a href="favourite.html" style="color:inherit;">⭐ My Favourites</a></li>
+                    <li><a href="about.html" style="color:inherit;">❓ About Us</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Contact Info</h3>
                 <ul>
                     <li>📍 123 Library Street, Cairo, Egypt</li>
-                    <li>📞 +20 123 456 7890</li>
-                    <li>✉️ info@library.edu</li>
+                    <li><a href="tel:+201234567890" style="color:inherit;">📞 +20 123 456 7890</a></li>
+                    <li><a href="mailto:info@library.edu" style="color:inherit;">✉️ info@library.edu</a></li>
                     <li>🕒 Mon-Sat: 8:00 AM - 8:00 PM</li>
                 </ul>
             </div>
@@ -188,6 +130,9 @@
             <p>&copy; 2026 Library Management System. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="theme.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/favourite.js"></script>
 </body>
 </html>

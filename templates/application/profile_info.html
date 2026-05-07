@@ -1,0 +1,60 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+    <title>Profile Information — Libraria</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- SIDE MENU -->
+    <div class="menu-wrapper">
+      <details>
+        <summary aria-label="Open navigation menu">
+          <div class="icon-bar"><span></span><span></span><span></span></div>
+        </summary>
+        <nav class="menu">
+          <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
+          <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
+          <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+          <div class="menu-divider"></div>
+        </nav>
+      </details>
+    </div>
+
+    <!-- TOP NAV -->
+    <nav class="topnav">
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="books.html">Browse Books</a>
+        <a href="about.html">About Us</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </nav>
+
+    <main>
+      <div class="content">
+        <h2>Profile Information</h2>
+        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; max-width:500px; box-shadow:var(--shadow-sm);">
+          <p><strong>Full Name:</strong> <span id="info-name">—</span></p>
+          <br/>
+          <p><strong>Email:</strong> <span id="info-email">—</span></p>
+          <br/>
+          <p><strong>Member Since:</strong> <span id="info-join">—</span></p>
+          <br/>
+          <a href="profile.html" class="btn" style="width:auto; display:inline-block; margin-top:8px;">← Back to Profile</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 Libraria — IS231 Web Technology Project</p>
+    </footer>
+
+    <script src="theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile_info.js"></script>
+  </body>
+</html>

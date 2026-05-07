@@ -1,0 +1,190 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+    <title>User Profile — Libraria</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .profile-wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
+      .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 32px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+      }
+      .profile-pic-wrapper {
+        position: relative;
+        flex-shrink: 0;
+      }
+      .profile-pic-wrapper img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--accent-blue);
+        box-shadow: var(--shadow-md);
+      }
+      .upload-overlay {
+        position: absolute;
+        bottom: 0; right: 0;
+        background: var(--accent-blue);
+        color: #fff;
+        border-radius: 50%;
+        width: 30px; height: 30px;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        border: 2px solid var(--bg-card);
+        transition: background var(--transition);
+      }
+      .upload-overlay:hover { background: var(--accent-blue-dark); }
+      .profile-info-text h2 {
+        font-family: var(--font-display);
+        margin-bottom: 6px;
+      }
+      .profile-info-text p { margin-bottom: 4px; font-size: 14px; }
+      .profile-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+      }
+      .stat-card h4 { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+      .stat-card p  { font-size: 2rem; font-weight: 700; color: var(--accent-blue); margin: 0; font-family: var(--font-display); }
+      .profile-links {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+      .profile-link-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 24px;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background var(--transition), padding-left var(--transition);
+      }
+      .profile-link-item:last-child { border-bottom: none; }
+      .profile-link-item:hover { background: var(--accent-blue-light); padding-left: 32px; color: var(--accent-blue); }
+      .profile-link-item span { font-size: 20px; }
+      @media (max-width: 600px) {
+        .profile-header { flex-direction: column; text-align: center; }
+        .profile-stats  { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SIDE MENU -->
+    <div class="menu-wrapper">
+      <details>
+        <summary aria-label="Open navigation menu">
+          <div class="icon-bar"><span></span><span></span><span></span></div>
+        </summary>
+        <nav class="menu">
+          <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
+          <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
+          <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
+          <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+          <div class="menu-divider"></div>
+        </nav>
+      </details>
+    </div>
+
+    <!-- TOP NAV -->
+    <nav class="topnav">
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="books.html">Browse Books</a>
+        <a href="favourite.html">Favourite</a>
+        <a href="about.html">About Us</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </nav>
+
+    <div class="profile-wrapper">
+      <!-- Header Card -->
+      <div class="profile-header">
+        <div class="profile-pic-wrapper">
+          <img id="profile-pic" src="user.png" alt="Profile Picture" />
+          <div class="upload-overlay" id="upload-pic-btn" title="Change photo">📷</div>
+          <input type="file" id="pic-input" accept="image/*" style="display:none;" />
+        </div>
+        <div class="profile-info-text">
+          <h2 id="profile-name">—</h2>
+          <p>📧 <span id="profile-email">—</span></p>
+          <p>📅 Member since <span id="profile-join">—</span></p>
+          <p>🎭 Role: <strong><span id="profile-role">—</span></strong></p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="profile-stats">
+        <div class="stat-card">
+          <h4>Total Borrowed</h4>
+          <p id="stat-total-borrowed">0</p>
+        </div>
+        <div class="stat-card">
+          <h4>Currently Active</h4>
+          <p id="stat-active">0</p>
+        </div>
+        <div class="stat-card">
+          <h4>Returned</h4>
+          <p id="stat-returned">0</p>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="profile-links">
+        <a href="borrowed-books.html" class="profile-link-item">
+          <span>📖</span> My Borrowed Books
+        </a>
+        <a href="borrow-history.html" class="profile-link-item">
+          <span>📜</span> Borrow History
+        </a>
+        <a href="favourite.html" class="profile-link-item">
+          <span>❤️</span> My Favourites
+        </a>
+        <a href="profile_info.html" class="profile-link-item">
+          <span>👤</span> Profile Information
+        </a>
+        <a href="account-settings.html" class="profile-link-item">
+          <span>⚙️</span> Account Settings
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2026 Libraria — IS231 Web Technology Project</p>
+    </footer>
+
+    <script src="theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

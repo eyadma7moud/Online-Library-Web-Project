@@ -1,0 +1,101 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Book - Online Library</title>
+
+  <!-- Fonts -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+  <!-- SIDE MENU -->
+  <div class="menu-wrapper">
+    <details>
+      <summary>
+        <div class="icon-bar"><span></span><span></span><span></span></div>
+      </summary>
+
+      <nav class="menu">
+        <a href="{% url 'home' %}">🏠 Home</a>
+        <a href="#">📚 Books</a>
+        <a href="{% url 'admin_dashboard' %}">⚙️ Dashboard</a>
+      </nav>
+    </details>
+  </div>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a href="{% url 'home' %}" class="logo">Libraria</a>
+
+    <div class="links">
+      <a href="#">Browse Books</a>
+      <a href="#">Favourite</a>
+      <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+
+      <button id="themeToggle">🌙</button>
+    </div>
+  </nav>
+
+  <hr>
+
+  <main style="padding-top:40px">
+    <h1>Add New Book</h1>
+
+    <form class="auth-form" id="add-book-form">
+
+      <label>Book Title</label>
+      <input type="text" id="title" required>
+
+      <label>Author</label>
+      <input type="text" id="author" required>
+
+      <label>Category</label>
+      <select id="category">
+        <option>Fiction</option>
+        <option>Science</option>
+        <option>History</option>
+        <option>Technology</option>
+      </select>
+
+      <label>Year</label>
+      <input type="number" id="year">
+
+      <label>Pages</label>
+      <input type="number" id="pages">
+
+      <label>Description</label>
+      <textarea id="description" rows="5"></textarea>
+
+      <label>Status</label>
+      <select id="status">
+        <option>Available</option>
+        <option>Borrowed</option>
+      </select>
+
+      <br><br>
+
+      <button type="submit">Add Book</button>
+    </form>
+  </main>
+
+  <hr>
+
+  <footer>
+    <p>© 2026 Online Library</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="{% static 'js/add-book.js' %}"></script>
+  <script src="{% static 'js/theme.js' %}"></script>
+  <script src="{% static 'js/auth.js' %}"></script>
+
+</body>
+</html>

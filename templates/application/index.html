@@ -1,0 +1,94 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+
+    <title>Libraria — Home</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+
+  <!-- SIDE MENU -->
+  <div class="menu-wrapper">
+    <details>
+      <summary aria-label="Open navigation menu">
+        <div class="icon-bar"><span></span><span></span><span></span></div>
+      </summary>
+
+      <nav class="menu">
+        <a href="/"><span class="menu-icon">🏠</span> Home</a>
+        <a href="/books/"><span class="menu-icon">📚</span> Browse Books</a>
+        <a href="/favourite/"><span class="menu-icon">❤️</span> Favourite</a>
+        <a href="/about/"><span class="menu-icon">ℹ️</span> About Us</a>
+        <div class="menu-divider"></div>
+        <a href="/login/"><span class="menu-icon">🔑</span> Login</a>
+        <a href="/register/"><span class="menu-icon">📝</span> Register</a>
+        <a href="/profile/"><span class="menu-icon">👤</span> Profile</a>
+      </nav>
+    </details>
+  </div>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a href="/" class="logo">Libraria</a>
+
+    <div class="links">
+      <a href="/books/">Browse Books</a>
+      <a href="/favourite/">Favourite</a>
+      <a href="/about/">About Us</a>
+      <a href="/login/">Login</a>
+      <a href="/register/">Register</a>
+
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+    </div>
+  </nav>
+
+  <!-- MAIN HOME -->
+  <main class="home">
+
+    <section class="hero">
+      <h1>Discover & Borrow<br><em>Books You Love</em></h1>
+
+      <p>
+        Thousands of books available — search, explore, and enjoy reading anytime.
+      </p>
+
+      <!-- Search -->
+      <form action="/books/" method="GET" class="search-bar">
+        <input type="search" name="search" placeholder="Search books or authors..." required>
+        <button type="submit">Search</button>
+      </form>
+
+      <!-- Categories -->
+      <div class="categories">
+        <a href="/books/">Programming</a>
+        <a href="/books/">History</a>
+        <a href="/books/">Novels</a>
+        <a href="/books/">Science</a>
+      </div>
+
+      <a href="/books/" class="btn">View All Books</a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Libraria — IS231 Web Project</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="{% static 'js/theme.js' %}"></script>
+  <script src="{% static 'js/auth.js' %}"></script>
+
+  </body>
+</html>

@@ -1,0 +1,95 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts (زي ما هي) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+
+    <title>Return Book — Libraria</title>
+
+    <!-- CSS (Django static) -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+
+  <!-- SIDE MENU -->
+  <div class="menu-wrapper">
+    <details>
+      <summary aria-label="Open navigation menu">
+        <div class="icon-bar"><span></span><span></span><span></span></div>
+      </summary>
+
+      <nav class="menu">
+        <a href="/"><span class="menu-icon">🏠</span> Home</a>
+        <a href="/books/"><span class="menu-icon">📚</span> Browse Books</a>
+        <a href="/borrowed-books/"><span class="menu-icon">📖</span> My Books</a>
+        <div class="menu-divider"></div>
+      </nav>
+    </details>
+  </div>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a href="/" class="logo">Libraria</a>
+
+    <div class="links">
+      <a href="/books/">Browse Books</a>
+      <a href="/borrowed-books/">My Books</a>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main style="padding-top: 40px;">
+    <h2>Return Book</h2>
+
+    <section>
+      <h3>Book Information</h3>
+      <p><strong>Title:</strong> <span id="return-book-title">—</span></p>
+      <p><strong>Author:</strong> <span id="return-book-author">—</span></p>
+    </section>
+
+    <section>
+      <h3>Return Form</h3>
+
+      <form id="return-form">
+        <label for="return-book-id">Book ID</label>
+        <input type="text" id="return-book-id" readonly />
+
+        <label for="borrow-date">Borrow Date</label>
+        <input type="date" id="borrow-date" readonly />
+
+        <label for="return-date">Return Date</label>
+        <input type="date" id="return-date" required />
+
+        <label for="book-condition">Condition of Book</label>
+        <select id="book-condition" required>
+          <option value="">Select condition</option>
+          <option value="Excellent">Excellent</option>
+          <option value="Good">Good</option>
+          <option value="Damaged">Damaged</option>
+        </select>
+
+        <br /><br />
+        <button class="btn" type="submit">Return Book</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Libraria — IS231 Web Technology Project</p>
+  </footer>
+
+  <!-- JS (Django static) -->
+  <script src="{% static 'js/theme.js' %}"></script>
+  <script src="{% static 'js/auth.js' %}"></script>
+  <script src="{% static 'js/return.js' %}"></script>
+
+  </body>
+</html>

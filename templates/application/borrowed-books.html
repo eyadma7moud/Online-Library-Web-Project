@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+    <title>Borrowed Books — Libraria</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- SIDE MENU -->
+    <div class="menu-wrapper">
+      <details>
+        <summary aria-label="Open navigation menu">
+          <div class="icon-bar"><span></span><span></span><span></span></div>
+        </summary>
+        <nav class="menu">
+          <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
+          <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
+          <a href="profile.html"><span class="menu-icon">👤</span> My Profile</a>
+          <div class="menu-divider"></div>
+        </nav>
+      </details>
+    </div>
+
+    <!-- TOP NAV -->
+    <nav class="topnav">
+      <a href="index.html" class="logo">Libraria</a>
+      <div class="links">
+        <a href="books.html">Browse Books</a>
+        <a href="profile.html">My Profile</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </nav>
+
+    <main>
+      <h1>My Borrowed Books</h1>
+
+      <p id="empty-borrowed" style="display:none; color:var(--text-muted); text-align:center; padding:40px 0;">
+        📚 You have no currently borrowed books.
+        <br/><br/>
+        <a href="books.html" class="btn" style="width:auto; display:inline-block;">Browse Books</a>
+      </p>
+
+      <table id="borrowed-table">
+        <thead>
+          <tr>
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Borrow Date</th>
+            <th>Return By</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </main>
+
+    <footer>
+      <p>© 2026 Libraria — IS231 Web Technology Project</p>
+    </footer>
+
+    <script src="theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/borrowed_books.js"></script>
+  </body>
+</html>

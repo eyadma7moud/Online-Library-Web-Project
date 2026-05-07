@@ -1,0 +1,129 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Register — Libraria</title>
+
+    <!-- Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+
+    <!-- SIDE MENU -->
+    <div class="menu-wrapper">
+      <details>
+        <summary aria-label="Open navigation menu">
+          <div class="icon-bar"><span></span><span></span><span></span></div>
+        </summary>
+
+        <nav class="menu">
+          <a href="/"><span class="menu-icon">🏠</span> Home</a>
+          <a href="/books/"><span class="menu-icon">📚</span> Browse Books</a>
+          <a href="/favourite/"><span class="menu-icon">❤️</span> Favourite</a>
+          <a href="/about/"><span class="menu-icon">ℹ️</span> About Us</a>
+
+          <div class="menu-divider"></div>
+
+          <a href="/login/"><span class="menu-icon">🔑</span> Login</a>
+          <a href="/register/"><span class="menu-icon">📝</span> Register</a>
+          <a href="/profile/"><span class="menu-icon">👤</span> User Profile</a>
+
+          <div class="menu-divider"></div>
+
+          <a href="/admin-dashboard/" class="dashboard-link">
+            <span class="menu-icon">⚙️</span> Admin Dashboard
+          </a>
+        </nav>
+      </details>
+    </div>
+
+    <!-- TOP NAV -->
+    <nav class="topnav">
+      <a href="/" class="logo">Libraria</a>
+
+      <div class="links">
+        <a href="/books/">Browse Books</a>
+        <a href="/favourite/">Favourite</a>
+        <a href="/about/">About Us</a>
+        <a href="/login/">Login</a>
+        <a href="/register/">Register</a>
+        <a href="/profile/">User Profile</a>
+
+        <a class="dashboard" href="/admin-dashboard/">Admin Dashboard</a>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          🌙
+        </button>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main>
+      <div class="content">
+        <h2>Register</h2>
+
+        <p id="register-error" style="color: red; display: none"></p>
+
+        <form class="auth-form" id="register-form">
+          <label>Full Name</label>
+          <input type="text" id="fullname" placeholder="Enter your full name" required />
+
+          <label>Email</label>
+          <input type="email" id="email" placeholder="Enter your email" required />
+
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Enter password" required minlength="6" />
+
+          <label>Confirm Password</label>
+          <input type="password" id="confirm-password" placeholder="Confirm password" required minlength="6" />
+
+          <button type="submit">Register</button>
+        </form>
+
+        <p style="margin-top: 12px">
+          Already have an account?
+          <a href="/login/">Login</a>
+        </p>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
+    </footer>
+
+    <!-- JS -->
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+
+    <script>
+      if (isLoggedIn()) {
+        window.location.href = "/profile/";
+      }
+
+      document
+        .getElementById("register-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("fullname").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const pass = document.getElementById("password").value;
+          const confirm = document.getElementById("confirm-password").value;
+
+          handleRegister(name, email, pass, confirm, "register-error");
+        });
+    </script>
+
+  </body>
+</html>

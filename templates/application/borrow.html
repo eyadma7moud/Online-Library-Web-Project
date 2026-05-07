@@ -1,0 +1,80 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+    <title>Borrow Book — Libraria</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+  <!-- SIDE MENU -->
+  <div class="menu-wrapper">
+    <details>
+      <summary aria-label="Open navigation menu">
+        <div class="icon-bar"><span></span><span></span><span></span></div>
+      </summary>
+      <nav class="menu">
+        <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
+        <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
+        <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
+        <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+        <div class="menu-divider"></div>
+      </nav>
+    </details>
+  </div>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <a href="index.html" class="logo">Libraria</a>
+    <div class="links">
+      <a href="books.html">Browse Books</a>
+      <a href="favourite.html">Favourite</a>
+      <a href="about.html">About Us</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </nav>
+
+  <main style="padding-top: 40px;">
+    <h2>Borrow Book</h2>
+
+    <section>
+      <h3>Book Information</h3>
+      <p><strong>Title:</strong> <span id="borrow-book-title">—</span></p>
+      <p><strong>Author:</strong> <span id="borrow-book-author">—</span></p>
+    </section>
+
+    <section>
+      <h3>Borrow Form</h3>
+      <form id="borrow-form">
+        <label for="borrow-book-id">Book ID</label>
+        <input type="text" id="borrow-book-id" readonly />
+
+        <label for="borrow-date">Borrow Date</label>
+        <input type="date" id="borrow-date" required />
+
+        <label for="return-date">Return Date</label>
+        <input type="date" id="return-date" required />
+
+        <br /><br />
+        <input type="checkbox" id="confirm-borrow" />
+        <label for="confirm-borrow" style="display:inline; margin-top:0;">
+          I confirm I want to borrow this book.
+        </label>
+        <br /><br />
+
+        <button class="btn" type="submit">Borrow</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Libraria — IS231 Web Technology Project</p>
+  </footer>
+
+  <script src="theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/borrow.js"></script>
+  </body>
+</html>

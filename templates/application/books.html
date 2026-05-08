@@ -1,81 +1,272 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-    <title>Browse Books — Libraria</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- SIDE MENU -->
-    <div class="menu-wrapper">
-      <details>
-        <summary aria-label="Open navigation menu">
-          <div class="icon-bar"><span></span><span></span><span></span></div>
-        </summary>
-        <nav class="menu">
-          <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-          <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
-          <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
-          <div class="menu-divider"></div>
-        </nav>
-      </details>
-    </div>
 
-    <!-- TOP NAV -->
-    <nav class="topnav">
-      <a href="index.html" class="logo">Libraria</a>
-      <div class="links">
-        <a href="books.html">Browse Books</a>
-        <a href="favourite.html">Favourite</a>
-        <a href="about.html">About Us</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-      </div>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <main>
-      <div class="content" style="max-width:1100px;">
-        <h1>Book Collection</h1>
+  <!-- Fonts -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime" />
 
-        <div class="filters">
-          <form style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; background:transparent; border:none; padding:0; box-shadow:none; max-width:none;">
-            <input type="text"  id="search-input" placeholder="Search by title, author or category…" style="flex:1; min-width:180px;" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
 
-            <select id="cat-filter">
-              <option value="">All Categories</option>
-              <option value="Fiction">Fiction</option>
-              <option value="Science">Science</option>
-              <option value="History">History</option>
-              <option value="Technology">Technology</option>
-              <option value="Philosophy">Philosophy</option>
-              <option value="Self Development">Self Development</option>
-            </select>
+  <title>Browse Books — Libraria</title>
 
-            <select id="status-filter">
-              <option value="">All Status</option>
-              <option value="available">Available</option>
-              <option value="borrowed">Borrowed</option>
-            </select>
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
 
-            <button type="button" id="search-btn" class="btn" style="width:auto; padding:12px 28px;">Search</button>
-          </form>
+<body>
+
+  <!-- SIDE MENU -->
+  <div class="menu-wrapper">
+
+    <details>
+      <summary aria-label="Open navigation menu">
+
+        <div class="icon-bar">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
 
-        <!-- Grid rendered by books-page.js -->
-        <div class="books-grid" id="books-grid"></div>
+      </summary>
+
+      <nav class="menu">
+
+        <a href="/">
+          <span class="menu-icon">🏠</span>
+          Home
+        </a>
+
+        <a href="{% url 'books' %}">
+          <span class="menu-icon">📚</span>
+          Browse Books
+        </a>
+
+        <a href="#">
+          <span class="menu-icon">❤️</span>
+          Favourite
+        </a>
+
+        <a href="#">
+          <span class="menu-icon">ℹ️</span>
+          About Us
+        </a>
+
+        <div class="menu-divider"></div>
+
+      </nav>
+    </details>
+  </div>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+
+    <a href="/" class="logo">
+      Libraria
+    </a>
+
+    <div class="links">
+
+      <a href="{% url 'books' %}">
+        Browse Books
+      </a>
+
+      <a href="#">
+        Favourite
+      </a>
+
+      <a href="#">
+        About Us
+      </a>
+
+      <button class="theme-toggle"
+        id="themeToggle"
+        aria-label="Toggle dark mode">
+
+        🌙
+
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <div class="content" style="max-width:1100px;">
+
+      <h1>Book Collection</h1>
+
+      <!-- FILTERS -->
+      <div class="filters">
+
+        <form method="GET"
+          style="display:flex;
+                 flex-wrap:wrap;
+                 gap:12px;
+                 align-items:flex-end;
+                 background:transparent;
+                 border:none;
+                 padding:0;
+                 box-shadow:none;
+                 max-width:none;">
+
+          <!-- Search -->
+          <input type="text"
+            name="search"
+            id="search-input"
+            placeholder="Search by title, author or category…"
+            style="flex:1; min-width:180px;"
+            value="{{ request.GET.search }}" />
+
+          <!-- Category -->
+          <select name="category" id="cat-filter">
+
+            <option value="">All Categories</option>
+
+            <option value="Fiction"
+              {% if request.GET.category == "Fiction" %}selected{% endif %}>
+              Fiction
+            </option>
+
+            <option value="Science"
+              {% if request.GET.category == "Science" %}selected{% endif %}>
+              Science
+            </option>
+
+            <option value="History"
+              {% if request.GET.category == "History" %}selected{% endif %}>
+              History
+            </option>
+
+            <option value="Technology"
+              {% if request.GET.category == "Technology" %}selected{% endif %}>
+              Technology
+            </option>
+
+            <option value="Philosophy"
+              {% if request.GET.category == "Philosophy" %}selected{% endif %}>
+              Philosophy
+            </option>
+
+            <option value="Self Development"
+              {% if request.GET.category == "Self Development" %}selected{% endif %}>
+              Self Development
+            </option>
+
+          </select>
+
+          <!-- Status -->
+          <select name="status" id="status-filter">
+
+            <option value="">All Status</option>
+
+            <option value="available"
+              {% if request.GET.status == "available" %}selected{% endif %}>
+              Available
+            </option>
+
+            <option value="borrowed"
+              {% if request.GET.status == "borrowed" %}selected{% endif %}>
+              Borrowed
+            </option>
+
+          </select>
+
+          <!-- Search Button -->
+          <button type="submit"
+            id="search-btn"
+            class="btn"
+            style="width:auto; padding:12px 28px;">
+
+            Search
+
+          </button>
+
+        </form>
       </div>
-    </main>
 
-    <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project</p>
-    </footer>
+      <!-- BOOK GRID -->
+      <div class="books-grid" id="books-grid">
 
-    <script src="theme.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/books-page.js"></script>
-  </body>
+        {% for book in books %}
+
+        <div class="book-card">
+
+          <!-- Book Image -->
+          <img src="{{ book.image }}"
+            alt="{{ book.title }}">
+
+          <!-- Title -->
+          <h3>{{ book.title }}</h3>
+
+          <!-- Author -->
+          <p>
+            <strong>Author:</strong>
+            {{ book.author }}
+          </p>
+
+          <!-- Category -->
+          <p>
+            <strong>Category:</strong>
+            {{ book.category }}
+          </p>
+
+          <!-- Status -->
+          <p>
+
+            <strong>Status:</strong>
+
+            {% if book.status == "available" %}
+
+            <span style="color:green;">
+              Available
+            </span>
+
+            {% else %}
+
+            <span style="color:red;">
+              Borrowed
+            </span>
+
+            {% endif %}
+
+          </p>
+
+        </div>
+
+        {% empty %}
+
+        <p>No books found.</p>
+
+        {% endfor %}
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <p>
+      © 2026 Libraria — IS231 Web Technology Project
+    </p>
+
+  </footer>
+
+  <!-- JS -->
+  <script src="{% static 'js/theme.js' %}"></script>
+
+  <script src="{% static 'js/auth.js' %}"></script>
+
+  <!-- <script src="{% static 'js/books-page.js' %}"></script> -->
+
+</body>
 </html>

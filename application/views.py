@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Book
 
 def home(request):
     return render(request, 'application/index.html')
@@ -14,3 +16,24 @@ def admin_dashboard(request):
 
 def add_book(request):
     return render(request, 'application/add-book.html')
+
+
+
+def books_page(request):
+
+    books = Book.objects.all()
+    
+    search = request.GET.get('search')
+    category = request.GET.get('category')
+    status = request.GET.get('status')
+
+    if search:
+        books = books.filter(title__icontains=search)
+
+    if category:
+        books = books.filter(category=category)
+
+    if status:
+        books = books.filter(status=status)
+
+    return render(request, 'application/books.html', {"books": books})

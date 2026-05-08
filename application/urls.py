@@ -10,5 +10,7 @@ urlpatterns = [
 
     path('add-book/', views.add_book, name='add_book'),
     path('books/', views.books_page, name='books'),
-
+    
+    path('favourite/', views.favourite, name='favourite'),
+    path('about/', views.about, name='about'),
 ]

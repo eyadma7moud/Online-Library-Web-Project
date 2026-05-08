@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Libraria</title>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="topnav">
+    <a href="{% url 'home' %}" class="logo">Libraria</a>
+
+    <div class="links">
+      <a href="{% url 'books' %}">Browse Books</a>
+      <a href="{% url 'favourite' %}">Favourite</a>
+      <a href="{% url 'about' %}">About Us</a>
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'register' %}">Register</a>
+
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  {% block content %}
+  {% endblock %}
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Libraria — IS231 Web Project</p>
+  </footer>
+
+</body>
+</html>

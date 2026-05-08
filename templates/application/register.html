@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block content %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -47,25 +49,7 @@
       </details>
     </div>
 
-    <!-- TOP NAV -->
-    <nav class="topnav">
-      <a href="/" class="logo">Libraria</a>
 
-      <div class="links">
-        <a href="/books/">Browse Books</a>
-        <a href="/favourite/">Favourite</a>
-        <a href="/about/">About Us</a>
-        <a href="/login/">Login</a>
-        <a href="/register/">Register</a>
-        <a href="/profile/">User Profile</a>
-
-        <a class="dashboard" href="/admin-dashboard/">Admin Dashboard</a>
-
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-          🌙
-        </button>
-      </div>
-    </nav>
 
     <!-- MAIN -->
     <main>
@@ -97,10 +81,6 @@
       </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
-    </footer>
 
     <!-- JS -->
     <script src="{% static 'js/theme.js' %}"></script>
@@ -127,3 +107,4 @@
 
   </body>
 </html>
+{% endblock content %}

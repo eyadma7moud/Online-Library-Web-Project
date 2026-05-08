@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Book
 
 def home(request):
@@ -37,3 +36,10 @@ def books_page(request):
         books = books.filter(status=status)
 
     return render(request, 'application/books.html', {"books": books})
+
+
+def favourite(request):
+    return render(request, 'application/favourite.html')
+
+def about(request):
+    return render(request, 'application/about.html')

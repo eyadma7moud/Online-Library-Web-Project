@@ -24,4 +24,8 @@ urlpatterns = [
     path('return-success/', views.return_success, name='return_success'),
     path('profile-info/', views.profile_info, name='profile_info'),
     path('book-details/<int:book_id>/', views.book_details, name='book_details'),
+     path('favourite/', views.favourite, name='favourite'),
+    path('about/', views.about, name='about'),
+    path('add-favourite/<int:book_id>/',views.add_to_favourite,name='add_favourite'),
+    path('remove-favourite/<int:book_id>/',views.remove_from_favourite,name='remove_favourite'),
 ]

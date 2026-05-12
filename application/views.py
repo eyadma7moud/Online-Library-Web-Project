@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book, BorrowRecord, UserProfile
+from .models import Book , Favourite, BorrowRecord, UserProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
@@ -203,3 +203,49 @@ def profile_info(request):
 def book_details(request, book_id):
     book = Book.objects.get(id=book_id)
     return render(request, 'application/book-details.html', {'book': book})
+
+def favourite(request):
+    return render(request, 'application/favourite.html')
+
+def about(request):
+    return render(request, 'application/about.html')
+
+@login_required
+def favourite_page(request):
+
+    favourites = Favourite.objects.filter(user=request.user)
+
+    return render(
+        request,
+        'application/favourite.html',
+        {'favourites': favourites}
+    )
+
+
+@login_required
+def add_to_favourite(request, book_id):
+
+    book = Book.objects.get(id=book_id)
+
+    Favourite.objects.get_or_create(
+        user=request.user,
+        book=book
+    )
+
+    return redirect('favourite')
+
+
+@login_required
+def remove_from_favourite(request, book_id):
+
+    Favourite.objects.filter(
+        user=request.user,
+        book_id=book_id
+    ).delete()
+
+    return redirect('favourite')
+
+
+def about_page(request):
+
+    return render(request, 'application/about.html')

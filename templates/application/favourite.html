@@ -1,139 +1,170 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Favourites — Libraria</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <style>
-        .books-grid {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fit, 260px) !important;
-            justify-content: center !important;
-            gap: 20px;
-        }
-        .book-card {
-            width: 260px !important;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow var(--transition);
-        }
-        .book-card:hover {
-            box-shadow: var(--shadow-md);
-        }
-        .book-card h3 {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            margin-bottom: 6px;
-        }
-        .books-grid .book-card button.remove-fav-btn {
-            width: 100%;
-            padding: 10px;
-            background: var(--accent-red-bg);
-            color: var(--accent-red);
-            border: 1.5px solid var(--accent-red);
-            border-radius: var(--radius-full);
-            font-size: 13px;
-            font-weight: 600;
-            font-family: var(--font-body);
-            cursor: pointer;
-            transition: all var(--transition);
-            margin-top: 8px;
-        }
-        .books-grid .book-card button.remove-fav-btn:hover {
-            background: var(--accent-red);
-            color: #fff;
-        }
-        .empty-fav {
-            text-align: center;
-            margin-top: 60px;
-            color: var(--text-muted);
-        }
-        .empty-fav h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            font-family: var(--font-display);
-        }
-        .empty-fav p { font-size: 14px; }
-    </style>
-</head>
-<body>
-    <!-- SIDE MENU -->
-    <div class="menu-wrapper">
-        <details>
-            <summary aria-label="Open navigation menu">
-                <div class="icon-bar"><span></span><span></span><span></span></div>
-            </summary>
-        <nav class="menu">
-          <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-          <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="{% url 'favourite' %}"><span class="menu-icon">❤️</span> Favourite</a>
-          <a href="{% url 'about' %}"><span class="menu-icon">ℹ️</span> About Us</a>
-          <div class="menu-divider"></div>
-        </nav>
-        </details>
-    </div>
 
-    <!-- TOP NAV -->
-    <nav class="topnav">
-        <a href="{% url 'home' %}" class="logo">Libraria</a>
-        <div class="links">
-            <a href="{% url 'books' %}">Browse Books</a>
-            <a href="{% url 'favourite' %}">Favourite</a>
-            <a href="{% url 'about' %}">About Us</a>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+{% block extra_head %}
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<style>
+    .books-grid {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, 260px) !important;
+        justify-content: center !important;
+        gap: 20px;
+    }
+
+    .book-card {
+        width: 260px !important;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        box-shadow: var(--shadow-sm);
+        transition: box-shadow var(--transition);
+    }
+
+    .book-card:hover {
+        box-shadow: var(--shadow-md);
+    }
+
+    .book-card img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 12px;
+    }
+
+    .book-card h3 {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+
+    .remove-fav-btn {
+        width: 100%;
+        padding: 10px;
+        background: var(--accent-red-bg);
+        color: var(--accent-red);
+        border: 1.5px solid var(--accent-red);
+        border-radius: var(--radius-full);
+        font-size: 13px;
+        font-weight: 600;
+        font-family: var(--font-body);
+        cursor: pointer;
+        transition: all var(--transition);
+        margin-top: 12px;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .remove-fav-btn:hover {
+        background: var(--accent-red);
+        color: #fff;
+    }
+
+    .empty-fav {
+        text-align: center;
+        margin-top: 60px;
+        color: var(--text-muted);
+    }
+
+    .empty-fav h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        font-family: var(--font-display);
+    }
+
+    .empty-fav p {
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="content">
+
+        <h2>My Favourite Books</h2>
+
+        <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">
+            Books you've hearted ❤️ — click any book to view details or borrow.
+        </p>
+
+        {% if favourites %}
+
+        <div class="books-grid">
+
+            {% for fav in favourites %}
+
+            <div class="book-card">
+
+                <img src="{{ fav.book.image }}"
+                     alt="{{ fav.book.title }}">
+
+                <h3>{{ fav.book.title }}</h3>
+
+                <p>
+                    <strong>Author:</strong>
+                    {{ fav.book.author }}
+                </p>
+
+                <p>
+                    <strong>Category:</strong>
+                    {{ fav.book.category }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+
+                    {% if fav.book.status == "available" %}
+
+                    <span style="color:green;">Available</span>
+
+                    {% else %}
+
+                    <span style="color:red;">Borrowed</span>
+
+                    {% endif %}
+                </p>
+
+                <a href="{% url 'remove_favourite' fav.book.id %}"
+                   class="remove-fav-btn">
+
+                    Remove From Favourite
+
+                </a>
+
+            </div>
+
+            {% endfor %}
+
         </div>
-    </nav>
 
-    <div class="container">
-        <div class="content">
-            <h2>My Favourite Books</h2>
-            <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">
-                Books you've hearted ❤️ — click any book to view details or borrow.
+        {% else %}
+
+        <div class="empty-fav">
+
+            <h3>No Favourite Books Yet 📚</h3>
+
+            <p>
+                Start adding books to your favourites list.
             </p>
-            <!-- Dynamically rendered by favourite.js -->
-            <div class="books-grid"></div>
+
         </div>
+
+        {% endif %}
+
     </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About Us</h3>
-                <p>Our library has been serving the community since 1950, providing access to thousands of books and resources.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="{% url 'books' %}" style="color:inherit;">📚 Browse Catalog</a></li>
-                    <li><a href="{% url 'books' %}" style="color:inherit;">📖 New Arrivals</a></li>
-                    <li><a href="{% url 'favourite' %}" style="color:inherit;">⭐ My Favourites</a></li>
-                    <li><a href="{% url 'about' %}" style="color:inherit;">❓ About Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <ul>
-                    <li>📍 123 Library Street, Cairo, Egypt</li>
-                    <li><a href="tel:+201234567890" style="color:inherit;">📞 +20 123 456 7890</a></li>
-                    <li><a href="mailto:info@library.edu" style="color:inherit;">✉️ info@library.edu</a></li>
-                    <li>🕒 Mon-Sat: 8:00 AM - 8:00 PM</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Library Management System. All rights reserved.</p>
-        </div>
-    </footer>
+</div>
 
-    <script src="{% static 'js/theme.js' %}"></script>
-    <script src="{% static 'js/auth.js' %}"></script>
-    <script src="{% static 'js/favourite.js' %}"></script>
-</body>
-</html>
+<script src="{% static 'js/theme.js' %}"></script>
+<script src="{% static 'js/auth.js' %}"></script>
+
+{% endblock %}

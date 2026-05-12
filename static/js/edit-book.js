@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!bookId) {
     alert("No book ID found.");
-    window.location.href = "admin-dashboard.html";
+    window.location.href = "/admin-dashboard/";
     return;
   }
 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!book) {
     alert("Book not found.");
-    window.location.href = "admin-dashboard.html";
+    window.location.href = "/admin-dashboard/";
     return;
   }
 
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("books", JSON.stringify(updatedBooks));
 
     sessionStorage.setItem("editSuccess", book.title);
-    window.location.href = "admin-dashboard.html";
+    window.location.href = "/admin-dashboard/";
   });
 
 });

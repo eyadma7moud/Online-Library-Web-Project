@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mainEl.innerHTML = `
           <div class="content" style="text-align:center; padding:60px;">
             <h2>Book not found.</h2>
-            <a href="books.html" class="btn" style="width:auto; display:inline-block; margin-top:16px;">← Back to Books</a>
+            <a href="/books/" class="btn" style="width:auto; display:inline-block; margin-top:16px;">← Back to Books</a>
           </div>`;
       }
       return;
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
         borrowBtn.style.display = "none";
       } else {
         borrowBtn.style.display = "";
-        borrowBtn.href = "borrow.html?id=" + book.id;
+        borrowBtn.href = "/borrow/" + book.id + "/";
       }
     }
 
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (returnBtn) {
       if (userBorrowed) {
         returnBtn.style.display = "";
-        returnBtn.href = "return.html?id=" + book.id;
+        returnBtn.href = "/return-book/" + book.id + "/";
       } else {
         returnBtn.style.display = "none";
       }

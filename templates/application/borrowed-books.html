@@ -1,71 +1,87 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-    <title>Borrowed Books — Libraria</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- SIDE MENU -->
-    <div class="menu-wrapper">
-      <details>
-        <summary aria-label="Open navigation menu">
-          <div class="icon-bar"><span></span><span></span><span></span></div>
-        </summary>
-        <nav class="menu">
-          <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-          <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="profile.html"><span class="menu-icon">👤</span> My Profile</a>
-          <div class="menu-divider"></div>
-        </nav>
-      </details>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+  <title>Borrowed Books — Libraria</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <div class="menu-wrapper">
+    <details>
+      <summary aria-label="Open navigation menu">
+        <div class="icon-bar"><span></span><span></span><span></span></div>
+      </summary>
+      <nav class="menu">
+        <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
+        <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
+        <a href="{% url 'profile' %}"><span class="menu-icon">👤</span> My Profile</a>
+        <div class="menu-divider"></div>
+      </nav>
+    </details>
+  </div>
+
+  <nav class="topnav">
+    <a href="{% url 'home' %}" class="logo">Libraria</a>
+    <div class="links">
+      <a href="{% url 'books' %}">Browse Books</a>
+      <a href="{% url 'profile' %}">My Profile</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
     </div>
+  </nav>
 
-    <!-- TOP NAV -->
-    <nav class="topnav">
-      <a href="index.html" class="logo">Libraria</a>
-      <div class="links">
-        <a href="books.html">Browse Books</a>
-        <a href="profile.html">My Profile</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-      </div>
-    </nav>
+  <main>
+    <h1>My Borrowed Books</h1>
 
-    <main>
-      <h1>My Borrowed Books</h1>
+    <table id="borrowed-table">
+      <thead>
+        <tr>
+          <th>Book ID</th>
+          <th>Book Name</th>
+          <th>Author</th>
+          <th>Borrow Date</th>
+          <th>Return By</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in borrowed_records %}
+        <tr>
+          <td>{{ record.book.id }}</td>
+          <td>{{ record.book.title }}</td>
+          <td>{{ record.book.author }}</td>
+          <td>{{ record.borrow_date|date:"d M Y" }}</td>
+          <td>--</td>
+          <td>
+            <a href="{% url 'return_book' record.book.id %}" class="btn"
+              style="background-color: #e67e22; padding: 5px 15px; text-decoration: none; color: white; border-radius: 4px;">
+              Return
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" style="text-align:center; padding: 30px;">
+            📚 You have no currently borrowed books.<br><br>
+            <a href="{% url 'books' %}" class="btn" style="width:auto; display:inline-block;">Browse Books</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
 
-      <p id="empty-borrowed" style="display:none; color:var(--text-muted); text-align:center; padding:40px 0;">
-        📚 You have no currently borrowed books.
-        <br/><br/>
-        <a href="books.html" class="btn" style="width:auto; display:inline-block;">Browse Books</a>
-      </p>
+  <footer>
+    <p>© 2026 Libraria — IS231 Web Technology Project</p>
+  </footer>
 
-      <table id="borrowed-table">
-        <thead>
-          <tr>
-            <th>Book ID</th>
-            <th>Book Name</th>
-            <th>Author</th>
-            <th>Borrow Date</th>
-            <th>Return By</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Populated by JS -->
-        </tbody>
-      </table>
-    </main>
+  <script src="{% static 'js/theme.js' %}"></script>
+  <script src="{% static 'js/auth.js' %}"></script>
+  <script src="{% static 'js/borrowed_books.js' %}"></script>
+</body>
 
-    <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project</p>
-    </footer>
-
-    <script src="theme.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/borrowed_books.js"></script>
-  </body>
 </html>

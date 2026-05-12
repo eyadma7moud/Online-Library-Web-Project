@@ -23,31 +23,31 @@
         </div>
       </summary>
       <nav class="menu">
-        <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-        <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-        <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
-        <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+        <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
+        <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
+        <a href="{% url 'favourite' %}"><span class="menu-icon">❤️</span> Favourite</a>
+        <a href="{% url 'about' %}"><span class="menu-icon">ℹ️</span> About Us</a>
         <div class="menu-divider"></div>
         <a href="/login/"><span class="menu-icon">🔑</span> Login</a>
-        <a href="register.html"><span class="menu-icon">📝</span> Register</a>
-        <a href="profile.html"><span class="menu-icon">👤</span> User Profile</a>
+        <a href="{% url 'register' %}"><span class="menu-icon">📝</span> Register</a>
+        <a href="{% url 'profile' %}"><span class="menu-icon">👤</span> User Profile</a>
         <div class="menu-divider"></div>
-        <a href="admin-dashboard.html" class="dashboard-link"><span class="menu-icon">⚙️</span> Admin Dashboard</a>
+        <a href="{% url 'admin_dashboard' %}" class="dashboard-link"><span class="menu-icon">⚙️</span> Admin Dashboard</a>
       </nav>
     </details>
   </div>
 
   <!-- TOP NAV -->
   <nav class="topnav">
-    <a href="index.html" class="logo">Libraria</a>
+    <a href="{% url 'home' %}" class="logo">Libraria</a>
     <div class="links">
-      <a href="books.html">Browse Books</a>
-      <a href="favourite.html">Favourite</a>
-      <a href="about.html">About Us</a>
+      <a href="{% url 'books' %}">Browse Books</a>
+      <a href="{% url 'favourite' %}">Favourite</a>
+      <a href="{% url 'about' %}">About Us</a>
       <a href="/login/">Login</a>
-      <a href="register.html">Register</a>
-      <a href="profile.html">User Profile</a>
-      <a class="dashboard" href="admin-dashboard.html">Admin Dashboard</a>
+      <a href="{% url 'register' %}">Register</a>
+      <a href="{% url 'profile' %}">User Profile</a>
+      <a class="dashboard" href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
     </div>
   </nav>

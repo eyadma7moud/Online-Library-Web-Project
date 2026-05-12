@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="empty-fav" style="grid-column:1/-1;">
           <h3>No favourite books yet 😢</h3>
           <p>Browse books and click ❤️ to add them here.</p>
-          <a href="books.html" class="btn" style="width:auto; display:inline-block; margin-top:16px;">Browse Books</a>
+          <a href="/books/" class="btn" style="width:auto; display:inline-block; margin-top:16px;">Browse Books</a>
         </div>`;
       return;
     }
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <p class="${isAvailable ? 'status-available' : 'status-borrowed'}" style="font-size:12px; margin-bottom:12px;">
           ${isAvailable ? '✓ Available' : '✗ Borrowed'}
         </p>
-        <a href="book-details.html?id=${book.id}" class="btn" style="margin-bottom:8px; display:block; text-align:center; padding:8px;">View Details</a>
+        <a href="/book-details/${book.id}/" class="btn" style="margin-bottom:8px; display:block; text-align:center; padding:8px;">View Details</a>
         <button class="remove-fav-btn" data-id="${book.id}">❌ Remove from Favourites</button>
       `;
       container.appendChild(div);

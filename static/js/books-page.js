@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <p class="${isAvailable ? "status-available" : "status-borrowed"}">
           ${isAvailable ? "✓ Available" : "✗ Borrowed"}
         </p>
-        <a href="book-details.html?id=${book.id}" class="btn">View Details</a>
+        <a href="/book-details/${book.id}/" class="btn">View Details</a>
       `;
       grid.appendChild(div);
     });

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
     <title>Account Settings — Libraria</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <style>
       .settings-wrapper { max-width: 600px; margin: 0 auto; padding: 40px 24px; }
       .settings-section {
@@ -74,9 +74,9 @@
           <div class="icon-bar"><span></span><span></span><span></span></div>
         </summary>
         <nav class="menu">
-          <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-          <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="profile.html"><span class="menu-icon">👤</span> My Profile</a>
+          <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
+          <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
+          <a href="{% url 'profile' %}"><span class="menu-icon">👤</span> My Profile</a>
           <div class="menu-divider"></div>
         </nav>
       </details>
@@ -84,10 +84,10 @@
 
     <!-- TOP NAV -->
     <nav class="topnav">
-      <a href="index.html" class="logo">Libraria</a>
+      <a href="{% url 'home' %}" class="logo">Libraria</a>
       <div class="links">
-        <a href="books.html">Browse Books</a>
-        <a href="profile.html">My Profile</a>
+        <a href="{% url 'books' %}">Browse Books</a>
+        <a href="{% url 'profile' %}">My Profile</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       </div>
     </nav>
@@ -99,7 +99,7 @@
       <div class="settings-section">
         <h3>📷 Profile Picture</h3>
         <div class="pic-row">
-          <img id="settings-pic" src="user.png" alt="Profile" />
+          <img id="settings-pic" src="{{ profile.profile_pic.url }}" alt="Profile" />
           <div>
             <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">
               Upload a new profile photo (JPG, PNG, etc.)
@@ -115,14 +115,14 @@
       <!-- Change Name -->
       <div class="settings-section">
         <h3>✏️ Change Name</h3>
-        <form id="name-form">
+        <form method="POST">
+          {% csrf_token %}
           <label>Current Name</label>
-          <input type="text" id="current-name" readonly />
+          <input type="text" value="{{ request.user.username }}" readonly />
 
           <label>New Name</label>
-          <input type="text" id="new-name" placeholder="Enter new name" required />
+          <input type="text" name="username" placeholder="Enter new name" required />
 
-          <p class="error-msg" id="name-error"></p>
           <br/>
           <button type="submit" style="width:auto;">Update Name</button>
         </form>
@@ -131,23 +131,17 @@
       <!-- Change Email & Password -->
       <div class="settings-section">
         <h3>🔐 Change Email & Password</h3>
-        <form id="pass-form">
+        <form method="POST">
+          {% csrf_token %}
           <label>Current Email</label>
-          <input type="email" id="current-email" readonly />
+          <input type="email" value="{{ request.user.email }}" readonly />
 
           <label>New Email <span style="color:var(--text-muted); font-weight:400;">(leave blank to keep current)</span></label>
-          <input type="email" id="new-email" placeholder="Enter new email" />
-
-          <label>Current Password <span style="color:var(--accent-red);">*</span></label>
-          <input type="password" id="current-password" placeholder="Enter current password" required />
+          <input type="email" name="email" placeholder="Enter new email" />
 
           <label>New Password <span style="color:var(--text-muted); font-weight:400;">(leave blank to keep current)</span></label>
-          <input type="password" id="new-password" placeholder="Enter new password" minlength="6" />
+          <input type="password" name="new_password" placeholder="Enter new password" minlength="6" />
 
-          <label>Confirm New Password</label>
-          <input type="password" id="confirm-new-password" placeholder="Confirm new password" minlength="6" />
-
-          <p class="error-msg" id="pass-error"></p>
           <br/>
           <button type="submit" style="width:auto;">Save Changes</button>
         </form>
@@ -168,8 +162,8 @@
       <p>© 2026 Libraria — IS231 Web Technology Project</p>
     </footer>
 
-    <script src="theme.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/account_settings.js"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+    <script src="{% static 'js/account_settings.js' %}"></script>
   </body>
 </html>

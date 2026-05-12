@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Libraria</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   {% block extra_head %}{% endblock %}
 </head>
 <body>
@@ -17,6 +19,7 @@
       <a href="{% url 'about' %}">About Us</a>
       <a href="{% url 'login' %}">Login</a>
       <a href="{% url 'register' %}">Register</a>
+      <a href="{% url 'profile' %}">My Profile</a>
 
       <button class="theme-toggle" id="themeToggle">🌙</button>
     </div>
@@ -31,5 +34,7 @@
     <p>© 2026 Libraria — IS231 Web Project</p>
   </footer>
 
+  <!-- JS -->
+  <script src="{% static 'js/theme.js' %}"></script>
 </body>
 </html>

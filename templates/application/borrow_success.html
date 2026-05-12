@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
     <title>Borrow Successful — Libraria</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body>
   <!-- SIDE MENU -->
@@ -16,9 +16,12 @@
         <div class="icon-bar"><span></span><span></span><span></span></div>
       </summary>
       <nav class="menu">
-        <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-        <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-        <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+        <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
+        <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
+        <a href="{% url 'about' %}"><span class="menu-icon">ℹ️</span> About Us</a>
+        <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
+        <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
+        <a href="{% url 'about' %}"><span class="menu-icon">ℹ️</span> About Us</a>
         <div class="menu-divider"></div>
       </nav>
     </details>
@@ -26,10 +29,10 @@
 
   <!-- TOP NAV -->
   <nav class="topnav">
-    <a href="index.html" class="logo">Libraria</a>
+    <a href="{% url 'home' %}" class="logo">Libraria</a>
     <div class="links">
-      <a href="books.html">Browse Books</a>
-      <a href="about.html">About Us</a>
+      <a href="{% url 'books' %}">Browse Books</a>
+      <a href="{% url 'about' %}">About Us</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
     </div>
   </nav>
@@ -43,8 +46,8 @@
     <p>Return by: <strong><span id="success-return-date"></span></strong></p>
     <br />
     <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <a href="borrowed-books.html" class="btn" style="width:auto;">My Borrowed Books</a>
-      <a href="books.html" class="btn btn-secondary" style="width:auto;">Browse More Books</a>
+      <a href="{% url 'borrowed_books' %}" class="btn" style="width:auto;">My Borrowed Books</a>
+      <a href="{% url 'books' %}" class="btn btn-secondary" style="width:auto;">Browse More Books</a>
     </div>
   </main>
 
@@ -52,8 +55,8 @@
     <p>© 2026 Libraria — IS231 Web Technology Project</p>
   </footer>
 
-  <script src="theme.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/borrow_success.js"></script>
+  <script src="{% static 'js/theme.js' %}"></script>
+  <script src="{% static 'js/auth.js' %}"></script>
+  <script src="{% static 'js/borrow_success.js' %}"></script>
   </body>
 </html>

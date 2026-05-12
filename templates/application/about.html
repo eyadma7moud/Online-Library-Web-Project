@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us — Libraria</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
       .about-grid {
         display: grid;
@@ -72,10 +72,10 @@
           <div class="icon-bar"><span></span><span></span><span></span></div>
         </summary>
         <nav class="menu">
-          <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-          <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
-          <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+          <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
+          <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
+          <a href="{% url 'favourite' %}"><span class="menu-icon">❤️</span> Favourite</a>
+          <a href="{% url 'about' %}"><span class="menu-icon">ℹ️</span> About Us</a>
           <div class="menu-divider"></div>
         </nav>
       </details>
@@ -83,11 +83,11 @@
 
     <!-- TOP NAV -->
     <nav class="topnav">
-      <a href="index.html" class="logo">Libraria</a>
+      <a href="{% url 'home' %}" class="logo">Libraria</a>
       <div class="links">
-        <a href="books.html">Browse Books</a>
-        <a href="favourite.html">Favourite</a>
-        <a href="about.html">About Us</a>
+        <a href="{% url 'books' %}">Browse Books</a>
+        <a href="{% url 'favourite' %}">Favourite</a>
+        <a href="{% url 'about' %}">About Us</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       </div>
     </nav>
@@ -191,10 +191,10 @@
         <div class="footer-section">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="books.html" style="color:inherit;">📚 Browse Catalog</a></li>
-            <li><a href="books.html" style="color:inherit;">📖 New Arrivals</a></li>
-            <li><a href="favourite.html" style="color:inherit;">⭐ My Favourites</a></li>
-            <li><a href="about.html" style="color:inherit;">ℹ️ About Us</a></li>
+            <li><a href="{% url 'books' %}" style="color:inherit;">📚 Browse Catalog</a></li>
+            <li><a href="{% url 'books' %}" style="color:inherit;">📖 New Arrivals</a></li>
+            <li><a href="{% url 'favourite' %}" style="color:inherit;">⭐ My Favourites</a></li>
+            <li><a href="{% url 'about' %}" style="color:inherit;">ℹ️ About Us</a></li>
           </ul>
         </div>
         <div class="footer-section">
@@ -216,7 +216,7 @@
       </div>
     </footer>
 
-    <script src="js/auth.js"></script>
-    <script src="theme.js"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
   </body>
 </html>

@@ -85,7 +85,7 @@ function handleLogin(email, password, errorElId) {
   const { password: _, ...safeUser } = user;
   localStorage.setItem("currentUser", JSON.stringify(safeUser));
 
-  window.location.href = user.role === "admin" ? "admin-dashboard.html" : "profile.html";
+  window.location.href = user.role === "admin" ? "/admin-dashboard/" : "/profile/";
   return true;
 }
 
@@ -123,12 +123,12 @@ function handleRegister(name, email, password, confirmPassword, errorElId) {
 // ── Logout 
 function handleLogout() {
   localStorage.removeItem("currentUser");
-  window.location.href = "index.html";
+  window.location.href = "/";
 }
 
 // ── Admin Protection 
 function protectAdmin() {
-  if (!isAdmin()) window.location.href = "index.html";
+  if (!isAdmin()) window.location.href = "/";
 }
 
 // ── Theme  
@@ -166,9 +166,9 @@ function updateNavbar() {
       const href = a.getAttribute("href") || "";
       if (
         href.includes("/login/") ||
-        href.includes("register.html") ||
-        href.includes("admin-dashboard.html") ||
-        href.includes("profile.html")
+        href.includes("/register/") ||
+        href.includes("/admin-dashboard/") ||
+        href.includes("/profile/")
       ) a.remove();
     });
 
@@ -176,11 +176,11 @@ function updateNavbar() {
 
     if (!user) {
       topLinks.insertBefore(makeLink("/login/", "Login"), themeBtn);
-      topLinks.insertBefore(makeLink("register.html", "Register"), themeBtn);
+      topLinks.insertBefore(makeLink("/register/", "Register"), themeBtn);
     } else {
-      topLinks.insertBefore(makeLink("profile.html", "My Profile"), themeBtn);
+      topLinks.insertBefore(makeLink("/profile/", "My Profile"), themeBtn);
       if (user.role === "admin") {
-        const dashLink = makeLink("admin-dashboard.html", "Admin Dashboard");
+        const dashLink = makeLink("/admin-dashboard/", "Admin Dashboard");
         dashLink.classList.add("dashboard");
         topLinks.insertBefore(dashLink, themeBtn);
       }
@@ -199,22 +199,22 @@ function updateNavbar() {
       const href = a.getAttribute("href") || "";
       if (
         href.includes("/login/") ||
-        href.includes("register.html") ||
-        href.includes("admin-dashboard.html") ||
-        href.includes("profile.html")
+        href.includes("/register/") ||
+        href.includes("/admin-dashboard/") ||
+        href.includes("/profile/")
       ) a.remove();
     });
 
     if (!user) {
       sideMenu.appendChild(makeSideLink("/login/", "🔑", "Login"));
-      sideMenu.appendChild(makeSideLink("register.html", "📝", "Register"));
+      sideMenu.appendChild(makeSideLink("/register/", "📝", "Register"));
     } else {
-      sideMenu.appendChild(makeSideLink("profile.html", "👤", "My Profile"));
+      sideMenu.appendChild(makeSideLink("/profile/", "👤", "My Profile"));
       if (user.role === "admin") {
         const div = document.createElement("div");
         div.className = "menu-divider";
         sideMenu.appendChild(div);
-        const dashA = makeSideLink("admin-dashboard.html", "⚙️", "Admin Dashboard");
+        const dashA = makeSideLink("/admin-dashboard/", "⚙️", "Admin Dashboard");
         dashA.classList.add("dashboard-link");
         sideMenu.appendChild(dashA);
       }

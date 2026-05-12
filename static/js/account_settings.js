@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("users", JSON.stringify(filtered));
       localStorage.removeItem("currentUser");
       localStorage.removeItem("profilePic_" + currentUser.id);
-      window.location.href = "index.html";
+      window.location.href = "/";
     });
   }
 

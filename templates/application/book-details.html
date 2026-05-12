@@ -22,9 +22,9 @@
         </summary>
         <nav class="menu">
           <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
-          <a href="books.html"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="favourite.html"><span class="menu-icon">❤️</span> Favourite</a>
-          <a href="about.html"><span class="menu-icon">ℹ️</span> About Us</a>
+          <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
+          <a href="{% url 'favourite' %}"><span class="menu-icon">❤️</span> Favourite</a>
+          <a href="{% url 'about' %}"><span class="menu-icon">ℹ️</span> About Us</a>
           <div class="menu-divider"></div>
         </nav>
       </details>
@@ -34,9 +34,9 @@
     <nav class="topnav">
       <a href="index.html" class="logo">Libraria</a>
       <div class="links">
-        <a href="books.html">Browse Books</a>
-        <a href="favourite.html">Favourite</a>
-        <a href="about.html">About Us</a>
+        <a href="{% url 'books' %}">Browse Books</a>
+        <a href="{% url 'favourite' %}">Favourite</a>
+        <a href="{% url 'about' %}">About Us</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       </div>
     </nav>
@@ -71,7 +71,7 @@
           <a id="return-btn" href="#" class="btn btn-secondary" style="display:none;">Return Book</a>
 
           <!-- Always visible -->
-          <a href="books.html" class="btn btn-secondary">Return to Library</a>
+          <a href="{% url 'books' %}" class="btn btn-secondary">Return to Library</a>
         </div>
       </div>
     </section>

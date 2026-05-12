@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <td>${entry.borrowDate}</td>
       <td>${entry.returnDate}</td>
       <td>
-        <a href="return.html?id=${book.id}" class="btn edit-btn"
+        <a href="/return-book/${book.id}/" class="btn edit-btn"
            style="padding:8px 16px; width:auto; display:inline-block;">
           Return
         </a>

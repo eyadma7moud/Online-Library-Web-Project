@@ -26,5 +26,5 @@ document
     alert("Book added successfully!");
     this.reset();
 
-    window.location.href = "admin-dashboard.html";
+    window.location.href = "/admin-dashboard/";
   });

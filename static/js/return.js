@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!bookId) {
     alert("No book selected.");
-    window.location.href = "borrowed-books.html";
+    window.location.href = "/borrowed-books/";
     return;
   }
 
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (userIndex === -1) {
     alert("User not found.");
-    window.location.href = "index.html";
+    window.location.href = "/";
     return;
   }
 
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!borrowEntry) {
     alert("You have not borrowed this book or it has already been returned.");
-    window.location.href = "borrowed-books.html";
+    window.location.href = "/borrowed-books/";
     return;
   }
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!book) {
     alert("Book not found.");
-    window.location.href = "borrowed-books.html";
+    window.location.href = "/borrowed-books/";
     return;
   }
 
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
         returnDate: returnDate
       }));
 
-      window.location.href = "return_success.html";
+      window.location.href = "/return-success/";
     });
   }
 });

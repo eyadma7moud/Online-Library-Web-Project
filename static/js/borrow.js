@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   if (isAdmin()) {
     alert("Admins cannot borrow books.");
-    window.location.href = "admin-dashboard.html";
+    window.location.href = "/admin-dashboard/";
     return;
   }
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!bookId) {
     alert("No book selected.");
-    window.location.href = "books.html";
+    window.location.href = "/books/";
     return;
   }
 
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!book) {
     alert("Book not found.");
-    window.location.href = "books.html";
+    window.location.href = "/books/";
     return;
   }
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <p style="color: var(--accent-red); font-weight:600; font-size:1.1rem;">
             ❌ You have already borrowed this book.
           </p>
-          <a href="borrowed-books.html" class="btn" style="width:auto; display:inline-block; margin-top:16px;">
+          <a href="/borrowed-books/" class="btn" style="width:auto; display:inline-block; margin-top:16px;">
             My Borrowed Books
           </a>
         </div>`;
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <p style="color: var(--accent-red); font-weight:600; font-size:1.1rem;">
             ❌ This book is currently not available.
           </p>
-          <a href="books.html" class="btn" style="width:auto; display:inline-block; margin-top:16px;">
+          <a href="/books/" class="btn" style="width:auto; display:inline-block; margin-top:16px;">
             Back to Books
           </a>
         </div>`;
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (bookIndex === -1 || allBooks[bookIndex].status === "borrowed") {
         alert("Sorry, this book is no longer available.");
-        window.location.href = "books.html";
+        window.location.href = "/books/";
         return;
       }
 
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
         returnDate: returnDate
       }));
 
-      window.location.href = "borrow_success.html";
+      window.location.href = "/borrow-success/";
     });
   }
 });

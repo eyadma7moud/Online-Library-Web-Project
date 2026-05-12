@@ -1,61 +1,86 @@
-# Libraria — Fixed Files
+# 📚 Libraria — Online Library Management System
 
-## Files to Replace in Your Project
-
-### Replace these HTML files:
-- `book-details.html` → Added ❤️ Favourite toggle button
-- `favourite.html`    → Now fully dynamic (no hardcoded books), shows real user favourites
-- `about.html`        → Phone/email/location are now clickable links + team section
-
-### Replace these JS files (in your `js/` folder):
-- `js/book-details.js` → Favourite toggle, correct borrow/return button logic
-- `js/books-page.js`   → Heart (🤍/❤️) button on every book card, URL search pre-fill
-- `js/borrow.js`       → Marks book as **unavailable**, saves to history, goes to borrow_success
-- `js/return.js`       → Marks book as **available** again, saves to history, goes to return_success
-- `js/favourite.js`    → Reads from user's `favourites[]` array, dynamic add/remove
+Libraria is a comprehensive, modern web-based library management platform built with **Django**. It provides a seamless experience for both readers to discover and borrow books, and for administrators to manage the library's collection.
 
 ---
 
-## What Was Fixed
+## ✨ Key Features
 
-### 1. Borrow flow
-- Clicking "Borrow Book" now correctly marks the book status → `"borrowed"` (unavailable)
-- Adds entry to user's `borrowedBooks[]` history
-- Redirects to `borrow_success.html` with correct info
+### 👤 User Features
+- **Dynamic Book Discovery**: Browse and search books by title, author, or category with real-time availability status.
+- **Book Details**: Dedicated pages for every book with full metadata and author information.
+- **Borrowing System**: Request books digitally with automated status tracking (Available / Borrowed).
+- **Personalized Profile**: Customizable user profiles with photo upload and borrowing statistics.
+- **Favourites List**: Save your favourite books for quick access.
+- **Borrow History**: Track your current and past borrowing activities in a clean table format.
+- **Account Settings**: Update your personal information, email, and password securely.
 
-### 2. Return flow
-- Clicking "Return Book" now correctly marks the book status → `"available"` again
-- Updates user's `borrowedBooks[]` entry: `returned: true`, `actualReturn: date`
-- Redirects to `return_success.html`
-- Borrow history page shows returned books correctly
+### 🛡️ Admin Features
+- **Admin Dashboard**: Manage the entire library collection (Add, Edit, Delete books).
+- **Inventory Control**: Real-time monitoring of borrowed vs. available books.
+- **Django Admin Integration**: Full access to database records via the powerful Django Admin panel.
 
-### 3. Favourites — any book, any state
-- Every book card on `books.html` has a 🤍/❤️ button to toggle favourite
-- `book-details.html` has a "❤️ Add to Favourites" / "💔 Remove from Favourites" button
-- `favourite.html` is now fully dynamic — shows real books from your favourites list
-- Works for available AND borrowed books
-- Requires login (redirects to login if not logged in)
-
-### 4. Borrow/Return requires login
-- Both `borrow.js` and `return.js` redirect to `login.html` if not logged in
-- Admin users are blocked from borrowing
-
-### 5. About page — clickable contact info
-- Phone number: `<a href="tel:+201234567890">`
-- Email: `<a href="mailto:info@library.edu">`
-- Address: links to Google Maps
-- Footer links are also clickable across all pages
-
-### 6. Borrow history accuracy
-- History shows all past borrows (returned = true)
-- Active borrows shown in "My Borrowed Books" (returned = false)
-- Stats on profile page update correctly
+### 🌙 Modern UI/UX
+- **Dark Mode Support**: Seamlessly toggle between light and dark themes across all pages.
+- **Responsive Design**: Optimized for both desktop and mobile viewing.
+- **Rich Aesthetics**: Custom-built design using modern typography and smooth transitions.
 
 ---
 
-## No changes needed for:
-- `js/auth.js` (keep as-is)
-- `js/profile.js` (keep as-is)
-- `js/account_settings.js` (keep as-is)
-- `js/books.js` (admin dashboard, keep as-is)
-- All other HTML pages
+## 🛠️ Technology Stack
+
+- **Backend**: Python / Django (Full MTV Architecture)
+- **Frontend**: HTML5, Vanilla CSS3, JavaScript (ES6+)
+- **Database**: SQLite (Default) / PostgreSQL ready
+- **Styling**: Premium CSS Design System (Glassmorphism & Vibrant Gradients)
+
+---
+
+## 🚀 Recent Improvements & Fixes
+
+We have recently migrated the project from a static frontend to a fully dynamic **Django** environment:
+- **Unified Navigation**: Implemented absolute Django URL routing to eliminate all 404 navigation errors.
+- **Dynamic Logic**: Moved all localStorage logic to permanent database records using Django Models.
+- **Profile Image Support**: Integrated Django Media settings to allow users to upload and persist profile pictures.
+- **Template Inheritance**: Used `base.html` to centralize the design and minimize code duplication.
+- **Security**: Added CSRF protection and login requirements for sensitive actions like borrowing.
+
+---
+
+## ⚙️ How to Run the Project
+
+1. **Install Dependencies**:
+   Ensure you have Python and Django installed. You also need the `Pillow` library for images:
+   ```bash
+   pip install Django Pillow
+   ```
+
+2. **Migrate Database**:
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+3. **Create a Superuser** (for Admin access):
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+4. **Start the Server**:
+   ```bash
+   python manage.py run server
+   ```
+
+5. **Visit the Site**:
+   Open `http://127.0.0.1:8000/` in your browser.
+
+---
+
+## 👥 Development Team
+- **Eyad Mahmoud** — Team Leader
+- **Ali Saber Hassan** — Developer
+- **Nour Salah Alaa** — Developer
+- **Ash** — Developer & UI/UX Designer
+
+---
+*Developed with ❤️ as part of the CS214/IS231 Web Technology Project — 2026.*

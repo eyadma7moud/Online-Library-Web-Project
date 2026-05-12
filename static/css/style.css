@@ -1999,3 +1999,18 @@ button[type="submit"] {
   opacity: 1;
   transform: translateY(0);
 }
+.btn-fav{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background: #4361ee;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-fav:hover{
+    background: #3046c9;
+}

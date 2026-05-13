@@ -1,113 +1,192 @@
-# Libraria: Online Library Management System
+# 📚 Libraria
 
-### Project Overview
-Libraria is a comprehensive, full-stack web application developed as the final submission for the **IS231: Web Technology** course. This project (Phase 3) demonstrates the practical application of the Django framework to build a robust, scalable, and user-centric library management ecosystem.
-
-The platform facilitates a seamless interaction between readers and the library's inventory, featuring dynamic book discovery, digital borrowing workflows, and an administrative oversight dashboard.
+A comprehensive full-stack Library Management System designed for seamless book browsing, borrowing, and administrative control.
 
 ---
 
-## 🔑 Key Functionalities
-
-### 1. User Interface & Reader Experience
-*   **Dynamic Inventory Discovery**: Real-time search and multi-criteria filtering (Title, Author, Category) powered by Django ORM.
-*   **Borrowing Ecosystem**: Automated borrowing and returning workflows with real-time status updates and session tracking.
-*   **Interactive Favourites**: Asynchronous (AJAX) interaction allowing users to manage personal reading lists without page reloads.
-*   **Advanced User Profiles**: Dynamic profile management including secure data updates and profile picture processing.
-*   **Aesthetic Continuity**: A bespoke CSS design system featuring native Dark Mode support and high-performance responsive layouts.
-
-### 2. Administrative Controls (Staff Only)
-*   **Centralized Analytics**: A staff-only dashboard providing high-level metrics on library inventory and user activity.
-*   **Full Inventory CRUD**: Secure interfaces for creating, reading, updating, and deleting book records.
-*   **Status Monitoring**: Visual indicators for active borrows, returns, and total system users.
+## 📖 Table of Contents
+- [About the Project](#-about-the-project)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Contributors](#-contributors)
+- [License](#-license)
 
 ---
 
-## 🛠️ Technical Stack & Dependencies
+## 🔍 About the Project
+
+**Libraria** is a robust web application built to bridge the gap between readers and library resources. It offers a dynamic platform where users can explore a vast catalog of books, manage their borrowing history, and curate personal favorites.
+
+The system is split into two main experiences:
+
+1. **User Experience:** Focused on discovery, borrowing, and profile management.
+2. **Admin Experience:** Focused on full catalog CRUD (Create, Read, Update, Delete) operations and user oversight.
+
+Built with a **Django** backend and a dynamic **JavaScript** frontend, Libraria ensures a responsive and secure environment for all library operations.
+
+---
+
+## ✨ Features
+
+### 👤 User Features
+
+| Feature | Description |
+| :--- | :--- |
+| **Registration & Login** | Secure authentication system for personal accounts. |
+| **Advanced Search** | Find books by title, author, or category with real-time results. |
+| **Borrowing System** | One-click borrowing with automated availability updates. |
+| **Favorites List** | Save books to your personal favorites collection for later. |
+| **Profile Management** | Update profile info, change profile pictures, and view borrowing history. |
+| **Dark/Light Mode** | Toggleable UI themes for a better reading experience. |
+
+### 🔐 Admin Features
+
+| Feature | Description |
+| :--- | :--- |
+| **Dashboard** | Overview of all library statistics and system management. |
+| **Catalog CRUD** | Full control to add, edit, or delete books from the system. |
+| **Image Hosting** | Upload and manage book covers and profile pictures directly. |
+| **User Oversight** | Monitor borrowing records and system users. |
+
+---
+
+## 🛠 Tech Stack
 
 | Layer | Technology |
-|---|---|
-| **Backend Framework** | Django 6.0 (Python-based MTV Architecture) |
-| **Frontend** | HTML5, Vanilla CSS3 (Custom Variables), JavaScript (ES6+) |
-| **Database Engine** | SQLite (Relational Database Management) |
-| **Authentication** | Django Contrib Auth (Session-based) |
-| **Image Processing** | Pillow (Library for Image Handling) |
-
-*Detailed versions can be found in `requirements.txt`.*
+| :--- | :--- |
+| **Frontend** | HTML5, CSS3, JavaScript (ES6+) |
+| **Backend** | Python, Django |
+| **Database** | SQLite3 |
+| **Styling** | Custom CSS |
+| **Image Handling** | Pillow |
 
 ---
 
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```text
-Online-Library-Web-Project/
-├── application/                # Core Django Application
-│   ├── models.py               # Database Schema (Book, BorrowRecord, UserProfile, Favourite)
-│   ├── views.py                # Business Logic & Request Handling
-│   ├── urls.py                 # Application-specific Routing
-│   ├── forms.py                # Django ModelForms for Book Management
-│   ├── admin.py                # Django Admin Customization
-│   └── apps.py                 # App Configuration
-├── config/                     # Project Configuration
-│   ├── settings.py             # Global Settings (DB, Media, Static)
-│   ├── urls.py                 # Main Routing & Media Handling
-│   └── wsgi.py / asgi.py       # Server Interfaces
-├── static/                     # Assets Directory
-│   ├── css/                    # Custom Design System (style.css)
-│   ├── js/                     # Client-side Logic (theme.js, auth.js, etc.)
-│   └── images/                 # System UI Icons and Graphics
-├── templates/                  # HTML Templates
-│   ├── base.html               # Global Layout (Navbar, Sidebar, Footer)
-│   └── application/            # Page-specific Templates (Home, Books, Profile, Admin)
-├── media/                      # User-uploaded Content
-│   └── profile_pics/           # Profile Image Storage
-├── db.sqlite3                  # Project Database
-├── manage.py                   # Django Command-line Utility
-├── requirements.txt            # Dependency Specifications
-└── README.md                   # Project Documentation
+Libraria/
+├── application/                 # Main Django App
+│   ├── migrations/              # Database migration files
+│   ├── models.py                # Database models
+│   ├── urls.py                  # App routes
+│   └── views.py                 # Backend logic
+│
+├── config/                      # Project configuration
+│   ├── settings.py              # Django settings
+│   └── urls.py                  # Main URL routing
+│
+├── templates/                   # HTML templates
+│   ├── application/             # App templates
+│   └── base.html                # Base layout
+│
+├── static/                      # Static assets
+│   ├── css/                     # Stylesheets
+│   ├── js/                      # JavaScript files
+│   └── images/                  # Static images
+│
+├── media/                       # Uploaded files
+├── manage.py                    # Django management script
+└── requirements.txt             # Project dependencies
 ```
 
 ---
 
-## 🚀 Installation & Usage Guide
+## 🚀 Getting Started
 
-### Prerequisites
-*   Python 3.10 or higher
-*   pip (Python Package Installer)
+### 📌 Prerequisites
 
-### 1. Environment Setup
-Clone the repository and install the required dependencies:
+- Python 3.10+
+- pip (Python package manager)
+
+---
+
+### ⚙ Installation
+
+#### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/eyadma7moud/Online-Library-Web-Project.git
+cd Online-Library-Web-Project
+```
+
+---
+
+#### 2️⃣ Set Up Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+##### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+##### Mac/Linux
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+#### 3️⃣ Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Database Initialization
-Prepare the relational schema and synchronize the database:
+---
+
+#### 4️⃣ Database Setup
+
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 3. Administrative Setup
-Create a superuser account to access the administrative dashboard:
+---
+
+#### 5️⃣ Create Admin User
+
 ```bash
 python manage.py createsuperuser
 ```
 
-### 4. Running the Application
-Start the development server:
+---
+
+#### 6️⃣ Run the Development Server
+
 ```bash
 python manage.py runserver
 ```
-Navigate to `http://127.0.0.1:8000/` in your browser.
+
+Open your browser and visit:
+
+```text
+http://127.0.0.1:8000/
+```
 
 ---
 
-## 👥 Development Team: Phase 3
-*   **Eyad Mahmoud** — Project Leader & Backend Architecture
-*   **Ali Saber Hassan** — Lead Developer & Systems Integration
-*   **Nour Salah Alaa** — Frontend Engineering & UI Implementation
-*   **Ash** — UI/UX Strategy & Design Documentation
+## 👥 Contributors
+
+This project was developed with ❤️ by:
+
+- **Eyad Mahmoud**
+- **Sayed Badawy**
+- **Shahd Ayman**
+- **Youssef Sherif**
+- **Mohamed Mokhtar**
+- **Nada Essam**
 
 ---
-*Faculty of Computers and Artificial Intelligence — 2026*
+
+## 🎓 Academic Information
+
+**Faculty of Computers and Artificial Intelligence**  
+**Cairo University**

@@ -3,38 +3,89 @@
 
 {% block extra_styles %}
 <style>
-  .dashboard {
-    padding: 40px 0;
+  main.container .dashboard {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
   }
+  
+  .dashboard-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    margin-bottom: 32px;
+    color: var(--text-primary);
+  }
+  
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  
+  .add-book-btn {
+    background: var(--accent-blue);
+    color: white;
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all var(--transition);
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-body);
+  }
+  
+  .add-book-btn:hover {
+    background: var(--accent-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  }
+  
   .success-msg {
     background: var(--accent-green-bg);
     color: var(--accent-green);
-    padding: 16px;
+    padding: 16px 20px;
     border-radius: var(--radius-md);
     margin-bottom: 24px;
     border: 1px solid var(--accent-green);
+    font-weight: 500;
   }
+  
   .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 24px;
     margin-bottom: 40px;
   }
+  
   .stat-box {
     background: var(--bg-card);
-    padding: 32px;
-    border-radius: var(--radius-lg);
-    text-align: center;
     border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    text-align: center;
     box-shadow: var(--shadow-sm);
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
   }
+  
+  .stat-box:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  
   .stat-box h3 {
-    font-size: 14px;
-    color: var(--text-muted);
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
     margin-bottom: 12px;
+    font-weight: 600;
   }
+  
   .stat-box p {
     font-size: 3rem;
     font-weight: 700;
@@ -42,37 +93,134 @@
     margin: 0;
     font-family: var(--font-display);
   }
+  
+  .books-table-wrapper {
+    overflow-x: auto;
+    margin-top: 24px;
+  }
+  
   .books-table {
     width: 100%;
     border-collapse: collapse;
     background: var(--bg-card);
     border-radius: var(--radius-lg);
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
     border: 1px solid var(--border);
-    margin-top: 24px;
+    min-width: 600px;
   }
-  .books-table th, .books-table td {
-    padding: 16px 24px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-  }
-  .books-table th {
+  
+  .books-table thead {
     background: var(--bg-secondary);
-    font-size: 13px;
-    text-transform: uppercase;
-    color: var(--text-muted);
+    border-bottom: 2px solid var(--border);
   }
+  
+  .books-table th,
+  .books-table td {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  .books-table th {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  
+  .books-table td {
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  
+  .books-table tbody tr:hover {
+    background: var(--bg-primary);
+  }
+  
+  .books-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .status-badge {
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  
+  .status-available {
+    background: var(--accent-green-bg);
+    color: var(--accent-green);
+  }
+  
+  .status-borrowed {
+    background: var(--accent-red-bg);
+    color: var(--accent-red);
+  }
+  
   .action-buttons {
     display: flex;
     gap: 8px;
+    justify-content: flex-end;
+    align-items: center;
   }
-  .btn-delete {
-    background: var(--accent-red);
-    color: white;
-    border: none;
+  .action-buttons form{
+    box-shadow: none;
+    border-color: white;
+  }
+  
+  .action-buttons .btn-edit,
+  .action-buttons .btn-delete {
     padding: 8px 16px;
     border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
     cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    border: none;
+    font-family: var(--font-body);
+  }
+  
+  .action-buttons .btn-edit {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+  
+  .action-buttons .btn-edit:hover {
+    background: var(--border);
+    color: var(--accent-blue);
+  }
+  
+  .action-buttons .btn-delete {
+    background: #ff4d4d;
+    color: white;
+  }
+  
+  .action-buttons .btn-delete:hover {
+    background: #cc0000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 77, 77, 0.2);
+  }
+  
+  .action-buttons form {
+    display: inline-flex;
+    margin: 0;
+  }
+  
+  .no-books {
+    text-align: center;
+    padding: 48px;
+    color: var(--text-muted);
   }
 </style>
 {% endblock %}
@@ -80,23 +228,21 @@
 {% block content %}
 <main class="container">
   <div class="dashboard">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
-        <h2>Admin Dashboard</h2>
-        <a href="{% url 'add_book' %}" class="btn" style="background: var(--accent-blue); color: white; padding: 12px 24px; border-radius: 12px;">+ Add New Book</a>
+    <div class="header-section">
+      <h2 class="dashboard-title">Admin Dashboard</h2>
+      <a href="{% url 'add_book' %}" class="add-book-btn">+ Add New Book</a>
     </div>
 
     {% if add_success %}
-      <div class="success-msg">✅ "{{ add_success }}" added successfully!</div>
-    {% endif %} 
-    
+    <div class="success-msg">✅ "{{ add_success }}" added successfully!</div>
+    {% endif %}
     {% if edit_success %}
-      <div class="success-msg">✅ "{{ edit_success }}" updated successfully!</div>
-    {% endif %} 
-    
-    {% if messages %} 
+    <div class="success-msg">✅ "{{ edit_success }}" updated successfully!</div>
+    {% endif %}
+    {% if messages %}
       {% for msg in messages %}
-        <div class="success-msg">{{ msg }}</div>
-      {% endfor %} 
+      <div class="success-msg">{{ msg }}</div>
+      {% endfor %}
     {% endif %}
 
     <div class="stats">
@@ -114,48 +260,49 @@
       </div>
     </div>
 
-    <div style="overflow-x: auto;">
-        <table class="books-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Category</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for book in books %}
-            <tr>
-              <td><strong>{{ book.title }}</strong></td>
-              <td>{{ book.author }}</td>
-              <td>{{ book.category }}</td>
-              <td>
-                  <span style="color: {% if book.status == 'available' %}var(--accent-green){% else %}var(--accent-red){% endif %}; font-weight: 600;">
-                    {{ book.get_status_display }}
-                  </span>
-              </td>
-              <td>
-                <div class="action-buttons">
-                  <a href="{% url 'edit_book' book.id %}" class="btn" style="background: var(--bg-secondary); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px;">Edit</a>
-
-                  <form method="post" action="{% url 'delete_book' book.id %}" style="display: contents">
-                    {% csrf_token %}
-                    <button type="submit" class="btn-delete" onclick="return confirm('Delete this book?');">
-                      Delete
-                    </button>
-                  </form>
-                </div>
-              </td>
-            </tr>
-            {% empty %}
-            <tr>
-              <td colspan="5" style="text-align: center; padding: 48px; color: var(--text-muted);">No books yet. Add one!</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+    <div class="books-table-wrapper">
+      <table class="books-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+          <tr>
+            <td><strong>{{ book.title }}</strong></td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.category }}</td>
+            <td>
+              <span class="status-badge status-{{ book.status }}">
+                {{ book.get_status_display }}
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <a href="{% url 'edit_book' book.id %}" class="btn-edit">Edit</a>
+                <form method="post" action="{% url 'delete_book' book.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn-delete" onclick="return confirm('Delete this book?');">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="no-books">
+              No books yet. Add one!
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </main>

@@ -1,15 +1,34 @@
-# 📚 Libraria
+<p align="center">
+  <img src="Assets/Library_Logo.png" alt="Libraria Logo" width="180"/>
+</p>
 
-A comprehensive full-stack Library Management System designed for seamless book browsing, borrowing, and administrative control.
+<h1 align="center">📚 Libraria</h1>
+
+<p align="center">
+  <b>A comprehensive full-stack Library Management System for browsing, borrowing, and managing books.</b>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Django-6.0-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django"/>
+  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3"/>
+  <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite"/>
+</p>
 
 ---
 
 ## 📖 Table of Contents
+
 - [About the Project](#-about-the-project)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running the Application](#running-the-application)
 - [Contributors](#-contributors)
 - [License](#-license)
 
@@ -17,14 +36,14 @@ A comprehensive full-stack Library Management System designed for seamless book 
 
 ## 🔍 About the Project
 
-**Libraria** is a robust web application built to bridge the gap between readers and library resources. It offers a dynamic platform where users can explore a vast catalog of books, manage their borrowing history, and curate personal favorites.
+**Libraria** is a full-stack web application designed to simplify library management and improve user experience for readers and administrators.
 
-The system is split into two main experiences:
+The platform provides two main interfaces:
 
-1. **User Experience:** Focused on discovery, borrowing, and profile management.
-2. **Admin Experience:** Focused on full catalog CRUD (Create, Read, Update, Delete) operations and user oversight.
+- 👤 **User Interface:** Browse books, search by category or author, borrow books, manage favorites, and update personal profiles.
+- 🔐 **Admin Interface:** Manage the entire library catalog with full CRUD operations and monitor users and borrowing records.
 
-Built with a **Django** backend and a dynamic **JavaScript** frontend, Libraria ensures a responsive and secure environment for all library operations.
+The backend is powered by **Django**, while the frontend is built using **HTML**, **CSS**, and **JavaScript**, ensuring a responsive and interactive experience.
 
 ---
 
@@ -33,29 +52,29 @@ Built with a **Django** backend and a dynamic **JavaScript** frontend, Libraria 
 ### 👤 User Features
 
 | Feature | Description |
-| :--- | :--- |
-| **Registration & Login** | Secure authentication system for personal accounts. |
-| **Advanced Search** | Find books by title, author, or category with real-time results. |
-| **Borrowing System** | One-click borrowing with automated availability updates. |
-| **Favorites List** | Save books to your personal favorites collection for later. |
-| **Profile Management** | Update profile info, change profile pictures, and view borrowing history. |
-| **Dark/Light Mode** | Toggleable UI themes for a better reading experience. |
+|---|---|
+| **Registration & Login** | Secure authentication system for personal accounts |
+| **Advanced Search** | Search books by title, author, or category |
+| **Borrowing System** | Borrow books with automatic availability updates |
+| **Favorites List** | Save books to your favorites collection |
+| **Profile Management** | Update profile information and view borrowing history |
+| **Dark/Light Mode** | Switch between dark and light themes |
 
 ### 🔐 Admin Features
 
 | Feature | Description |
-| :--- | :--- |
-| **Dashboard** | Overview of all library statistics and system management. |
-| **Catalog CRUD** | Full control to add, edit, or delete books from the system. |
-| **Image Hosting** | Upload and manage book covers and profile pictures directly. |
-| **User Oversight** | Monitor borrowing records and system users. |
+|---|---|
+| **Dashboard** | Overview of library statistics and management |
+| **Catalog CRUD** | Add, update, and delete books |
+| **Image Uploads** | Manage book covers and profile pictures |
+| **User Oversight** | Monitor borrowing records and users |
 
 ---
 
 ## 🛠 Tech Stack
 
 | Layer | Technology |
-| :--- | :--- |
+|---|---|
 | **Frontend** | HTML5, CSS3, JavaScript (ES6+) |
 | **Backend** | Python, Django |
 | **Database** | SQLite3 |
@@ -68,7 +87,8 @@ Built with a **Django** backend and a dynamic **JavaScript** frontend, Libraria 
 
 ```text
 Libraria/
-├── application/                 # Main Django App
+│
+├── application/                 # Main Django application
 │   ├── migrations/              # Database migration files
 │   ├── models.py                # Database models
 │   ├── urls.py                  # App routes
@@ -85,9 +105,9 @@ Libraria/
 ├── static/                      # Static assets
 │   ├── css/                     # Stylesheets
 │   ├── js/                      # JavaScript files
-│   └── images/                  # Static images
+│   └── images/                  # Images
 │
-├── media/                       # Uploaded files
+├── media/                       # Uploaded media
 ├── manage.py                    # Django management script
 └── requirements.txt             # Project dependencies
 ```
@@ -96,14 +116,15 @@ Libraria/
 
 ## 🚀 Getting Started
 
-### 📌 Prerequisites
+### Prerequisites
 
-- Python 3.10+
-- pip (Python package manager)
+- **Python 3.10+**
+- **pip** (Python package manager)
+- **Git**
 
 ---
 
-### ⚙ Installation
+### Installation
 
 #### 1️⃣ Clone the Repository
 
@@ -114,7 +135,7 @@ cd Online-Library-Web-Project
 
 ---
 
-#### 2️⃣ Set Up Virtual Environment
+#### 2️⃣ Create and Activate Virtual Environment
 
 ```bash
 python -m venv venv
@@ -126,7 +147,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-##### Mac/Linux
+##### macOS / Linux
 
 ```bash
 source venv/bin/activate
@@ -142,7 +163,7 @@ pip install -r requirements.txt
 
 ---
 
-#### 4️⃣ Database Setup
+#### 4️⃣ Apply Database Migrations
 
 ```bash
 python manage.py makemigrations
@@ -151,7 +172,7 @@ python manage.py migrate
 
 ---
 
-#### 5️⃣ Create Admin User
+#### 5️⃣ Create Superuser
 
 ```bash
 python manage.py createsuperuser
@@ -159,7 +180,9 @@ python manage.py createsuperuser
 
 ---
 
-#### 6️⃣ Run the Development Server
+### Running the Application
+
+#### Start the Django Server
 
 ```bash
 python manage.py runserver
@@ -175,18 +198,29 @@ http://127.0.0.1:8000/
 
 ## 👥 Contributors
 
-This project was developed with ❤️ by:
-
-- **Eyad Mahmoud**
-- **Sayed Badawy**
-- **Shahd Ayman**
-- **Youssef Sherif**
-- **Mohamed Mokhtar**
-- **Nada Essam**
+<table>
+  <tr>
+    <td align="center"><b>Eyad Mahmoud</b></td>
+    <td align="center"><b>Sayed Badawy</b></td>
+    <td align="center"><b>Shahd Ayman</b></td>
+    <td align="center"><b>Youssef Sherif</b></td>
+    <td align="center"><b>Mohamed Mokhtar</b></td>
+    <td align="center"><b>Nada Essam</b></td>
+  </tr>
+</table>
 
 ---
 
 ## 🎓 Academic Information
 
-**Faculty of Computers and Artificial Intelligence**  
-**Cairo University**
+<p align="center">
+  <b>Faculty of Computers and Artificial Intelligence</b><br>
+  Cairo University
+</p>
+
+---
+
+
+<p align="center">
+  Made with ❤️ by <b>Libraria Team</b>
+</p>

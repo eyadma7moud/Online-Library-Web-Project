@@ -1,139 +1,221 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <!-- Fonts -->
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime"
+/>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap"
+/>
 
 <title>Browse Books — Libraria</title>
 
 <!-- CSS -->
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-
-
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
 <!-- SIDE MENU -->
 <div class="menu-wrapper">
-
   <details>
     <summary aria-label="Open navigation menu">
-
       <div class="icon-bar">
         <span></span>
         <span></span>
         <span></span>
       </div>
-
     </summary>
 
     <nav class="menu">
       <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-      <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
-      <a href="{% url 'favourite' %}"><span class="menu-icon">❤️</span> Favourite</a>
+      <a href="{% url 'books' %}"
+        ><span class="menu-icon">📚</span> Browse Books</a
+      >
+      <a href="{% url 'favourite' %}"
+        ><span class="menu-icon">❤️</span> Favourite</a
+      >
       <a href="{% url 'about' %}"><span class="menu-icon">ℹ️</span> About Us</a>
 
       <div class="menu-divider"></div>
 
       <a href="{% url 'login' %}"><span class="menu-icon">🔑</span> Login</a>
-      <a href="{% url 'register' %}"><span class="menu-icon">📝</span> Register</a>
-      <a href="{% url 'profile' %}"><span class="menu-icon">👤</span> User Profile</a>
+      <a href="{% url 'register' %}"
+        ><span class="menu-icon">📝</span> Register</a
+      >
+      <a href="{% url 'profile' %}"
+        ><span class="menu-icon">👤</span> User Profile</a
+      >
     </nav>
   </details>
 </div>
 
 <!-- MAIN -->
 <main>
-
-  <div class="content" style="max-width:1100px;">
-
+  <div class="content" style="max-width: 1100px">
     <h1>Book Collection</h1>
 
     <!-- FILTERS -->
     <div class="filters">
-
-      <form method="GET" style="display:flex;
-                 flex-wrap:wrap;
-                 gap:12px;
-                 align-items:flex-end;
-                 background:transparent;
-                 border:none;
-                 padding:0;
-                 box-shadow:none;
-                 max-width:none;">
-
+      <form
+        method="GET"
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          align-items: flex-end;
+          background: transparent;
+          border: none;
+          padding: 0;
+          box-shadow: none;
+          max-width: none;
+        "
+      >
         <!-- Search -->
-        <input type="text" name="search" id="search-input" placeholder="Search by title, author or category…"
-          style="flex:1; min-width:180px;" value="{{ request.GET.search }}" />
+        <input
+          type="text"
+          name="search"
+          id="search-input"
+          placeholder="Search by title, author or category…"
+          style="flex: 1; min-width: 180px"
+          value="{{ request.GET.search }}"
+        />
 
         <!-- Category -->
         <select name="category" id="cat-filter">
-
           <option value="">All Categories</option>
 
-          <option value="Fiction" {% if request.GET.category == "Fiction" %}selected{% endif %}>
+          <option
+            value="Fiction"
+            {%
+            if
+            request.GET.category=""
+            ="Fiction"
+            %}selected{%
+            endif
+            %}
+          >
             Fiction
           </option>
 
-          <option value="Science" {% if request.GET.category == "Science" %}selected{% endif %}>
+          <option
+            value="Science"
+            {%
+            if
+            request.GET.category=""
+            ="Science"
+            %}selected{%
+            endif
+            %}
+          >
             Science
           </option>
 
-          <option value="History" {% if request.GET.category == "History" %}selected{% endif %}>
+          <option
+            value="History"
+            {%
+            if
+            request.GET.category=""
+            ="History"
+            %}selected{%
+            endif
+            %}
+          >
             History
           </option>
 
-          <option value="Technology" {% if request.GET.category == "Technology" %}selected{% endif %}>
+          <option
+            value="Technology"
+            {%
+            if
+            request.GET.category=""
+            ="Technology"
+            %}selected{%
+            endif
+            %}
+          >
             Technology
           </option>
 
-          <option value="Philosophy" {% if request.GET.category == "Philosophy" %}selected{% endif %}>
+          <option
+            value="Philosophy"
+            {%
+            if
+            request.GET.category=""
+            ="Philosophy"
+            %}selected{%
+            endif
+            %}
+          >
             Philosophy
           </option>
 
-          <option value="Self Development" {% if request.GET.category == "Self Development" %}selected{% endif %}>
+          <option
+            value="Self Development"
+            {%
+            if
+            request.GET.category=""
+            ="Self Development"
+            %}selected{%
+            endif
+            %}
+          >
             Self Development
           </option>
-
         </select>
 
         <!-- Status -->
         <select name="status" id="status-filter">
-
           <option value="">All Status</option>
 
-          <option value="available" {% if request.GET.status == "available" %}selected{% endif %}>
+          <option
+            value="available"
+            {%
+            if
+            request.GET.status=""
+            ="available"
+            %}selected{%
+            endif
+            %}
+          >
             Available
           </option>
 
-          <option value="borrowed" {% if request.GET.status == "borrowed" %}selected{% endif %}>
+          <option
+            value="borrowed"
+            {%
+            if
+            request.GET.status=""
+            ="borrowed"
+            %}selected{%
+            endif
+            %}
+          >
             Borrowed
           </option>
-
         </select>
 
         <!-- Search Button -->
-        <button type="submit" id="search-btn" class="btn" style="width:auto; padding:12px 28px;">
-
+        <button
+          type="submit"
+          id="search-btn"
+          class="btn"
+          style="width: auto; padding: 12px 28px"
+        >
           Search
-
         </button>
-
       </form>
     </div>
 
     <!-- BOOK GRID -->
     <div class="books-grid" id="books-grid">
-
       {% for book in books %}
 
       <div class="book-card">
-
         <!-- Book Image -->
-        <img src="{{ book.image }}" alt="{{ book.title }}">
-
+        <img
+          src="{{ book.image|default:'https://placehold.co/200x300?text=No+Cover' }}"
+          alt="{{ book.title }}"
+        />
         <!-- Title -->
         <h3>{{ book.title }}</h3>
 
@@ -151,50 +233,79 @@
 
         <!-- Status -->
         <p>
-
           <strong>Status:</strong>
 
           {% if book.status == "available" %}
 
-          <span style="color:green;">
-            Available
-          </span>
+          <span style="color: green"> Available </span>
 
           {% else %}
 
-          <span style="color:red;">
-            Borrowed
-          </span>
+          <span style="color: red"> Borrowed </span>
 
           {% endif %}
-
         </p>
-        <div style="margin-top: 10px;">
+        <div style="margin-top: 10px">
           {% if book.status == "available" %}
-          <a href="{% url 'borrow_book' book.id %}"
-            style="background-color: #2c3e50; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+          <a
+            href="{% url 'borrow_book' book.id %}"
+            style="
+              background-color: #2c3e50;
+              color: white;
+              padding: 8px 20px;
+              text-decoration: none;
+              border-radius: 5px;
+              display: inline-block;
+            "
+          >
             Borrow Now
           </a>
 
           {% elif book.id in borrowed_ids %}
-          <a href="{% url 'return_book' book.id %}"
-            style="background-color: #e67e22; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+          <a
+            href="{% url 'return_book' book.id %}"
+            style="
+              background-color: #e67e22;
+              color: white;
+              padding: 8px 20px;
+              text-decoration: none;
+              border-radius: 5px;
+              display: inline-block;
+            "
+          >
             Return Book
           </a>
 
           {% else %}
-          <button type="button" disabled
-            style="background-color: #ccc; color: #666; padding: 8px 20px; border: none; border-radius: 5px;">
+          <button
+            type="button"
+            disabled
+            style="
+              background-color: #ccc;
+              color: #666;
+              padding: 8px 20px;
+              border: none;
+              border-radius: 5px;
+            "
+          >
             Not Available
           </button>
           {% endif %}
 
-          <button type="button"
-            style="background-color: #ccc; color: #666; padding: 8px 20px; border: none; border-radius: 5px; margin-left: 5px;">
+          <button
+            type="button"
+            style="
+              background-color: #ccc;
+              color: #666;
+              padding: 8px 20px;
+              border: none;
+              border-radius: 5px;
+              margin-left: 5px;
+            "
+          >
             Add to Favourite
           </button>
         </div>
-
       </div>
 
       {% empty %}
@@ -202,11 +313,8 @@
       <p>No books found.</p>
 
       {% endfor %}
-
     </div>
-
   </div>
-
 </main>
 
 <!-- JS -->

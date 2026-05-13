@@ -1,101 +1,92 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <title>Add Book - Online Library</title>
-
-  <!-- Fonts -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-
-<body>
-
-  <!-- SIDE MENU -->
-  <div class="menu-wrapper">
-    <details>
-      <summary>
-        <div class="icon-bar"><span></span><span></span><span></span></div>
-      </summary>
-
-      <nav class="menu">
-        <a href="{% url 'home' %}">🏠 Home</a>
-        <a href="#">📚 Books</a>
-        <a href="{% url 'admin_dashboard' %}">⚙️ Dashboard</a>
-      </nav>
-    </details>
-  </div>
-
-  <!-- TOP NAV -->
-  <nav class="topnav">
-    <a href="{% url 'home' %}" class="logo">Libraria</a>
-
-    <div class="links">
-      <a href="#">Browse Books</a>
-      <a href="#">Favourite</a>
-      <a href="{% url 'admin_dashboard' %}">Dashboard</a>
-
-      <button id="themeToggle">🌙</button>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Book - Libraria</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div class="menu-wrapper">
+      <details>
+        <summary>
+          <div class="icon-bar"><span></span><span></span><span></span></div>
+        </summary>
+        <nav class="menu">
+          <a href="{% url 'home' %}">🏠 Home</a>
+          <a href="#">📚 Books</a>
+          <a href="{% url 'admin_dashboard' %}">⚙️ Dashboard</a>
+        </nav>
+      </details>
     </div>
-  </nav>
 
-  <hr>
+    <nav class="topnav">
+      <a href="{% url 'home' %}" class="logo">Libraria</a>
+      <div class="links">
+        <a href="#">Browse Books</a>
+        <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </div>
+    </nav>
 
-  <main style="padding-top:40px">
-    <h1>Add New Book</h1>
+    <hr />
 
-    <form class="auth-form" id="add-book-form">
+    <main style="padding-top: 40px">
+      <h1>Add New Book</h1>
 
-      <label>Book Title</label>
-      <input type="text" id="title" required>
+      <form
+        class="auth-form"
+        id="add-book-form"
+        method="post"
+        action="{% url 'add_book' %}"
+      >
+        {% csrf_token %} {% if form.errors %}
+        <div style="color: red; margin-bottom: 10px">
+          <strong>Please fix the following:</strong>
+          {{ form.errors }}
+        </div>
+        {% endif %}
 
-      <label>Author</label>
-      <input type="text" id="author" required>
+        <label>Book Title</label>
+        {{ form.title }} {% if form.title.errors %}
+        <span class="form-error">{{ form.title.errors.0 }}</span>
+        {% endif %}
 
-      <label>Category</label>
-      <select id="category">
-        <option>Fiction</option>
-        <option>Science</option>
-        <option>History</option>
-        <option>Technology</option>
-      </select>
+        <label>Author</label>
+        {{ form.author }}
 
-      <label>Year</label>
-      <input type="number" id="year">
+        <label>Category</label>
+        {{ form.category }}
 
-      <label>Pages</label>
-      <input type="number" id="pages">
+        <label>Year</label>
+        {{ form.year }}
 
-      <label>Description</label>
-      <textarea id="description" rows="5"></textarea>
+        <label>Pages</label>
+        {{ form.pages }}
 
-      <label>Status</label>
-      <select id="status">
-        <option>Available</option>
-        <option>Borrowed</option>
-      </select>
+        <label>Description</label>
+        {{ form.description }}
 
-      <br><br>
+        <label>Cover Image URL</label>
+        {{ form.image }}
 
-      <button type="submit">Add Book</button>
-    </form>
-  </main>
+        <label>Status</label>
+        {{ form.status }}
 
-  <hr>
+        <br /><br />
+        <button type="submit">Add Book</button>
+        <a href="{% url 'admin_dashboard' %}" class="btn cancel-btn">Cancel</a>
+      </form>
+    </main>
 
-  <footer>
-    <p>© 2026 Online Library</p>
-  </footer>
+    <hr />
+    <footer><p>© 2026 Libraria</p></footer>
 
-  <!-- JS -->
-  <script src="{% static 'js/add-book.js' %}"></script>
-  <script src="{% static 'js/theme.js' %}"></script>
-  <script src="{% static 'js/auth.js' %}"></script>
-
-</body>
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+  </body>
 </html>

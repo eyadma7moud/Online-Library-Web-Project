@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Book , Favourite, BorrowRecord, UserProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 from django.shortcuts import redirect, get_object_or_404
+from .models import Book
+from .forms import BookForm
+
+
 
 def home(request):
     return render(request, 'application/index.html')
@@ -38,11 +42,66 @@ def register_view(request):
     return render(request, 'application/register.html')
 
 def admin_dashboard(request):
-    return render(request, 'application/admin-dashboard.html')
+    books          = Book.objects.all().order_by('-created_at')
+    total_books    = books.count()
+    borrowed_books = books.filter(status='borrowed').count()
 
+    from django.contrib.auth.models import User
+    total_users = User.objects.count()
+
+    edit_success = request.session.pop('edit_success', None)
+    add_success  = request.session.pop('add_success',  None)
+
+    return render(request, 'application/admin-dashboard.html', {
+        'books':         books,
+        'total_books':   total_books,
+        'borrowed_books': borrowed_books,
+        'total_users':   total_users,
+        'edit_success':  edit_success,
+        'add_success':   add_success,
+    })
+
+
+# ── Add Book ─────────────────────────────────────────────────
 def add_book(request):
-    return render(request, 'application/add-book.html')
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            book = form.save()
+            request.session['add_success'] = book.title
+            return redirect('admin_dashboard')
+    else:
+        form = BookForm()
 
+    return render(request, 'application/add-book.html', {'form': form})
+
+
+# ── Edit Book ────────────────────────────────────────────────
+def edit_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            request.session['edit_success'] = book.title
+            return redirect('admin_dashboard')
+    else:
+        form = BookForm(instance=book)
+
+    return render(request, 'application/edit-book.html', {
+        'form': form,
+        'book': book,
+    })
+
+
+# ── Delete Book ───────────────────────────────────────────────
+def delete_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == 'POST':
+        book.delete()
+        messages.success(request, f'"{book.title}" deleted.')
+    return redirect('admin_dashboard')
 
 
 def books_page(request):

@@ -28,4 +28,10 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('add-favourite/<int:book_id>/',views.add_to_favourite,name='add_favourite'),
     path('remove-favourite/<int:book_id>/',views.remove_from_favourite,name='remove_favourite'),
+
+    path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('admin-dashboard/add-book/', views.add_book, name='add_book'),
+    path('admin-dashboard/edit-book/<int:book_id>/', views.edit_book,  name='edit_book'),
+    path('admin-dashboard/delete-book/<int:book_id>/', views.delete_book, name='delete_book'),
+
 ]

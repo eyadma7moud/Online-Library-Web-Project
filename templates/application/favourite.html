@@ -90,7 +90,12 @@
 
     <div class="content">
 
-        <h2>My Favourite Books</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>My Favourite Books</h2>
+            <a href="{% url 'books' %}" class="btn" style="background-color: var(--accent-blue); color: white; padding: 10px 20px; text-decoration: none; border-radius: var(--radius-md); font-weight: 600;">
+                + Add More Books
+            </a>
+        </div>
 
         <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">
             Books you've hearted ❤️ — click any book to view details or borrow.
@@ -104,8 +109,9 @@
 
             <div class="book-card">
 
-                <img src="{{ fav.book.image }}"
-                     alt="{{ fav.book.title }}">
+                <img src="{{ fav.book.image|default:'https://placehold.co/200x300?text=No+Cover' }}"
+                     alt="{{ fav.book.title }}"
+                     onerror="this.src='https://placehold.co/200x300?text=No+Cover'">
 
                 <h3>{{ fav.book.title }}</h3>
 
@@ -133,12 +139,15 @@
                     {% endif %}
                 </p>
 
-                <a href="{% url 'remove_favourite' fav.book.id %}"
-                   class="remove-fav-btn">
-
-                    Remove From Favourite
-
-                </a>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+                    <a href="{% url 'borrow_book' fav.book.id %}" class="btn" style="background-color: var(--accent-blue); color: white; padding: 8px; text-align: center; text-decoration: none; border-radius: 6px; font-size: 13px;">
+                        Borrow Now
+                    </a>
+                    <a href="{% url 'remove_favourite' fav.book.id %}"
+                       class="remove-fav-btn" style="margin-top: 0;">
+                        Remove
+                    </a>
+                </div>
 
             </div>
 
@@ -152,9 +161,13 @@
 
             <h3>No Favourite Books Yet 📚</h3>
 
-            <p>
+            <p style="margin-bottom: 24px;">
                 Start adding books to your favourites list.
             </p>
+
+            <a href="{% url 'books' %}" class="btn" style="background-color: var(--accent-blue); color: white; padding: 12px 30px; text-decoration: none; border-radius: var(--radius-md); font-weight: 600;">
+                Go to Book Collection
+            </a>
 
         </div>
 

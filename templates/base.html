@@ -1,40 +1,218 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <link rel="icon" type="image/jpeg" href="{% static 'css/images_slider_and_cover/pexels-mographe-30752162.jpg' %}">
+
   <meta charset="UTF-8">
   <title>Libraria</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  {% block extra_head %}{% endblock %}
+  <style>
+    /* Side Drawer & Navbar Styles — Always Applied */
+    .side-drawer {
+      position: fixed; 
+      top: 20px; 
+      left: -320px; 
+      width: 280px; 
+      height: calc(100vh - 40px);
+      background: var(--bg-card); 
+      z-index: 2000;
+      box-shadow: var(--shadow-lg);
+      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 24px; 
+      display: flex; 
+      flex-direction: column;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .side-drawer.open { left: 20px; }
+    .drawer-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.3); backdrop-filter: blur(6px);
+      z-index: 1999; display: none; opacity: 0; transition: opacity 0.4s ease;
+    }
+    .drawer-overlay.active { display: block; opacity: 1; }
+    .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .close-drawer { background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text-primary); transition: transform 0.2s; }
+    .close-drawer:hover { transform: rotate(90deg); color: var(--accent-red); }
+    .drawer-links { display: flex; flex-direction: column; gap: 8px; }
+    .drawer-links a { 
+      text-decoration: none; 
+      color: var(--text-primary); 
+      font-size: 15px; 
+      font-weight: 500; 
+      padding: 14px 18px; 
+      border-radius: 14px; 
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .drawer-links a:hover { 
+      background: var(--accent-blue-light); 
+      color: var(--accent-blue); 
+      transform: translateX(5px);
+    }
+    .drawer-links .divider { height: 1px; background: var(--border); margin: 12px 0; }
+    .menu-trigger { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 5px; 
+      background: var(--bg-secondary); 
+      border: 1px solid var(--border); 
+      cursor: pointer; 
+      padding: 10px;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .menu-trigger:hover {
+      background: var(--accent-blue-light);
+      border-color: var(--accent-blue);
+    }
+    .menu-trigger span { width: 20px; height: 2px; background: var(--text-primary); border-radius: 2px; }
+    @media (max-width: 768px) {
+      .topnav .links { display: none; }
+      .mobile-only { display: flex !important; }
+      .topnav { justify-content: space-between; }
+    }
+    /* Fixed Top Navbar */
+    .topnav {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      height: 70px;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+    }
+  </style>
+  {% block extra_styles %}{% endblock %}
 </head>
+
 <body>
 
-  <!--  NAVBAR  -->
+  <!-- Side Drawer (Mobile/Tablet) -->
+  <div class="side-drawer" id="sideDrawer">
+    <div class="drawer-header">
+      <span class="logo">Libraria</span>
+      <button class="close-drawer" id="closeDrawer">&times;</button>
+    </div>
+    <div class="drawer-links">
+      <a href="{% url 'home' %}">🏠 Home</a>
+      <a href="{% url 'books' %}">📚 Browse Books</a>
+      <a href="{% url 'about' %}">ℹ️ About Us</a>
+      <div class="divider"></div>
+      {% if user.is_authenticated %}
+        {% if user.is_staff %}
+          <a href="{% url 'admin_dashboard' %}" style="color: var(--accent-blue); font-weight: 700;">⚙️ Admin Dashboard</a>
+        {% endif %}
+        <a href="{% url 'favourite' %}">❤️ Favourites</a>
+        <a href="{% url 'profile' %}">👤 My Profile</a>
+        <a href="{% url 'logout' %}" style="color: var(--accent-red);">🚪 Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">🔑 Login</a>
+        <a href="{% url 'register' %}">📝 Register</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- NAVBAR -->
   <nav class="topnav">
-    <a href="{% url 'home' %}" class="logo">Libraria</a>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <button class="menu-trigger" id="menuTrigger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="{% url 'home' %}" class="logo">Libraria</a>
+    </div>
 
     <div class="links">
       <a href="{% url 'books' %}">Browse Books</a>
-      <a href="{% url 'favourite' %}">Favourite</a>
       <a href="{% url 'about' %}">About Us</a>
-      <a href="{% url 'login' %}">Login</a>
-      <a href="{% url 'register' %}">Register</a>
-      <a href="{% url 'profile' %}">My Profile</a>
+
+      {% if user.is_authenticated %}
+        {% if user.is_staff %}
+          <a href="{% url 'admin_dashboard' %}" 
+             style="background: {% if '/admin-dashboard' in request.path %}var(--accent-blue){% else %}var(--bg-secondary){% endif %}; 
+                    color: {% if '/admin-dashboard' in request.path %}white{% else %}var(--text-primary){% endif %}; 
+                    border-radius: 12px; padding: 8px 16px; border: 1px solid var(--border); font-weight: 600;">
+             Admin Panel
+          </a>
+        {% endif %}
+        <a href="{% url 'favourite' %}">Favourite</a>
+        <a href="{% url 'profile' %}">My Profile</a>
+        <a href="{% url 'logout' %}" style="color: var(--accent-red);">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+      {% endif %}
 
       <button class="theme-toggle" id="themeToggle">🌙</button>
     </div>
+
+    <!-- Mobile Theme Toggle -->
+    <div class="mobile-only" style="display: none;">
+      <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </div>
   </nav>
+
+  <style>
+    @media (max-width: 768px) {
+      .mobile-only {
+        display: block !important;
+      }
+
+      .topnav {
+        justify-content: space-between;
+      }
+    }
+  </style>
+
+  <!-- MESSAGES BLOCK -->
+  {% if messages %}
+  <div class="messages-container" style="max-width: 800px; margin: 20px auto; padding: 0 20px;">
+    {% for message in messages %}
+    <div class="message {{ message.tags }}"
+      style="padding: 12px 20px; border-radius: 8px; margin-bottom: 10px; background: {% if message.tags == 'error' %}#fee2e2{% elif message.tags == 'success' %}#dcfce7{% else %}#e0f2fe{% endif %}; color: {% if message.tags == 'error' %}#991b1b{% elif message.tags == 'success' %}#166534{% else %}#075985{% endif %}; border: 1px solid currentColor;">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
 
   <!-- PAGE CONTENT -->
   {% block content %}
   {% endblock %}
 
-  <!-- FOOTER --> 
+  <!-- FOOTER -->
   <footer>
     <p>© 2026 Libraria — IS231 Web Project</p>
   </footer>
 
   <!-- JS -->
   <script src="{% static 'js/theme.js' %}"></script>
+  <script>
+    const menuTrigger = document.getElementById('menuTrigger');
+    const sideDrawer = document.getElementById('sideDrawer');
+    const closeDrawer = document.getElementById('closeDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+
+    function toggleDrawer() {
+      sideDrawer.classList.toggle('open');
+      drawerOverlay.classList.toggle('active');
+    }
+
+    if (menuTrigger) menuTrigger.addEventListener('click', toggleDrawer);
+    if (closeDrawer) closeDrawer.addEventListener('click', toggleDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener('click', toggleDrawer);
+  </script>
 </body>
+
 </html>

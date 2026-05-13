@@ -1,169 +1,116 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-    <title>Account Settings — Libraria</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <style>
-      .settings-wrapper { max-width: 600px; margin: 0 auto; padding: 40px 24px; }
-      .settings-section {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 28px;
-        margin-bottom: 24px;
-        box-shadow: var(--shadow-sm);
-      }
-      .settings-section h3 {
-        font-size: 1rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--border);
-        color: var(--text-primary);
-      }
-      .error-msg {
-        color: var(--accent-red);
-        font-size: 13px;
-        display: none;
-        margin-top: 8px;
-        padding: 10px 14px;
-        background: var(--accent-red-bg);
-        border-radius: var(--radius-sm);
-      }
-      .pic-row {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 16px;
-      }
-      .pic-row img {
-        width: 80px; height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid var(--accent-blue);
-      }
-      .danger-zone {
-        border-color: var(--accent-red);
-      }
-      .danger-zone h3 { color: var(--accent-red); }
-      .btn-danger {
-        background: var(--accent-red-bg);
-        color: var(--accent-red);
-        border: 1.5px solid var(--accent-red);
-        padding: 12px 24px;
-        border-radius: var(--radius-full);
-        font-size: 14px;
-        font-weight: 600;
-        font-family: var(--font-body);
-        cursor: pointer;
-        transition: all var(--transition);
-        margin-right: 8px;
-      }
-      .btn-danger:hover { background: var(--accent-red); color: #fff; }
-    </style>
-  </head>
-  <body>
-    <!-- SIDE MENU -->
-    <div class="menu-wrapper">
-      <details>
-        <summary aria-label="Open navigation menu">
-          <div class="icon-bar"><span></span><span></span><span></span></div>
-        </summary>
-        <nav class="menu">
-          <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-          <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="{% url 'profile' %}"><span class="menu-icon">👤</span> My Profile</a>
-          <div class="menu-divider"></div>
-        </nav>
-      </details>
-    </div>
 
-    <!-- TOP NAV -->
-    <nav class="topnav">
-      <a href="{% url 'home' %}" class="logo">Libraria</a>
-      <div class="links">
-        <a href="{% url 'books' %}">Browse Books</a>
-        <a href="{% url 'profile' %}">My Profile</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-      </div>
-    </nav>
+{% block extra_styles %}
+<style>
+  .settings-wrapper { max-width: 600px; margin: 0 auto; padding: 40px 24px; }
+  .settings-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+  .settings-section h3 {
+    font-size: 1rem; font-weight: 700;
+    margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+  .pic-row { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+  .pic-row img {
+    width: 80px; height: 80px;
+    border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--accent-blue);
+  }
+  .danger-zone { border-color: var(--accent-red); }
+  .danger-zone h3 { color: var(--accent-red); }
+  .btn-danger {
+    background: var(--accent-red-bg); color: var(--accent-red);
+    border: 1.5px solid var(--accent-red);
+    padding: 12px 24px; border-radius: var(--radius-full);
+    font-size: 14px; font-weight: 600; font-family: var(--font-body);
+    cursor: pointer; transition: all var(--transition); margin-right: 8px;
+  }
+  .btn-danger:hover { background: var(--accent-red); color: #fff; }
+</style>
+{% endblock %}
 
-    <div class="settings-wrapper">
-      <h1>Account Settings</h1>
+{% block content %}
+<main>
+  <div class="settings-wrapper">
+    <h1>Account Settings</h1>
 
-      <!-- Profile Picture -->
-      <div class="settings-section">
-        <h3>📷 Profile Picture</h3>
-        <div class="pic-row">
-          <img id="settings-pic" src="{{ profile.profile_pic.url }}" alt="Profile" />
-          <div>
-            <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">
-              Upload a new profile photo (JPG, PNG, etc.)
-            </p>
-            <button class="btn" id="settings-upload-btn" style="width:auto; display:inline-block;">
+    <!-- Profile Picture -->
+    <div class="settings-section">
+      <h3>📷 Profile Picture</h3>
+      <div class="pic-row">
+        {% if profile.profile_pic %}
+        <img src="{{ profile.profile_pic.url }}" alt="Profile" />
+        {% else %}
+        <img src="{% static 'images/default-user.png' %}" alt="Profile" />
+        {% endif %}
+        <div>
+          <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">
+            Upload a new profile photo (JPG, PNG, etc.)
+          </p>
+          <form method="POST" enctype="multipart/form-data" action="{% url 'profile' %}">
+            {% csrf_token %}
+            <label for="settings-pic-input" class="btn" style="width:auto; display:inline-block; cursor:pointer;">
               Choose Photo
-            </button>
-            <input type="file" id="settings-pic-input" accept="image/*" style="display:none;" />
-          </div>
+            </label>
+            <input type="file" name="profile_pic" id="settings-pic-input" accept="image/*" style="display:none;" onchange="this.form.submit();" />
+          </form>
         </div>
       </div>
-
-      <!-- Change Name -->
-      <div class="settings-section">
-        <h3>✏️ Change Name</h3>
-        <form method="POST">
-          {% csrf_token %}
-          <label>Current Name</label>
-          <input type="text" value="{{ request.user.username }}" readonly />
-
-          <label>New Name</label>
-          <input type="text" name="username" placeholder="Enter new name" required />
-
-          <br/>
-          <button type="submit" style="width:auto;">Update Name</button>
-        </form>
-      </div>
-
-      <!-- Change Email & Password -->
-      <div class="settings-section">
-        <h3>🔐 Change Email & Password</h3>
-        <form method="POST">
-          {% csrf_token %}
-          <label>Current Email</label>
-          <input type="email" value="{{ request.user.email }}" readonly />
-
-          <label>New Email <span style="color:var(--text-muted); font-weight:400;">(leave blank to keep current)</span></label>
-          <input type="email" name="email" placeholder="Enter new email" />
-
-          <label>New Password <span style="color:var(--text-muted); font-weight:400;">(leave blank to keep current)</span></label>
-          <input type="password" name="new_password" placeholder="Enter new password" minlength="6" />
-
-          <br/>
-          <button type="submit" style="width:auto;">Save Changes</button>
-        </form>
-      </div>
-
-      <!-- Danger Zone -->
-      <div class="settings-section danger-zone">
-        <h3>⚠️ Danger Zone</h3>
-        <p style="font-size:13px; margin-bottom:16px;">
-          These actions are permanent and cannot be undone.
-        </p>
-        <button class="btn-danger" id="delete-account-btn">🗑️ Delete Account</button>
-        <button class="btn-danger" id="logout-settings-btn">🚪 Logout</button>
-      </div>
     </div>
 
-    <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project</p>
-    </footer>
+    <!-- Change Name -->
+    <div class="settings-section">
+      <h3>✏️ Change Name</h3>
+      <form method="POST" action="{% url 'account_settings' %}">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="update_name" />
+        <label>Current Name</label>
+        <input type="text" value="{{ request.user.username }}" readonly />
 
-    <script src="{% static 'js/theme.js' %}"></script>
-    <script src="{% static 'js/auth.js' %}"></script>
-    <script src="{% static 'js/account_settings.js' %}"></script>
-  </body>
-</html>
+        <label>New Name</label>
+        <input type="text" name="username" placeholder="Enter new name" required />
+
+        <br/>
+        <button type="submit" class="btn" style="width:auto; margin-top:12px;">Update Name</button>
+      </form>
+    </div>
+
+    <!-- Change Email & Password -->
+    <div class="settings-section">
+      <h3>🔐 Change Email &amp; Password</h3>
+      <form method="POST" action="{% url 'account_settings' %}">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="update_credentials" />
+        <label>Current Email</label>
+        <input type="email" value="{{ request.user.email }}" readonly />
+
+        <label>New Email <span style="color:var(--text-muted); font-weight:400;">(leave blank to keep)</span></label>
+        <input type="email" name="email" placeholder="Enter new email" />
+
+        <label>New Password <span style="color:var(--text-muted); font-weight:400;">(leave blank to keep)</span></label>
+        <input type="password" name="new_password" placeholder="Enter new password" minlength="6" />
+
+        <br/>
+        <button type="submit" class="btn" style="width:auto; margin-top:12px;">Save Changes</button>
+      </form>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="settings-section danger-zone">
+      <h3>⚠️ Danger Zone</h3>
+      <p style="font-size:13px; margin-bottom:16px;">
+        These actions are permanent and cannot be undone.
+      </p>
+      <a href="{% url 'logout' %}" class="btn-danger">🚪 Logout</a>
+    </div>
+  </div>
+</main>
+{% endblock %}

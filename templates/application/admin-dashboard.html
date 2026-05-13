@@ -1,128 +1,162 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Admin Dashboard - Libraria</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap"
-    />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  </head>
-  <body>
-    <div class="menu-wrapper">
-      <details>
-        <summary>
-          <div class="icon-bar"><span></span><span></span><span></span></div>
-        </summary>
-        <nav class="menu">
-          <a href="{% url 'home' %}">🏠 Home</a>
-          <a href="#">📚 Browse Books</a>
-          <a href="#">❤️ Favourite</a>
-          <a href="#">ℹ️ About</a>
-          <div class="menu-divider"></div>
-          <a href="{% url 'admin_dashboard' %}">⚙️ Admin Dashboard</a>
-        </nav>
-      </details>
+
+{% block extra_styles %}
+<style>
+  .dashboard {
+    padding: 40px 0;
+  }
+  .success-msg {
+    background: var(--accent-green-bg);
+    color: var(--accent-green);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+    border: 1px solid var(--accent-green);
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .stat-box {
+    background: var(--bg-card);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-box h3 {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .stat-box p {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    margin: 0;
+    font-family: var(--font-display);
+  }
+  .books-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-top: 24px;
+  }
+  .books-table th, .books-table td {
+    padding: 16px 24px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .books-table th {
+    background: var(--bg-secondary);
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  .btn-delete {
+    background: var(--accent-red);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container">
+  <div class="dashboard">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+        <h2>Admin Dashboard</h2>
+        <a href="{% url 'add_book' %}" class="btn" style="background: var(--accent-blue); color: white; padding: 12px 24px; border-radius: 12px;">+ Add New Book</a>
     </div>
 
-    <nav class="topnav">
-      <a href="{% url 'home' %}" class="logo">Libraria</a>
-      <div class="links">
-        <a href="#">Browse Books</a>
-        <a href="#">Favourite</a>
-        <a href="#">About</a>
-        <button class="theme-toggle" id="themeToggle">🌙</button>
-      </div>
-    </nav>
-
-    <hr />
-
-    <main class="dashboard">
-      <h2>Admin Dashboard</h2>
-
-      {% if add_success %}
+    {% if add_success %}
       <div class="success-msg">✅ "{{ add_success }}" added successfully!</div>
-      {% endif %} {% if edit_success %}
-      <div class="success-msg">
-        ✅ "{{ edit_success }}" updated successfully!
+    {% endif %} 
+    
+    {% if edit_success %}
+      <div class="success-msg">✅ "{{ edit_success }}" updated successfully!</div>
+    {% endif %} 
+    
+    {% if messages %} 
+      {% for msg in messages %}
+        <div class="success-msg">{{ msg }}</div>
+      {% endfor %} 
+    {% endif %}
+
+    <div class="stats">
+      <div class="stat-box">
+        <h3>Total Books</h3>
+        <p>{{ total_books }}</p>
       </div>
-      {% endif %} {% if messages %} {% for msg in messages %}
-      <div class="success-msg">{{ msg }}</div>
-      {% endfor %} {% endif %}
-
-      <div class="stats">
-        <div class="stat-box">
-          <h3>Total Books</h3>
-          <p>{{ total_books }}</p>
-        </div>
-        <div class="stat-box">
-          <h3>Borrowed Books</h3>
-          <p>{{ borrowed_books }}</p>
-        </div>
-        <div class="stat-box">
-          <h3>Users</h3>
-          <p>{{ total_users }}</p>
-        </div>
+      <div class="stat-box">
+        <h3>Borrowed Books</h3>
+        <p>{{ borrowed_books }}</p>
       </div>
-
-      <div class="dashboard-actions">
-        <a href="{% url 'add_book' %}" class="btn">Add New Book</a>
+      <div class="stat-box">
+        <h3>Users</h3>
+        <p>{{ total_users }}</p>
       </div>
+    </div>
 
-      <table class="books-table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for book in books %}
-          <tr>
-            <td>{{ book.title }}</td>
-            <td>{{ book.author }}</td>
-            <td>{{ book.category }}</td>
-            <td>{{ book.get_status_display }}</td>
-            <td>
-              <div class="action-buttons">
-                <a href="{% url 'edit_book' book.id %}" class="btn">Edit</a>
+    <div style="overflow-x: auto;">
+        <table class="books-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for book in books %}
+            <tr>
+              <td><strong>{{ book.title }}</strong></td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.category }}</td>
+              <td>
+                  <span style="color: {% if book.status == 'available' %}var(--accent-green){% else %}var(--accent-red){% endif %}; font-weight: 600;">
+                    {{ book.get_status_display }}
+                  </span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <a href="{% url 'edit_book' book.id %}" class="btn" style="background: var(--bg-secondary); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px;">Edit</a>
 
-                <form
-                  method="post"
-                  action="{% url 'delete_book' book.id %}"
-                  style="display: contents"
-                >
-                  {% csrf_token %}
-                  <button
-                    type="submit"
-                    class="btn"
-                    onclick="return confirm('Delete?');"
-                    style="background-color: rgb(198, 6, 6);"
-                  >
-                    Delete
-                  </button>
-                </form>
-              </div>
-            </td>
-          </tr>
-          {% empty %}
-          <tr>
-            <td colspan="5">No books yet. Add one!</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </main>
-
-    <hr />
-    <footer><p>© 2026 Libraria — IS231 Project</p></footer>
-
-    <script src="{% static 'js/theme.js' %}"></script>
-    <script src="{% static 'js/auth.js' %}"></script>
-  </body>
-</html>
+                  <form method="post" action="{% url 'delete_book' book.id %}" style="display: contents">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete" onclick="return confirm('Delete this book?');">
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5" style="text-align: center; padding: 48px; color: var(--text-muted);">No books yet. Add one!</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+  </div>
+</main>
+{% endblock %}

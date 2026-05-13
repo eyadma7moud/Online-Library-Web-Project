@@ -1,59 +1,17 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-    <title>Return Successful — Libraria</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  </head>
-  <body>
-  <!-- SIDE MENU -->
-  <div class="menu-wrapper">
-    <details>
-      <summary aria-label="Open navigation menu">
-        <div class="icon-bar"><span></span><span></span><span></span></div>
-      </summary>
-      <nav class="menu">
-        <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-        <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
-        <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-        <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
-        <div class="menu-divider"></div>
-      </nav>
-    </details>
+
+{% block content %}
+<main style="text-align:center; padding-top: 80px;">
+  <div style="font-size: 4rem; margin-bottom: 16px;">✅</div>
+  <h2>Return Successful!</h2>
+  <p>You have returned <strong>{{ book.title }}</strong>.</p>
+  <p>Author: {{ book.author }}</p>
+  <p>Thank you for returning the book on time!</p>
+  <br />
+  <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+    <a href="{% url 'borrow_history' %}" class="btn" style="width:auto;">View History</a>
+    <a href="{% url 'books' %}" class="btn" style="width:auto; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border);">Browse Books</a>
   </div>
-
-  <!-- TOP NAV -->
-  <nav class="topnav">
-    <a href="{% url 'home' %}" class="logo">Libraria</a>
-    <div class="links">
-      <a href="{% url 'books' %}">Browse Books</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </div>
-  </nav>
-
-  <main style="text-align:center; padding-top: 80px;">
-    <div style="font-size: 4rem; margin-bottom: 16px;">✅</div>
-    <h2>Return Successful!</h2>
-    <p>You have returned <strong><span id="success-title"></span></strong>.</p>
-    <p>Author: <span id="success-author"></span></p>
-    <p>Returned on: <strong><span id="success-return-date"></span></strong></p>
-    <p>Thank you for returning the book on time!</p>
-    <br />
-    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <a href="{% url 'borrow_history' %}" class="btn" style="width:auto;">View History</a>
-      <a href="{% url 'books' %}" class="btn btn-secondary" style="width:auto;">Browse Books</a>
-    </div>
-  </main>
-
-  <footer>
-    <p>© 2026 Libraria — IS231 Web Technology Project</p>
-  </footer>
-
-  <script src="{% static 'js/theme.js' %}"></script>
-  <script src="{% static 'js/auth.js' %}"></script>
-  <script src="{% static 'js/return_success.js' %}"></script>
-  </body>
-</html>
+</main>
+{% endblock %}

@@ -1,70 +1,16 @@
-// js/profile.js
+// profile.js - Simplified for Django
+// Data is now handled by Django templates directly.
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (!isLoggedIn()) {
-    window.location.href = "/login/";
-    return;
-  }
-
-  const user = getCurrentUser();
-
-  // Fill profile info
-  const nameEl = document.getElementById("profile-name");
-  const emailEl = document.getElementById("profile-email");
-  const usernameEl = document.getElementById("profile-username");
-  const joinEl = document.getElementById("profile-join");
-  const roleEl = document.getElementById("profile-role");
-
-  if (nameEl) nameEl.textContent = user.name || "—";
-  if (emailEl) emailEl.textContent = user.email || "—";
-  if (usernameEl) usernameEl.textContent = user.name || "—";
-  if (joinEl) joinEl.textContent = user.joinDate || "—";
-  if (roleEl) roleEl.textContent = user.role === "admin" ? "Admin" : "User";
-
-  // Profile picture
-  const profilePic = document.getElementById("profile-pic");
+  // We keep only the profile pic change logic if needed, 
+  // but even that is now handled by a form submission in profile.html
+  
   const picInput = document.getElementById("pic-input");
-  const uploadBtn = document.getElementById("upload-pic-btn");
-  const savedPic = localStorage.getItem("profilePic_" + user.id);
-
-  if (profilePic && savedPic) profilePic.src = savedPic;
-
-  if (uploadBtn && picInput) {
-    uploadBtn.addEventListener("click", () => picInput.click());
-  }
-
   if (picInput) {
     picInput.addEventListener("change", function () {
-      const file = this.files[0];
-      if (!file) return;
-      if (!file.type.startsWith("image/")) {
-        alert("Please select an image file.");
-        return;
+      if (this.files && this.files[0]) {
+        document.getElementById('profile-pic-form').submit();
       }
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const base64 = e.target.result;
-        localStorage.setItem("profilePic_" + user.id, base64);
-        if (profilePic) profilePic.src = base64;
-      };
-      reader.readAsDataURL(file);
     });
   }
-
-  // Quick stats
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  const fullUser = users.find(u => u.id === user.id);
-  const borrowed = fullUser ? (fullUser.borrowedBooks || []) : [];
-
-  const totalBorrowed = borrowed.length;
-  const currentlyActive = borrowed.filter(b => !b.returned).length;
-  const returned = borrowed.filter(b => b.returned).length;
-
-  const totalEl = document.getElementById("stat-total-borrowed");
-  const activeEl = document.getElementById("stat-active");
-  const returnedEl = document.getElementById("stat-returned");
-
-  if (totalEl) totalEl.textContent = totalBorrowed;
-  if (activeEl) activeEl.textContent = currentlyActive;
-  if (returnedEl) returnedEl.textContent = returned;
 });

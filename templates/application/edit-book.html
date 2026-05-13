@@ -1,118 +1,145 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Edit Book — Libraria</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap"
-    />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  </head>
-  <body>
-    <div class="menu-wrapper">
-      <details>
-        <summary>
-          <div class="icon-bar"><span></span><span></span><span></span></div>
-        </summary>
-        <nav class="menu">
-          <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-          <a href="#"><span class="menu-icon">📚</span> Browse Books</a>
-          <a href="#"><span class="menu-icon">❤️</span> Favourite</a>
-          <a href="#"><span class="menu-icon">ℹ️</span> About Us</a>
-          <div class="menu-divider"></div>
-          <a href="{% url 'admin_dashboard' %}" class="dashboard-link"
-            ><span class="menu-icon">⚙️</span> Admin Dashboard</a
-          >
-        </nav>
-      </details>
-    </div>
 
-    <nav class="topnav">
-      <a href="{% url 'home' %}" class="logo">Libraria</a>
-      <div class="links">
-        <a href="#">Browse Books</a>
-        <a href="#">About Us</a>
-        <button class="theme-toggle" id="themeToggle">🌙</button>
-      </div>
-    </nav>
+{% block extra_styles %}
+<style>
+  .form-container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+  }
+  .form-container h1 {
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      font-size: 14px;
+  }
+  .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+  }
+  .form-group {
+      margin-bottom: 20px;
+  }
+  .form-group.full {
+      grid-column: span 2;
+  }
+  .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+  }
+  .current-cover {
+      margin-top: 10px;
+      max-height: 150px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+  }
+  .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+  }
+  .form-actions button {
+      flex: 1;
+      padding: 14px;
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+  }
+  .btn-cancel {
+      flex: 1;
+      padding: 14px;
+      background: var(--bg-secondary);
+      text-align: center;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      text-decoration: none;
+  }
+</style>
+{% endblock %}
 
-    <hr />
+{% block content %}
+<main class="container">
+  <div class="form-container">
+    <a href="{% url 'admin_dashboard' %}" style="text-decoration: none; color: var(--accent-blue); font-weight: 600; display: inline-block; margin-bottom: 16px;">← Back to Dashboard</a>
+    <h1>Edit Book</h1>
+    <p class="subtitle">Update information for "{{ book.title }}"</p>
 
-    <main style="padding-top: 40px">
-      <div class="edit-book-header">
-        <a href="{% url 'admin_dashboard' %}" class="back-btn"
-          >← Back to Dashboard</a
-        >
-        <h1>Edit Book</h1>
-        <p class="edit-subtitle">Update the book information below</p>
-      </div>
-
-      <form class="auth-form edit-book-form" id="edit-book-form" method="post">
-        {% csrf_token %}
-
-        <div class="form-row">
+    <form method="post">
+      {% csrf_token %}
+      
+      <div class="form-grid">
           <div class="form-group">
-            <label for="id_title">Book Title</label>
+            <label>Book Title</label>
             {{ form.title }}
           </div>
+
           <div class="form-group">
-            <label for="id_author">Author</label>
+            <label>Author Name</label>
             {{ form.author }}
           </div>
-        </div>
 
-        <div class="form-row">
           <div class="form-group">
-            <label for="id_category">Category</label>
+            <label>Category</label>
             {{ form.category }}
           </div>
+
           <div class="form-group">
-            <label for="id_image">Cover Image URL</label>
-            {{ form.image }} {% if book.image %}
-            <img
-              src="{{ book.image }}"
-              alt="Current Cover"
-              style="margin-top: 8px; max-height: 120px; border-radius: 8px"
-            />
-            {% endif %}
-          </div>
-          <div class="form-group">
-            <label for="id_status">Status</label>
+            <label>Status</label>
             {{ form.status }}
           </div>
-        </div>
 
-        <div class="form-row">
           <div class="form-group">
-            <label for="id_year">Publish Year</label>
+            <label>Publish Year</label>
             {{ form.year }}
           </div>
+
           <div class="form-group">
-            <label for="id_pages">Pages</label>
+            <label>Number of Pages</label>
             {{ form.pages }}
           </div>
-        </div>
 
-        <label for="id_description">Book Description</label>
-        {{ form.description }}
+          <div class="form-group full">
+            <label>Cover Image URL</label>
+            {{ form.image }}
+            {% if book.image %}
+                <img src="{{ book.image }}" alt="Cover Preview" class="current-cover">
+            {% endif %}
+          </div>
 
-        <div class="edit-book-actions">
-          <button type="submit" class="btn save-btn">💾 Save Changes</button>
-          <a href="{% url 'admin_dashboard' %}" class="btn cancel-btn"
-            >✕ Cancel</a
-          >
-        </div>
-      </form>
-    </main>
+          <div class="form-group full">
+            <label>Description</label>
+            {{ form.description }}
+          </div>
+      </div>
 
-    <hr />
-    <footer>
-      <p>© 2026 Libraria — IS231 Web Technology Project | Phase 1</p>
-    </footer>
-
-    <script src="{% static 'js/theme.js' %}"></script>
-    <script src="{% static 'js/auth.js' %}"></script>
-  </body>
-</html>
+      <div class="form-actions">
+        <button type="submit">💾 Save Changes</button>
+        <a href="{% url 'admin_dashboard' %}" class="btn-cancel">✕ Cancel</a>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}

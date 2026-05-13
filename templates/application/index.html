@@ -1,94 +1,285 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Fonts -->
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
+{% block extra_styles %}
+<style>
+  .home {
+    padding: 0;
+    background-color: var(--bg-main);
+  }
 
-    <title>Libraria — Home</title>
+  .hero {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 48px;
+    padding: 40px 48px 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 70px);
+  }
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  </head>
+  .hero-text {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    height: auto;
+  }
 
-  <body>
+  .hero-text h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    line-height: 1.1;
+    margin-top: 0;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+  }
 
-  <!-- SIDE MENU -->
-  <div class="menu-wrapper">
-    <details>
-      <summary aria-label="Open navigation menu">
-        <div class="icon-bar"><span></span><span></span><span></span></div>
-      </summary>
+  .hero-text h1 em {
+    color: var(--accent-blue);
+    font-style: italic;
+  }
 
-      <nav class="menu">
-        <a href="/"><span class="menu-icon">🏠</span> Home</a>
-        <a href="/books/"><span class="menu-icon">📚</span> Browse Books</a>
-        <a href="/favourite/"><span class="menu-icon">❤️</span> Favourite</a>
-        <a href="/about/"><span class="menu-icon">ℹ️</span> About Us</a>
-        <div class="menu-divider"></div>
-        <a href="/login/"><span class="menu-icon">🔑</span> Login</a>
-        <a href="/register/"><span class="menu-icon">📝</span> Register</a>
-        <a href="/profile/"><span class="menu-icon">👤</span> Profile</a>
-      </nav>
-    </details>
-  </div>
+  .hero-text p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
 
-  <!-- TOP NAV -->
-  <nav class="topnav">
-    <a href="/" class="logo">Libraria</a>
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    max-width: 480px;
+    margin-bottom: 36px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    padding: 6px;
+    border-radius: var(--radius-full);
+  }
 
-    <div class="links">
-      <a href="/books/">Browse Books</a>
-      <a href="/favourite/">Favourite</a>
-      <a href="/about/">About Us</a>
-      <a href="/login/">Login</a>
-      <a href="/register/">Register</a>
+  .search-bar input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 14px 24px;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
 
-      <button class="theme-toggle" id="themeToggle">🌙</button>
-    </div>
-  </nav>
+  .search-bar input::placeholder {
+    color: var(--text-muted);
+  }
 
-  <!-- MAIN HOME -->
-  <main class="home">
+  .search-bar button {
+    width: auto;
+    padding: 12px 32px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 1.1rem;
+    background: var(--accent-blue);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
 
-    <section class="hero">
-      <h1>Discover & Borrow<br><em>Books You Love</em></h1>
+  .browse-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .categories a {
+    padding: 8px 20px;
+    border-radius: var(--radius-full);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all var(--transition);
+  }
+
+  .categories a:hover {
+    background: var(--accent-blue);
+    color: white;
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+  }
+
+  .hero-slider {
+    flex-shrink: 0;
+    width: 440px;
+    aspect-ratio: 4 / 5;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+    height: auto;
+  }
+
+  .slider-slide {
+    min-width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .slider-slide.active {
+    opacity: 1;
+  }
+
+  .slider-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .slider-dots {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+  }
+
+  .slider-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .slider-dot.active {
+    background: white;
+    transform: scale(1.2);
+  }
+
+  @media (max-width: 992px) {
+    .hero {
+      flex-direction: column;
+      padding: 40px 24px;
+      gap: 40px;
+      text-align: center;
+    }
+
+    .hero-slider {
+      width: 100%;
+      max-width: 360px;
+      height: 450px;
+    }
+
+    .search-bar {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-text p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .categories {
+      justify-content: center;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="home">
+  <section class="hero">
+
+    <div class="hero-text">
+      <h1>Discover &amp; Borrow<br><em>Books You Love</em></h1>
 
       <p>
-        Thousands of books available — search, explore, and enjoy reading anytime.
+        Thousands of books at your fingertips — search, browse, and borrow from our digital library.
       </p>
 
-      <!-- Search -->
-      <form action="/books/" method="GET" class="search-bar">
-        <input type="search" name="search" placeholder="Search books or authors..." required>
-        <button type="submit">Search</button>
+      <form action="{% url 'books' %}" method="GET" class="search-bar">
+        <input type="search" name="search" placeholder="Search for any book or author..." required>
+        <button type="submit" class="btn">Search</button>
       </form>
 
-      <!-- Categories -->
+      <p class="browse-label">Browse by Category</p>
       <div class="categories">
-        <a href="/books/">Programming</a>
-        <a href="/books/">History</a>
-        <a href="/books/">Novels</a>
-        <a href="/books/">Science</a>
+        <a href="{% url 'books' %}?category=Fiction">Fiction</a>
+        <a href="{% url 'books' %}?category=History">History</a>
+        <a href="{% url 'books' %}?category=Science">Science</a>
+        <a href="{% url 'books' %}?category=Technology">Technology</a>
+        <a href="{% url 'books' %}?category=Philosophy">Philosophy</a>
+        <a href="{% url 'books' %}">All Books →</a>
+      </div>
+    </div>
+
+    <div class="hero-slider" id="heroSlider">
+      <div class="slider-slide active">
+        <img src="{% static 'css/images_slider_and_cover/pure-julia-Cp5ofLz1gOM-unsplash.jpg' %}" alt="Library 1">
+      </div>
+      <div class="slider-slide">
+        <img src="{% static 'css/images_slider_and_cover/karen-zhao-2bqXqr4GeCg-unsplash.jpg' %}" alt="Library 2">
+      </div>
+      <div class="slider-slide">
+        <img src="{% static 'css/images_slider_and_cover/sincerely-media-CXYPfveiuis-unsplash.jpg' %}" alt="Library 3">
+      </div>
+      <div class="slider-slide">
+        <img src="{% static 'css/images_slider_and_cover/zoshua-colah-Kp_-rgu1bgw-unsplash.jpg' %}" alt="Library 4">
       </div>
 
-      <a href="/books/" class="btn">View All Books</a>
-    </section>
+      <div class="slider-dots">
+        <div class="slider-dot active" onclick="goToSlide(0)"></div>
+        <div class="slider-dot" onclick="goToSlide(1)"></div>
+        <div class="slider-dot" onclick="goToSlide(2)"></div>
+        <div class="slider-dot" onclick="goToSlide(3)"></div>
+      </div>
+    </div>
 
-  </main>
+  </section>
+</main>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 Libraria — IS231 Web Project</p>
-  </footer>
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slider-slide');
+  const dots = document.querySelectorAll('.slider-dot');
 
-  <!-- JS -->
-  <script src="{% static 'js/theme.js' %}"></script>
-  <script src="{% static 'js/auth.js' %}"></script>
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
 
-  </body>
-</html>
+  setInterval(() => goToSlide(currentSlide + 1), 3000);
+</script>
+{% endblock %}

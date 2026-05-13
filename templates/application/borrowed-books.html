@@ -1,40 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-  <title>Borrowed Books — Libraria</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-</head>
-
-<body>
-  <div class="menu-wrapper">
-    <details>
-      <summary aria-label="Open navigation menu">
-        <div class="icon-bar"><span></span><span></span><span></span></div>
-      </summary>
-      <nav class="menu">
-        <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-        <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
-        <a href="{% url 'profile' %}"><span class="menu-icon">👤</span> My Profile</a>
-        <div class="menu-divider"></div>
-      </nav>
-    </details>
-  </div>
-
-  <nav class="topnav">
-    <a href="{% url 'home' %}" class="logo">Libraria</a>
-    <div class="links">
-      <a href="{% url 'books' %}">Browse Books</a>
-      <a href="{% url 'profile' %}">My Profile</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </div>
-  </nav>
-
-  <main>
+{% block content %}
+<main>
+  <div class="content">
     <h1>My Borrowed Books</h1>
 
     <table id="borrowed-table">
@@ -73,15 +42,6 @@
         {% endfor %}
       </tbody>
     </table>
-  </main>
-
-  <footer>
-    <p>© 2026 Libraria — IS231 Web Technology Project</p>
-  </footer>
-
-  <script src="{% static 'js/theme.js' %}"></script>
-  <script src="{% static 'js/auth.js' %}"></script>
-  <script src="{% static 'js/borrowed_books.js' %}"></script>
-</body>
-
-</html>
+  </div>
+</main>
+{% endblock %}

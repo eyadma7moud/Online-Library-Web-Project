@@ -1,48 +1,10 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-  <title>Borrow History — Libraria</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-</head>
-
-<body>
-  <!-- SIDE MENU -->
-  <div class="menu-wrapper">
-    <details>
-      <summary aria-label="Open navigation menu">
-        <div class="icon-bar"><span></span><span></span><span></span></div>
-      </summary>
-      <nav class="menu">
-        <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-        <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
-        <a href="{% url 'profile' %}"><span class="menu-icon">👤</span> My Profile</a>
-        <div class="menu-divider"></div>
-      </nav>
-    </details>
-  </div>
-
-  <!-- TOP NAV -->
-  <nav class="topnav">
-    <a href="{% url 'home' %}" class="logo">Libraria</a>
-    <div class="links">
-      <a href="{% url 'books' %}">Browse Books</a>
-      <a href="{% url 'profile' %}">My Profile</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </div>
-  </nav>
-
-  <main>
+{% block content %}
+<main>
+  <div class="content">
     <h1>Borrow History</h1>
-
-    <p id="empty-history" style="display:none; color:var(--text-muted); text-align:center; padding:40px 0;">
-      📜 No borrow history yet. <br /><br />
-      <a href="{% url 'books' %}" class="btn" style="width:auto; display:inline-block;">Browse Books</a>
-    </p>
 
     <table id="history-table">
       <thead>
@@ -73,20 +35,14 @@
         </tr>
         {% empty %}
         <tr>
-          <td colspan="6" style="text-align:center; padding: 20px;">No history found.</td>
+          <td colspan="6" style="text-align:center; padding: 30px;">
+            📜 No borrow history yet.<br><br>
+            <a href="{% url 'books' %}" class="btn" style="width:auto; display:inline-block;">Browse Books</a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
-  </main>
-
-  <footer>
-    <p>© 2026 Libraria — IS231 Web Technology Project</p>
-  </footer>
-
-  <script src="{% static 'js/theme.js' %}"></script>
-  <script src="{% static 'js/auth.js' %}"></script>
-  <script src="{% static 'js/borrow_history.js' %}"></script>
-</body>
-
-</html>
+  </div>
+</main>
+{% endblock %}

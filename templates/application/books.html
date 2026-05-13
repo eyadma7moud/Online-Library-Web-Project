@@ -1,53 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <!-- Fonts -->
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=bedtime"
-/>
-
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap"
-/>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap" />
 <title>Browse Books — Libraria</title>
-
-<!-- CSS -->
-<link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
-<!-- SIDE MENU -->
-<div class="menu-wrapper">
-  <details>
-    <summary aria-label="Open navigation menu">
-      <div class="icon-bar">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </summary>
-
-    <nav class="menu">
-      <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-      <a href="{% url 'books' %}"
-        ><span class="menu-icon">📚</span> Browse Books</a
-      >
-      <a href="{% url 'favourite' %}"
-        ><span class="menu-icon">❤️</span> Favourite</a
-      >
-      <a href="{% url 'about' %}"><span class="menu-icon">ℹ️</span> About Us</a>
-
-      <div class="menu-divider"></div>
-
-      <a href="{% url 'login' %}"><span class="menu-icon">🔑</span> Login</a>
-      <a href="{% url 'register' %}"
-        ><span class="menu-icon">📝</span> Register</a
-      >
-      <a href="{% url 'profile' %}"
-        ><span class="menu-icon">👤</span> User Profile</a
-      >
-    </nav>
-  </details>
-</div>
 
 <!-- MAIN -->
 <main>
@@ -210,11 +164,12 @@
     <div class="books-grid" id="books-grid">
       {% for book in books %}
 
-      <div class="book-card">
+      <div class="book-card" data-book-id="{{ book.id }}">
         <!-- Book Image -->
         <img
           src="{{ book.image|default:'https://placehold.co/200x300?text=No+Cover' }}"
           alt="{{ book.title }}"
+          onerror="this.src='https://placehold.co/200x300?text=No+Cover'"
         />
         <!-- Title -->
         <h3>{{ book.title }}</h3>
@@ -245,17 +200,17 @@
 
           {% endif %}
         </p>
-        <div style="margin-top: 10px">
+        <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
           {% if book.status == "available" %}
           <a
             href="{% url 'borrow_book' book.id %}"
             style="
               background-color: #2c3e50;
               color: white;
-              padding: 8px 20px;
+              padding: 10px;
+              text-align: center;
               text-decoration: none;
-              border-radius: 5px;
-              display: inline-block;
+              border-radius: 6px;
             "
           >
             Borrow Now
@@ -267,10 +222,10 @@
             style="
               background-color: #e67e22;
               color: white;
-              padding: 8px 20px;
+              padding: 10px;
+              text-align: center;
               text-decoration: none;
-              border-radius: 5px;
-              display: inline-block;
+              border-radius: 6px;
             "
           >
             Return Book
@@ -283,27 +238,22 @@
             style="
               background-color: #ccc;
               color: #666;
-              padding: 8px 20px;
+              padding: 10px;
               border: none;
-              border-radius: 5px;
+              border-radius: 6px;
             "
           >
             Not Available
           </button>
           {% endif %}
 
-          <button
-            type="button"
-            style="
-              background-color: #ccc;
-              color: #666;
-              padding: 8px 20px;
-              border: none;
-              border-radius: 5px;
-              margin-left: 5px;
-            "
-          >
-            Add to Favourite
+          <button type="button" 
+                  class="fav-btn {% if book.id in favourite_ids %}active{% endif %}"
+                  data-book-id="{{ book.id }}"
+                  style="padding: 10px; border-radius: 6px; border: 1.5px solid var(--border); font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; 
+                         {% if book.id in favourite_ids %} background-color: #ff4757; color: white; border-color: #ff4757; {% else %} background-color: #f1f2f6; color: #2f3542; {% endif %}">
+            <span class="heart-icon">{% if book.id in favourite_ids %}❤️{% else %}🤍{% endif %}</span>
+            <span class="btn-text">{% if book.id in favourite_ids %}In Favourites{% else %}Add to Favourite{% endif %}</span>
           </button>
         </div>
       </div>
@@ -316,6 +266,52 @@
     </div>
   </div>
 </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const favButtons = document.querySelectorAll('.fav-btn');
+    
+    favButtons.forEach(btn => {
+        btn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            const bookId = this.dataset.bookId;
+            const isActive = this.classList.contains('active');
+            const url = isActive ? `/remove-favourite/${bookId}/` : `/add-favourite/${bookId}/`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'GET', // Or POST if you prefer, but views are setup for GET
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    if (data.action === 'added') {
+                        this.classList.add('active');
+                        this.style.backgroundColor = '#ff4757';
+                        this.style.color = 'white';
+                        this.style.borderColor = '#ff4757';
+                        this.querySelector('.heart-icon').textContent = '❤️';
+                        this.querySelector('.btn-text').textContent = 'In Favourites';
+                    } else {
+                        this.classList.remove('active');
+                        this.style.backgroundColor = '#f1f2f6';
+                        this.style.color = '#2f3542';
+                        this.style.borderColor = 'var(--border)';
+                        this.querySelector('.heart-icon').textContent = '🤍';
+                        this.querySelector('.btn-text').textContent = 'Add to Favourite';
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
+</script>
 
 <!-- JS -->
 <script src="{% static 'js/theme.js' %}"></script>

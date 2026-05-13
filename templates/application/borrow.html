@@ -1,79 +1,26 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=DM+Sans&display=swap">
-    <title>Borrow Book — Libraria</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  </head>
-  <body>
-  <!-- SIDE MENU -->
-  <div class="menu-wrapper">
-    <details>
-      <summary aria-label="Open navigation menu">
-        <div class="icon-bar"><span></span><span></span><span></span></div>
-      </summary>
-      <nav class="menu">
-        <a href="{% url 'home' %}"><span class="menu-icon">🏠</span> Home</a>
-        <a href="{% url 'books' %}"><span class="menu-icon">📚</span> Browse Books</a>
-        <a href="{% url 'favourite' %}"><span class="menu-icon">❤️</span> Favourite</a>
-        <a href="{% url 'about' %}"><span class="menu-icon">ℹ️</span> About Us</a>
-        <div class="menu-divider"></div>
-      </nav>
-    </details>
-  </div>
 
-  <!-- TOP NAV -->
-  <nav class="topnav">
-    <a href="{% url 'home' %}" class="logo">Libraria</a>
-    <div class="links">
-      <a href="{% url 'books' %}">Browse Books</a>
-      <a href="{% url 'favourite' %}">Favourite</a>
-      <a href="{% url 'about' %}">About Us</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    </div>
-  </nav>
-
-  <main style="padding-top: 40px;">
+{% block content %}
+<main style="padding-top: 40px;">
+  <div class="content">
     <h2>Borrow Book</h2>
 
     <section>
       <h3>Book Information</h3>
-      <p><strong>Title:</strong> <span id="borrow-book-title">—</span></p>
-      <p><strong>Author:</strong> <span id="borrow-book-author">—</span></p>
+      <p><strong>Title:</strong> {{ book.title }}</p>
+      <p><strong>Author:</strong> {{ book.author }}</p>
     </section>
 
     <section>
-      <h3>Borrow Form</h3>
-      <form id="borrow-form">
-        <label for="borrow-book-id">Book ID</label>
-        <input type="text" id="borrow-book-id" readonly />
-
-        <label for="borrow-date">Borrow Date</label>
-        <input type="date" id="borrow-date" required />
-
-        <label for="return-date">Return Date</label>
-        <input type="date" id="return-date" required />
-
-        <br /><br />
-        <input type="checkbox" id="confirm-borrow" />
-        <label for="confirm-borrow" style="display:inline; margin-top:0;">
-          I confirm I want to borrow this book.
-        </label>
-        <br /><br />
-
-        <button class="btn" type="submit">Borrow</button>
+      <h3>Confirm Borrow</h3>
+      <form method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to borrow <strong>{{ book.title }}</strong>?</p>
+        <button class="btn" type="submit">Confirm Borrow</button>
+        <a href="{% url 'books' %}" class="btn" style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); margin-left: 10px;">Cancel</a>
       </form>
     </section>
-  </main>
-
-  <footer>
-    <p>© 2026 Libraria — IS231 Web Technology Project</p>
-  </footer>
-    <script src="{% static 'js/theme.js' %}"></script>
-    <script src="{% static 'js/auth.js' %}"></script>
-    <script src="{% static 'js/borrow.js' %}"></script>
-  </body>
-</html>
+  </div>
+</main>
+{% endblock %}
